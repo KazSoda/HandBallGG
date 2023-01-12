@@ -1,4 +1,3 @@
-const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
@@ -11,6 +10,7 @@ const compression = require('compression');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
+const viewRouter = require('./routes/viewRoutes');
 
 
 const app = express(); // Create express app
@@ -83,7 +83,8 @@ app.use('/', viewRouter);
 
 // If no route round
 app.all('*', (req, res, next) => {
-	next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+	next();
+	// next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 })
 
 
