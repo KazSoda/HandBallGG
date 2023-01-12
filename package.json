@@ -1,0 +1,58 @@
+{
+  "name": "handballgg",
+  "version": "1.0.0",
+  "description": "Project for the 'th semester",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yohann69/HandBallGG.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yohann69/HandBallGG/issues"
+  },
+  "homepage": "https://github.com/yohann69/HandBallGG#readme",
+	"dependencies": {
+		"@babel/polyfill": "^7.12.1",
+		"axios": "^1.2.1",
+		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.20.1",
+		"compression": "^1.7.4",
+		"cookie-parser": "^1.4.6",
+		"dotenv": "^16.0.3",
+		"express": "^4.18.1",
+		"express-mongo-sanitize": "^2.2.0",
+		"express-rate-limit": "^6.7.0",
+		"helmet": "^6.0.1",
+		"hpp": "^0.2.3",
+		"jsonwebtoken": "^9.0.0",
+		"mongoose": "^5.13.15",
+		"morgan": "^1.10.0",
+		"nodemailer": "^6.8.0",
+		"nodemon": "^2.0.20",
+		"parcel-bundler": "^1.8.1",
+		"pug": "^3.0.2",
+		"slugify": "^1.6.5",
+		"validator": "^13.7.0",
+		"xss-clean": "^0.1.1"
+	},
+	"devDependencies": {
+		"eslint": "^8.25.0",
+		"eslint-config-airbnb": "^19.0.4",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-jsx-a11y": "^6.6.1",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-react": "^7.31.10",
+		"prettier": "^2.7.1"
+	},
+	"engines": {
+		"node": ">=10.0"
+	}
+}
