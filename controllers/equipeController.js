@@ -13,7 +13,7 @@ exports.getAllEquipes = catchAsync(async(req,res) => {
 
     res.status(200).json({
         status: 'success',
-        results: equipes.lenght,
+        results: equipes.length,
         data: {
             equipes
         }
