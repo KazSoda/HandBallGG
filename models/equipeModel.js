@@ -20,7 +20,6 @@ const equipeSchema = new mongoose.Schema({
 
     slot: {
         type: String,
-        required: [true, 'Une équipe doit avoir un creneaux'],
         trim: true,
         maxLength: 128,
     },

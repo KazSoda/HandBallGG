@@ -18,8 +18,6 @@ const app = require('./app');
 
 const db = process.env.DATABASE_mongodb
 
-
-
 mongoose.connect(db, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
