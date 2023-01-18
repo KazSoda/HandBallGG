@@ -1,27 +1,41 @@
 html 
-	head
-		title HandBallGG | #{title}
-		link(rel='stylesheet', href='/css/stylePrez.css')
-		link(rel='shortcut icon', href='/img/favicon.ico')
+	head 
+		meta (charset="UTF-8")
+		meta (http-equiv="X-UA-Compatible", content="IE=edge")
+		meta (name="viewport", content="width=device-width, initial-scale=1.0")
+		title HandBallGG | Présentation
+		link (rel="stylesheet", href="css/style.css")
 	body
-
-
-		section.home
-			<svg id="wave" style="transform:rotate(180deg); transition: 0.3s" viewBox="0 0 1440 250" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(62, 150.584, 243, 1)" offset="0%"></stop><stop stop-color="rgba(11, 204.812, 255, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 0px); opacity:1" fill="url(#sw-gradient-0)" d="M0,150L1440,25L2880,25L4320,175L5760,225L7200,150L8640,25L10080,25L11520,25L12960,200L14400,175L15840,100L17280,25L18720,50L20160,150L21600,225L23040,200L24480,175L25920,175L27360,100L28800,225L30240,200L31680,0L33120,200L34560,125L34560,250L33120,250L31680,250L30240,250L28800,250L27360,250L25920,250L24480,250L23040,250L21600,250L20160,250L18720,250L17280,250L15840,250L14400,250L12960,250L11520,250L10080,250L8640,250L7200,250L5760,250L4320,250L2880,250L1440,250L0,250Z"></path></svg>
-			nav 
-				img(src='/img/logo.png', alt='logo')
-				a(href='/connexion') Connexion
-
-			
-			h1 HandBallGG
-
-
-
-	
-
-		section.contact
-
+		nav 
+			section 
+				a(href="/") 
+					img(src="img/logo.png", alt="logo")
+			section
+				div 
+					a(href="actualites") Actualités
+				div 
+					a(href="#") Le club
+					div.nav-dropdown
+						a(href="presentation") Présentation
+						a(href="historique") Historique
+						a(href="partenaires") Partenaires
+				div 
+					a(href="equipes") Équipes
+				div 
+					a(href="matchs") Matchs
+				div 
+					a(href="boutique") Boutique
+				div 
+					a(href="pratique") Pratique
+					div.nav-dropdown
+						a(href="inscriptions") Inscriptions
+						a(href="entrainements") Entrainements
+						a(href="planningBenevoles") Planning bénévoles
+						a(href="contact") Contact
+		header
+			div
+				h1 HandBallGG
+				h2 Le club de handball de Guilherand-Granges
+		main
 
 		footer
-			p © 2022 HandBallGG
-

@@ -15,7 +15,7 @@
     /* Other */
     --radius-norm: 8px;
     --radius-lighter: 4px;
-    --blur-norm: 50px
+    --blur-norm: 20px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -84,6 +84,7 @@ body {
     font-family: 'Roboto', sans-serif;
     transition: ease-in-out;
     transition-duration: 200ms;
+    scroll-behavior: smooth;
 }
 
 
@@ -110,7 +111,7 @@ nav {
     -webkit-backdrop-filter: blur(var(--blur-norm));
     backdrop-filter: blur(var(--blur-norm));
     height: 73px;
-    top: 0;
+    top: 5px;
     z-index: 10;
 }
 
@@ -148,9 +149,6 @@ nav>section>div {
 }
 
 
-.nav-dropdown {
-    display: none;
-}
 
 nav>section>div:hover .nav-dropdown {
     display: flex;
@@ -160,6 +158,7 @@ nav>section>div:hover .nav-dropdown {
 }
 
 .nav-dropdown {
+    display: none;
     position: absolute;
     top: 73px;
     padding: 0px 20px;
