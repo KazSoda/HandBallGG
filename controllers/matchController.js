@@ -11,7 +11,7 @@ exports.getAllMatch = catchAsync(async (req,res)=>{
         .sort()
         .limitFields()
         .paginate()
-    
+     
     const matchs = await features.query;
 
     //send reponse
