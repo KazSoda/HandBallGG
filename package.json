@@ -1,22 +1,22 @@
 {
-  "name": "handballgg",
-  "version": "1.0.0",
-  "description": "Project for the 'th semester",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yohann69/HandBallGG.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/yohann69/HandBallGG/issues"
-  },
-  "homepage": "https://github.com/yohann69/HandBallGG#readme",
+	"name": "handballgg",
+	"version": "1.0.0",
+	"description": "Project for the 'th semester",
+	"main": "app.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/yohann69/HandBallGG.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/yohann69/HandBallGG/issues"
+	},
+	"homepage": "https://github.com/yohann69/HandBallGG#readme",
 	"dependencies": {
 		"@babel/polyfill": "^7.12.1",
 		"axios": "^1.2.1",

@@ -1,5 +1,4 @@
 [
-
     {
         "wording": "Loisirs",
         "trainer": "Ada Lovelace, Charles Babbage",
@@ -56,7 +55,6 @@
         "urlCalendar": "https://www.ffhandball.fr/fr/competition/17685#poule-94907",
         "comment": "PREMIERE DIVISION AURA P16 FEMININE, poule 8"
     },
-
     {
         "wording": "Seniors prénationales (SF1)",
         "trainer": "Patrick Henry Winston, Terry Winograd",
@@ -74,5 +72,3 @@
         "comment": "1ère phase, découverte"
     }
 ]
-
-

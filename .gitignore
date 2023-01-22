@@ -137,3 +137,4 @@ dist
 
 # Other stuff
 *.txt
+.hintrc

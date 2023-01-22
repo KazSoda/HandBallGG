@@ -3,8 +3,8 @@ const catchAsync = require('../utils/catchAsync')
 const AppError = require('../utils/appError')
 const APIFeatures = require('../utils/apiFeatures')
 
-exports.getAllEquipes = catchAsync(async(req,res) => {
-    const feature = new APIFeatures(Equipe.find(),req.query)
+exports.getAllEquipes = catchAsync(async (req, res) => {
+    const feature = new APIFeatures(Equipe.find(), req.query)
         .filter()
         .limitFields()
         .sort()
@@ -17,10 +17,10 @@ exports.getAllEquipes = catchAsync(async(req,res) => {
         data: {
             equipes
         }
-    })   
+    })
 })
 
-exports.createEquipe = catchAsync(async(req,res) => {
+exports.createEquipe = catchAsync(async (req, res) => {
     const newEquipe = await Equipe.create(req.body);
 
     res.status(201).json({
@@ -28,5 +28,5 @@ exports.createEquipe = catchAsync(async(req,res) => {
         data: {
             newEquipe
         }
-    }) 
+    })
 })

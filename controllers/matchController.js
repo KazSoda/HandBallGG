@@ -4,14 +4,14 @@ const catchAsync = require("../utils/catchAsync")
 const AppError = require("../utils/appError")
 
 //getAll
-exports.getAllMatch = catchAsync(async (req,res)=>{
+exports.getAllMatch = catchAsync(async (req, res) => {
     //Execute query
     const features = new APIFeatures(Match.find(), req.query)
         .filter()
         .sort()
         .limitFields()
         .paginate()
-     
+
     const matchs = await features.query;
 
     //send reponse
@@ -25,7 +25,7 @@ exports.getAllMatch = catchAsync(async (req,res)=>{
 })
 
 //createNewMatch
-exports.createMatch = catchAsync(async (req,res)=>{
+exports.createMatch = catchAsync(async (req, res) => {
     const newMatch = await Match.create(req.body);
 
     res.status(201).json({
