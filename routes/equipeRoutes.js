@@ -9,6 +9,14 @@ router
     .get(equipeController.getAllEquipes)
     .post(equipeController.createEquipe);
 
+router
+    .route('/:id')
+    .get(equipeController.getOne)
+    .patch(equipeController.UpdateEquipe)
+    .delete(equipeController.delEquipe)
+
+
+
 
 
 
