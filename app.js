@@ -82,7 +82,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/', viewRouter);
-app.use('/api/v1/matchs', matchRouter);
+app.use('/api/v1/match', matchRouter);
 app.use('/api/v1/equipe', equipeRouter)
 
 // If no route round

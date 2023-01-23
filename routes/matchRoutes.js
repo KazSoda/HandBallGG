@@ -8,4 +8,10 @@ router
     .get(matchController.getAllMatch)
     .post(matchController.createMatch)
 
+router
+    .route('/:id')
+    .get(matchController.getOneMatch)
+    .patch(matchController.updateMatch)
+    .delete(matchController.deleteMatch)
+
 module.exports = router;
