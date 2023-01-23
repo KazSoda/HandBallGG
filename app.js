@@ -11,6 +11,7 @@ const compression = require('compression');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const viewRouter = require('./routes/viewRoutes');
+const matchRouter = require('./routes/matchRoutes');
 const equipeRouter = require('./routes/equipeRoutes')
 
 
@@ -81,6 +82,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/', viewRouter);
+app.use('/api/v1/match', matchRouter);
 app.use('/api/v1/equipe', equipeRouter)
 
 // If no route round
@@ -88,6 +90,7 @@ app.all('*', (req, res, next) => {
 	next();
 	// next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 })
+
 
 
 app.use(globalErrorHandler)

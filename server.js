@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 
 
 process.on('uncaughtException', err => {
-    console.log(err);
+	console.log(err);
 	console.log(err.name, err.message);
 	console.log('UNCAUGHT EXCEPTION! Shutting down1...');
 	process.exit(1);
@@ -17,8 +17,6 @@ const app = require('./app');
 
 
 const db = process.env.DATABASE_mongodb
-
-
 
 mongoose.connect(db, {
 	useNewUrlParser: true,

@@ -1,0 +1,74 @@
+[
+    {
+        "wording": "Loisirs",
+        "trainer": "Ada Lovelace, Charles Babbage",
+        "slot": "Mercredi 20h-22h (ancien)",
+        "photo": "Loisirs.jpg",
+        "urlCalendar": "",
+        "comment": "Les matches ont lieu en semaine et sont suivis d'une troisième mi-temps conviviale."
+    },
+    {
+        "wording": "Moins de 13",
+        "trainer": "Alfred Aho, John Hopcroft, Jeffrey Ullman",
+        "slot": "Lundi 17h-18h30 (nouveau), mercredi 16h30-18h (nouveau)",
+        "photo": "Moins13.jpg",
+        "urlCalendar": "https://www.ffhandball.fr/fr/competition/17692#poule-100556",
+        "comment": "DIVISION AURA M13 FEMININ, 2ème phase, poule 7, div 2"
+    },
+    {
+        "wording": "Moins de 9",
+        "trainer": "Leslie Lamport, Donald Knuth",
+        "slot": "",
+        "photo": "Moins9.jpg",
+        "urlCalendar": "",
+        "comment": ""
+    },
+    {
+        "wording": "Moins de 15",
+        "trainer": "Brian Kernighan, Dennis Richie",
+        "slot": "Mercredi 18h30-20h (ancien), vendredi 17h-18h15 (alternance)",
+        "photo": "Moins15.jpg",
+        "urlCalendar": "https://www.ffhandball.fr/fr/competition/17691#poule-100531",
+        "comment": "1ERE DIVISION AURA M15 FEMININ, 2ème phase, poule 7, div 1"
+    },
+    {
+        "wording": "Moins de 17",
+        "trainer": "Ken Thomson",
+        "slot": "",
+        "photo": "Moins17.jpg",
+        "urlCalendar": "https://www.ffhandball.fr/fr/competition/17709#poule-89919",
+        "comment": "Phase de Brassage - Entente avec ETOILE/BEAUVALLON"
+    },
+    {
+        "wording": "Moins de 18",
+        "trainer": "Bram Moolenaar, Bill Joy",
+        "slot": "Mercredi 18h-20h00 (nouveau), Vendredi 18h15-19h30 (alternance)",
+        "photo": "Moins18.jpg",
+        "urlCalendar": "https://www.ffhandball.fr/fr/competition/17690#poule-100521",
+        "comment": "DIVISION AURA M18 ANS FEMININ, 2ème phase, poule 9, div 1"
+    },
+    {
+        "wording": "Seniors régionales (SF2)",
+        "trainer": "Patrick Henry Winston, Terry Winograd",
+        "slot": "Mercredi 20h-22h (nouveau), vendredi 19h30-21h00 (alternance)",
+        "photo": "SF2.jpg",
+        "urlCalendar": "https://www.ffhandball.fr/fr/competition/17685#poule-94907",
+        "comment": "PREMIERE DIVISION AURA P16 FEMININE, poule 8"
+    },
+    {
+        "wording": "Seniors prénationales (SF1)",
+        "trainer": "Patrick Henry Winston, Terry Winograd",
+        "slot": "Mercredi 20h-22h (nouveau), Vendredi 20h30-22h00 (alternance)",
+        "photo": "SF1.jpg",
+        "urlCalendar": "https://www.ffhandball.fr/fr/competition/17616#poule-90361",
+        "comment": "Équipe fanion, joue en prénational, poule 2"
+    },
+    {
+        "wording": "Moins de 11",
+        "trainer": "Alain Colmerauer",
+        "slot": "Mardi 17h-18h30 (ancien)",
+        "photo": "Moins11.jpg",
+        "urlCalendar": "https://www.ffhandball.fr/fr/competition/18492#poule-96268",
+        "comment": "1ère phase, découverte"
+    }
+]
