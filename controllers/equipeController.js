@@ -33,7 +33,7 @@ exports.createEquipe = catchAsync(async (req, res) => {
     }) 
 })
 
-exports.delEquipe = catchAsync(async(req,res) => {
+exports.delEquipe = catchAsync(async(req,res, next) => {
     const delEquipe = await Equipe.findByIdAndDelete(req.params.id)
 
     if (!delEquipe){
@@ -46,7 +46,7 @@ exports.delEquipe = catchAsync(async(req,res) => {
     })
 })
 
-exports.UpdateEquipe = catchAsync(async(req,res) => {
+exports.UpdateEquipe = catchAsync(async(req,res,next) => {
     const updateEquipe = await Equipe.findByIdAndUpdate(req.params.id,req.body,{
         new:true,
         runValidators:true
@@ -66,16 +66,17 @@ exports.UpdateEquipe = catchAsync(async(req,res) => {
 
 })
 
-exports.getOne = catchAsync(async(req,res) => {
-    const equipe = Equipe.findById(req.params.id);
+exports.getOneEquipe = catchAsync(async (req, res, next) => {
+    const equipe = await Equipe.findById(req.params.id);
 
-    if(!equipe){
-        return next(new AppError('Aucune équipe trouvé à cette id',404))
+    if (!equipe){
+        return next(new AppError('Aucun match avec cet ID', 404));
     }
 
+    //send reponse
     res.status(200).json({
-        status:'success',
-        data:{
+        status: 'success',
+        data: {
             equipe
         }
     })

@@ -1,7 +1,18 @@
-
+const catchAsync = require('../utils/catchAsync');
+const Equipe = require('../models/equipeModel');
 
 exports.getHomePage = (req, res) => {
-    res.status(200).render('index', {
+    res.status(200).render('base', {
         title: 'Accueil'
     })
 }
+
+
+exports.getEquipesPage = catchAsync(async (req, res, next) => {
+    const equipes = await Equipe.find();
+
+    res.status(200).render('equipes', {
+        title: 'Equipes',
+        equipes
+    })
+})

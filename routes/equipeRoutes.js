@@ -11,13 +11,9 @@ router
 
 router
     .route('/:id')
-    .get(equipeController.getOne)
+    .get(equipeController.getOneEquipe)
     .patch(equipeController.UpdateEquipe)
     .delete(equipeController.delEquipe)
-
-
-
-
 
 
 module.exports = router;

@@ -1,0 +1,16 @@
+extends base
+
+block content
+	main 
+		each equipe in equipes
+			article.team(style='background-image: url(img/'+equipe.photo+')')
+				div 
+					//- display the image of the team from the img folder
+					img(src='img/'+equipe.photo, alt=equipe.wording)
+
+					aside 
+						h3=equipe.wording 
+						span=equipe.comment
+						p=equipe.trainer
+						p=equipe.slot
+	

@@ -25,9 +25,25 @@
         --bg-color: white;
         --bg-color-darker: #efefef;
         --nav-bg-color: #e0e0e0a9;
+        --shadow-color: #0000007a;
     }
 
-
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    a,
+    li,
+    span,
+    div,
+    input,
+    textarea,
+    button {
+        color: var(--text-color-primary);
+    }
 
 
 
@@ -41,6 +57,17 @@
     }
 
 
+
+
+
+    /*--------------------------------------------------
+                        PrezArticle
+    --------------------------------------------------*/
+
+    .team {
+        background: linear-gradient(rgba(255, 255, 255, 0.7),
+                rgba(255, 255, 255, 0.7)), url(../img/Loisirs.jpg);
+    }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -50,9 +77,26 @@
         --bg-color: #1c1c1c;
         --bg-color-darker: #171717;
         --nav-bg-color: #0d0d0da9;
+        --shadow-color: #7474744f;
     }
 
 
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    a,
+    li,
+    span,
+    div,
+    input,
+    textarea,
+    button {
+        color: var(--text-color-primary);
+    }
 
 
     /*--------------------------------------------------
@@ -62,6 +106,17 @@
     nav>section>div:hover,
     .nav-dropdown a:hover {
         background-color: var(--accent-darker);
+    }
+
+
+
+    /*--------------------------------------------------
+                        PrezArticle
+    --------------------------------------------------*/
+
+    .team {
+        background: linear-gradient(rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.5)), url(../img/Loisirs.jpg);
     }
 }
 
@@ -85,6 +140,15 @@ body {
     transition: ease-in-out;
     transition-duration: 200ms;
     scroll-behavior: smooth;
+}
+
+main {
+    width: 100%;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 
@@ -172,4 +236,50 @@ nav>section>div:hover .nav-dropdown {
     text-align: center;
     padding: 20px 20px;
     width: 100%;
+}
+
+
+
+
+
+
+/*--------------------------------------------------
+                     PrezArticle
+--------------------------------------------------*/
+
+.team {
+    margin: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 800px;
+    border-radius: var(--radius-norm);
+    border: 1px solid var(--text-color-primary);
+    box-shadow: 4px 4px 10px var(--shadow-color);
+}
+
+.team *{
+    max-height: 300px;
+
+}
+
+.team>div {
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--radius-norm);
+    -webkit-backdrop-filter: blur(var(--blur-norm));
+    backdrop-filter: blur(var(--blur-norm));
+}
+
+.team img {
+    max-width: 450px;
+    border-radius: var(--radius-norm);
+}
+
+.team aside {
+    font-size: 110%;
+    padding: 35px;
 }
