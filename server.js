@@ -18,10 +18,10 @@ const app = require('./app');
 
 const db = process.env.DATABASE_mongodb
 
+mongoose.set('strictQuery', true);
+
 mongoose.connect(db, {
 	useNewUrlParser: true,
-	useCreateIndex: true,
-	useFindAndModify: false,
 	useUnifiedTopology: true
 }).then(() => console.log("Connected to database"));
 
