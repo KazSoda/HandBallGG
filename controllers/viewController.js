@@ -2,7 +2,7 @@ const catchAsync = require('../utils/catchAsync');
 const Equipe = require('../models/equipeModel');
 
 exports.getHomePage = (req, res) => {
-    res.status(200).render('base', {
+    res.status(200).render('homepage', {
         title: 'Accueil'
     })
 }

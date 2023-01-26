@@ -74,7 +74,7 @@
     :root {
         /* Colors */
         --text-color-primary: white;
-        --bg-color: #1c1c1c;
+        --bg-color: #161616;
         --bg-color-darker: #171717;
         --nav-bg-color: #0d0d0da9;
         --shadow-color: #7474744f;
@@ -140,6 +140,9 @@ body {
     transition: ease-in-out;
     transition-duration: 200ms;
     scroll-behavior: smooth;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 main {
@@ -151,8 +154,20 @@ main {
     flex-wrap: wrap;
 }
 
+button {
+    border: none;
+    border-radius: var(--radius-norm);
+    color: var(--text-color-primary);
+    background-color: var(--shadow-color);
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    outline: none;
+}
 
-
+button:hover {
+    background-color: var(--accent-primary);
+}
 
 
 
@@ -242,6 +257,57 @@ nav>section>div:hover .nav-dropdown {
 
 
 
+/*--------------------------------------------------
+                     HomePage
+--------------------------------------------------*/
+header {
+    margin-top: -105px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    background-image: url("./../img/homepage/bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+header h1 {
+    font-size: 100px;
+    margin: 10px 0;
+}
+
+header h2 {
+    font-size: 45px;
+    margin: 10px 0;
+}
+
+header button {
+    font-size: 1.2rem;
+    cursor: pointer;
+    outline: none;
+    margin-top: 15px;
+}
+
+
+
+.imgPrez {
+    display: flex;
+    align-items: flex-end;
+    height: 100vh;
+    background-image: url("./../img/homepage/whiteBalloon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 580px;
+}
+
+.playerHome {
+    width: 650px;
+}
+
+
+
 
 /*--------------------------------------------------
                      PrezArticle
@@ -258,7 +324,7 @@ nav>section>div:hover .nav-dropdown {
     box-shadow: 4px 4px 10px var(--shadow-color);
 }
 
-.team *{
+.team * {
     max-height: 300px;
 
 }
@@ -282,4 +348,64 @@ nav>section>div:hover .nav-dropdown {
 .team aside {
     font-size: 110%;
     padding: 35px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*--------------------------------------------------
+                     Responsive
+--------------------------------------------------*/
+
+@media only screen and (max-width: 800px) {
+    header {
+        flex-direction: column !important;
+    }
+
+    .imgPrez {
+        background-size: 280px !important;
+    }
+
+    .playerHome {
+        width: 255px !important;
+    }
+
+    header h1 {
+        font-size: 60px !important;
+    }
+
+    header h2 {
+        font-size: 30px !important;
+    }
+
+    .textPrez {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
 }
