@@ -138,3 +138,5 @@ dist
 # Other stuff
 *.txt
 .hintrc
+
+.idea

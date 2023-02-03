@@ -20,7 +20,7 @@ const createSendToken = (user,statusCode,res) => {
     res.cookie("jwt",token,cookieOption);
     user.password = undefined;
     res.status(statusCode).json({
-        status: "sucess",
+        status: "success",
         token: token,
         data:{user},
     })
@@ -30,7 +30,7 @@ exports.signUp = catchasync(async (req,res) => {
     const newUser = await User.create(req.body)
     newUser.password = undefined;
     res.status(200).json({
-        status:"sucess",
+        status:"success",
         data:{user},
     })
 })
@@ -52,5 +52,5 @@ exports.logout = (res) => {
         expires:new Date(Date.now()+10*1000),
         httpOnly:true
     });
-    res.status(200).json({status:"sucess"});
+    res.status(200).json({status:"success"});
 }
