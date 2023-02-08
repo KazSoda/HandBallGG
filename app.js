@@ -13,6 +13,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const viewRouter = require('./routes/viewRoutes');
 const matchRouter = require('./routes/matchRoutes');
 const equipeRouter = require('./routes/equipeRoutes')
+const userRouter = require('./routes/userRoutes');
 
 
 const app = express(); // Create express app
@@ -83,7 +84,9 @@ app.use((req, res, next) => {
 // Routes
 app.use('/', viewRouter);
 app.use('/api/v1/match', matchRouter);
-app.use('/api/v1/equipe', equipeRouter)
+app.use('/api/v1/equipe', equipeRouter);
+app.use('/api/v1/users', userRouter);
+
 
 // If no route round
 app.all('*', (req, res, next) => {

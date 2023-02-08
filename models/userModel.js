@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const validate = require("validator");
 const bcrypt = require("bcryptjs");
 
-const matchSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
 
     firstName: {
         type: String,
@@ -23,12 +23,13 @@ const matchSchema = new mongoose.Schema({
         trim: true,
         required: [true, 'Vous devez spécifiez une adresse mail'],
         length: 64,
+        validate: validate.isEmail,
     },
 
     role: {
         type: String,
         enum: {
-            values: ["Admin","User"],
+            values: ["Admin", "User"],
             message: "le role doit être soit user soit admin"
         },
         trim: true,
@@ -45,8 +46,8 @@ const matchSchema = new mongoose.Schema({
     passwordConfirm: {
         type: String,
         trim: true,
-        validate:{
-            validator: function(passwordConfirmed){
+        validate: {
+            validator: function (passwordConfirmed) {
                 return passwordConfirmed === this.password;
             },
             message: "Les mots de passe ne correspondent pas"
@@ -56,16 +57,20 @@ const matchSchema = new mongoose.Schema({
 
 })
 
-userScheme.pre('save', async function (next){
-    if(!this.isModified("password"))return next();
-    this.password=await bcrypt.hash(this.password,14);
+userSchema.pre('save', async function (next) {
+    if (!this.isModified("password")) return next();
+
+    this.password = await bcrypt.hash(this.password, 14);
     this.passwordConfirm = undefined;
+    
     next();
 })
 
-userSchema.methods.correctPassword = function(candidatePassword,correctPassword){
+userSchema.methods.correctPassword = function (candidatePassword, correctPassword) {
     return bcrypt.compare(candidatePassword, correctPassword);
 }
 
-const User = mongoose.model('User', matchSchema);
+
+
+const User = mongoose.model('User', userSchema);
 module.exports = User;

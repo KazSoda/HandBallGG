@@ -1,25 +1,24 @@
-const User = require("User");
+const User = require('./../models/userModel');
 const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
-const { json } = require("body-parser");
 
 exports.getAllUsers = catchAsync(async (req, res) => {
-	const users = await User.find()
+    const users = await User.find()
 
-	res.status(200).json({
-		status: 'success',
-		results: users.length,
-		data: {
-			users
-		}
-	})
+    res.status(200).json({
+        status: 'success',
+        results: users.length,
+        data: {
+            users
+        }
+    })
 })
 
-exports.getUser = catchAsync(async(req,res,next) =>{
+exports.getUser = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.params.id);
 
-    if(!user){
-        return next(new AppError('Aucune opération avec cet ID',404));
+    if (!user) {
+        return next(new AppError('Aucune opération avec cet ID', 404));
     }
 
     res.status(200).json({
@@ -30,29 +29,29 @@ exports.getUser = catchAsync(async(req,res,next) =>{
     })
 })
 
-exports.updateUser = catchAsync(async (req,res,next) => {
-    const updateUser = await User.findbyIdAndUpdate(req.params.id,req.body,{
-        new:true,
+exports.updateUser = catchAsync(async (req, res, next) => {
+    const updateUser = await User.findbyIdAndUpdate(req.params.id, req.body, {
+        new: true,
         runValidators: true
     })
 
-    if(!updateUser){
-        return next(new AppError("Aucun utilisateur n'a été trouvé avec cet ID",404))
+    if (!updateUser) {
+        return next(new AppError("Aucun utilisateur n'a été trouvé avec cet ID", 404))
     }
 
     res.status(200).json({
         status: 'success',
-        data:{
+        data: {
             updateUser
         }
     })
 })
 
-exports.deleteUser = catchAsync(async(req,res,next) => {
+exports.deleteUser = catchAsync(async (req, res, next) => {
     const delUser = await User.findByIdAndDelete(req.params.id)
 
-    if(!delUser){
-        return next(new AppError("Aucun utilisateur n'a été trouvé avec cet ID",404))
+    if (!delUser) {
+        return next(new AppError("Aucun utilisateur n'a été trouvé avec cet ID", 404))
     }
 
     res.status(204).json({
@@ -63,7 +62,7 @@ exports.deleteUser = catchAsync(async(req,res,next) => {
 
 
 //la création d'utilisateur se fait par authController
-exports.createUser = (req,res) => {
+exports.createUser = (req, res) => {
     res.status(500).json({
         status: 'error',
         message: "Cette route n'est pas encore définie"
@@ -73,40 +72,40 @@ exports.createUser = (req,res) => {
 //Si l'utilisateur veut supprimer ou modifier ses informations lui-même.
 //mais dans le sujet la modif/supp se fait par l'admin
 
-/*const filterObj = (obj, ...allowedFields) => {
-	const newObj = {};
-	Object.keys(obj).forEach(el => {
-		if (allowedFields.includes(el)) {
-			newObj[el] = obj[el];
-		}
-	});
-	return newObj;
-}
+// const filterObj = (obj, ...allowedFields) => {
+// 	const newObj = {};
+// 	Object.keys(obj).forEach(el => {
+// 		if (allowedFields.includes(el)) {
+// 			newObj[el] = obj[el];
+// 		}
+// 	});
+// 	return newObj;
+// }
 
-exports.updateMe = catchAsync(async (req, res, next) => {
-	if (req.body.password || req.body.passwordConfirm) {
-		return next(new AppError('Cette url n\'est pas pour la mise à jour du mot de passe. Veuillez utiliser /updateMyPassword', 400))
-	}
+// exports.updateMe = catchAsync(async (req, res, next) => {
+// 	if (req.body.password || req.body.passwordConfirm) {
+// 		return next(new AppError('Cette url n\'est pas pour la mise à jour du mot de passe. Veuillez utiliser /updateMyPassword', 400))
+// 	}
 
-    const filteredBody = filterObj(req.body, 'firstName','lastName','email');
-    const updatedUser = await User.findByIdAndUpdate(req.body, filteredBody,{
-        new: true,
-        runValidators: true
-    })
+//     const filteredBody = filterObj(req.body, 'firstName','lastName','email');
+//     const updatedUser = await User.findByIdAndUpdate(req.body, filteredBody,{
+//         new: true,
+//         runValidators: true
+//     })
 
-    res.status('200').json({
-        status: 'success',
-        data: {
-            user: updatedUser
-        }
-    })
-})
+//     res.status('200').json({
+//         status: 'success',
+//         data: {
+//             user: updatedUser
+//         }
+//     })
+// })
 
-exports.deleteMe = catchAsync(async (req, res, next) => {
-	await User.findByIdAndUpdate(req.user.id, { active: false })
+// exports.deleteMe = catchAsync(async (req, res, next) => {
+// 	await User.findByIdAndUpdate(req.user.id, { active: false })
 
-	res.status(204).json({
-		status: 'success',
-		data: null
-	})
-});*/
+// 	res.status(204).json({
+// 		status: 'success',
+// 		data: null
+// 	})
+// });
