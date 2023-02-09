@@ -9,5 +9,6 @@ router.get('/', viewController.getHomePage);
 
 router.get('/equipes', viewController.getEquipesPage);
 
+router.get('/partenaires', viewController.getPartners);
 
 module.exports = router;

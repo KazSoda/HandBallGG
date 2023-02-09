@@ -8,35 +8,13 @@ html
 		link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css")
 
 	body
-		nav 
-			section 
-				a(href='/') 
-					img(src='img/logo.png', alt='logo')
-			section
-				div 
-					a(href='actualites') Actualités
-				div 
-					a(href='#') Le club
-					div.nav-dropdown
-						a(href='presentation') Présentation
-						a(href='historique') Historique
-						a(href='partenaires') Partenaires
-				div 
-					a(href='equipes') Équipes
-				div 
-					a(href='matchs') Matchs
-				div 
-					a(href='boutique') Boutique
-				div 
-					a(href='pratique') Pratique
-					div.nav-dropdown
-						a(href='inscriptions') Inscriptions
-						a(href='entrainements') Entrainements
-						a(href='planningBenevoles') Planning bénévoles
-						a(href='contact') Contact
-		
+		include navbar
 
 		block content
 
 
 		footer
+			p Guilherand-Granges Ardèche Handball
+			p Espace Rémy Roure -- 07500 Guilherand-Granges
+			p Facebook : @GGAhandball
+			p 5107009@ffhandball.net

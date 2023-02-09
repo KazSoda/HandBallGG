@@ -271,6 +271,11 @@ header {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    background-color: #161616;
+}
+
+header * {
+    color: white;
 }
 
 header h1 {
@@ -357,6 +362,46 @@ header button {
 
 
 
+
+
+/*--------------------------------------------------
+                     Partners
+--------------------------------------------------*/
+
+.partners {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
+.partners>section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1000px;
+}
+
+.partners img {
+    max-width: 250px;
+    max-height: 250px;
+}
+
+.partners a {
+    margin: 10px;
+}
+
+
+
+
+
+
+/*--------------------------------------------------
+                     Footer
+--------------------------------------------------*/
 
 
 

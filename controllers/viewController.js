@@ -16,3 +16,11 @@ exports.getEquipesPage = catchAsync(async (req, res, next) => {
         equipes
     })
 })
+
+
+
+exports.getPartners = (req, res) => {
+    res.status(200).render('partners', {
+        title: 'Partenaires'
+    })
+}
