@@ -1,5 +1,6 @@
 const catchAsync = require('../utils/catchAsync');
 const Equipe = require('../models/equipeModel');
+const Match = require('../models/matchModel');
 
 exports.getHomePage = (req, res) => {
     res.status(200).render('homepage', {
@@ -67,11 +68,14 @@ exports.getEquipesPage = catchAsync(async (req, res, next) => {
                     Matches
 ---------------------------------------------- */
 
-exports.getMatchsPage = (req, res) => {
+exports.getMatchsPage = catchAsync(async (req, res) => {
+    const matchs = await Match.find();
+
     res.status(200).render('matchs', {
-        title: 'Matchs'
+        title: 'Matchs',
+        matchs
     })
-}
+})
 
 
 
