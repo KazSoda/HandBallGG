@@ -1,16 +1,16 @@
 {
-  "extends": [
-    "development"
-  ],
-  "hints": {
-    "compat-api/css": [
-      "default",
-      {
-        "ignore": [
-          "backdrop-filter",
-          "scroll-behavior"
-        ]
-      }
-    ]
-  }
+	"extends": [
+		"development"
+	],
+	"hints": {
+		"compat-api/css": [
+			"default",
+			{
+				"ignore": [
+					"backdrop-filter",
+					"scroll-behavior"
+				]
+			}
+		]
+	}
 }

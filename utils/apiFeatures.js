@@ -59,6 +59,22 @@ class APIFeatures {
 
 		return this;
 	}
+
+
+	sortDate() {
+		if (this.queryString.sort) {
+			// Sort results by multiple fields (add ',' in request)
+			const sortBy = this.queryString.sort.split(',').join(' ');
+			this.query = this.query.sort(sortBy);
+		} else {
+			this.query = this.query.sort('-date');
+		}
+
+		return this;
+	}
+
+
+
 }
 
 

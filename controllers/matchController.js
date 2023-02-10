@@ -11,6 +11,7 @@ exports.getAllMatch = catchAsync(async (req, res) => {
         .sort()
         .limitFields()
         .paginate()
+        .sortDate();
 
     const matchs = await features.query;
 
