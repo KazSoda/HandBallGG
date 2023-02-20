@@ -459,45 +459,44 @@ header button {
                      Match
 --------------------------------------------------*/
 
+.mainSection{
+    display: flex;
+    justify-content: center;
+}
+
 .matchInformation{
     display: flex;
     flex-direction: column;
     background-color: gray;
-    height: 550px;
-    width: 1200px;
-    margin-bottom: 75px;
+    width: 75%;
+    margin: 20px;
 }
 
 .headerInformationMatch{
-    background-color: rgb(76, 76, 76);
-    width: 100%;
-    height: 50px;
+    background-color: rgb(66, 66, 66);
 }
 
 .headerInformationMatch>h1{
     height: 100%;
     width: 100%;
     margin: 0px;
-    padding: 0px;
 }
 
 .bodyInformationMatch{
     display: flex;
     justify-content: space-around;
-    background-color: rgb(173, 0, 208);
-    width: 100%;
-    height: 500px;
+    background-color: #3b7b1a;
+    height: 350px;
 }
 
 .firstEquipeInformation{
-    background-color: rgb(231, 27, 27);
-    width: 35%;
-    height: 90%;
-    margin-top: 25px;
+    background-color: #1a3a09;
+}
+.secondEquipeInformation{
+    background-color: #1a3a09;
 }
 
-.secondEquipeInformation{
-    background-color: rgb(61, 41, 240);
+.firstEquipeInformation,.secondEquipeInformation{
     width: 35%;
     height: 90%;
     margin-top: 25px;
@@ -506,6 +505,12 @@ header button {
 .firstEquipeInformation>h1,.secondEquipeInformation>h1{
     display: flex;
     justify-content: center;
-    margin: 0px;
-    padding: 0px;
+    margin: 5px;
+    font-size: 50%;
+}
+
+.bodyInformationMatch>p{
+    display: flex;
+    align-items: center;
+    font-size: 200%;
 }

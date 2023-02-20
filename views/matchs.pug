@@ -4,14 +4,16 @@ extends base
 block content 
 	h1 🚧 Page en construction 🚧
 		each match in matchs
-			section.matchInformation
+			section.mainSection
+				section.matchInformation
+					section.headerInformationMatch
+						h1=match.gymnasium +" : "
 
-				section.headerInformationMatch
-					h1=match.gymnasium +" : "
+					section.bodyInformationMatch
+						article.firstEquipeInformation
+							h1=match.host
 
-				section.bodyInformationMatch
-					article.firstEquipeInformation
-						h1=match.host
+						p='VS'
 
-					article.secondEquipeInformation
-						h1=match.host
+						article.secondEquipeInformation
+							h1=match.host
