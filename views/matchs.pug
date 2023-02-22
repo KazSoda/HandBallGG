@@ -1,7 +1,11 @@
 extends base
 
 
-block content 
+block content
+	form(method="POST")
+		p Barre de recherche:
+			input(type="text" name="username" placeholder="Enter Your Username ")
+	input(type="submit")
 	h1 🚧 Page en construction 🚧
 		each match in matchs
 			section.mainSection
@@ -11,9 +15,9 @@ block content
 
 					section.bodyInformationMatch
 						article.firstEquipeInformation
-							h1=match.host
+							h1=match.localTeam
 
 						p='VS'
 
 						article.secondEquipeInformation
-							h1=match.host
+							h1=match.againstTeam
