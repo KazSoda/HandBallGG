@@ -2,13 +2,13 @@ extends base
 
 
 block content
-	form(id="searchForm" method="POST")
+	form(id="searchFormMatch" method="POST")
 		p Barre de recherche:
 			input(type="text" name="search" id="searchInformation" placeholder="Entrez le nom de l'équipe")
-	input(type="submit" id='searchBtn')
-	h1 🚧 Page en construction 🚧
+		input(type="submit" id='searchBtn')
+	section.mainSection
 		each match in matchs
-			section.mainSection
+			section.matchSection
 				section.matchInformation
 					section.headerInformationMatch
 						h1=match.gymnasium +" : "
@@ -20,4 +20,4 @@ block content
 						p='VS'
 
 						article.secondEquipeInformation
-							h1=match.againstTeam 
+							h1=match.againstTeam

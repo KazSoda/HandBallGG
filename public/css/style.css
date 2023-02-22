@@ -459,7 +459,7 @@ header button {
                      Match
 --------------------------------------------------*/
 
-.mainSection{
+.matchSection{
     display: flex;
     justify-content: center;
 }
@@ -510,7 +510,7 @@ header button {
     display: flex;
     justify-content: center;
     margin: 5px;
-    font-size: 50%;
+    font-size: 100%;
 }
 
 .bodyInformationMatch>p{

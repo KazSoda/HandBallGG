@@ -6,10 +6,14 @@ import {init, matchInformation, test} from './match.js';
 const loginForm = document.querySelector('.loginForm');
 const logOutBtn = document.querySelector('.nav-right');
 
-const searchBtn = document.querySelector('#searchBtn');
+const searchFormMatch = document.querySelector('#searchFormMatch');
 
-if (searchBtn) {
-    searchBtn.addEventListener('click', matchInformation);
+if (searchFormMatch) {
+    matchInformation()
+    searchFormMatch.addEventListener('submit', e => {
+        e.preventDefault();
+        matchInformation();
+    })
 }
 
 // Delegation

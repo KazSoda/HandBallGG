@@ -12091,7 +12091,7 @@ var matchInformation = /*#__PURE__*/function () {
           _context.next = 3;
           return (0, _axios.default)({
             method: "get",
-            url: "/api/v1/match"
+            url: "/api/v1/match?sort=date&date[gt]='2023-01-05'"
           });
         case 3:
           res = _context.sent;
@@ -12117,13 +12117,22 @@ var matchInformation = /*#__PURE__*/function () {
 exports.matchInformation = matchInformation;
 function init(queryResult) {
   var inputSearchBar = document.querySelector("#searchInformation");
+  var mainSection = document.querySelector(".mainSection");
   var resSort = [];
   queryResult.forEach(function (matchInfo, index, matchInfoFull) {
     if (matchInfo.againstTeam.toUpperCase().includes(inputSearchBar.value.toUpperCase()) || matchInfo.localTeam.toUpperCase().includes(inputSearchBar.value.toUpperCase())) {
       resSort.push(matchInfo);
     }
   });
-  console.log(resSort);
+  if (resSort.length == 0) {
+    mainSection.innerHTML = "<h1>La recherche n'a pas donn\xE9 de r\xE9sultats</h1>";
+  } else {
+    mainSection.innerHTML = '';
+    resSort.forEach(function (sortedMatch) {
+      var date = new Date(sortedMatch.date).toDateString();
+      mainSection.innerHTML += "\n\n\n      <section class=\"matchSection\">\n      <section class=\"matchInformation\">\n      <section class=\"headerInformationMatch\">\n      <h1>".concat(sortedMatch.gymnasium, " : ").concat(date, "</h1>\n        </section>\n        <section class=\"bodyInformationMatch\">\n          <article class=\"firstEquipeInformation\">\n            <h1>").concat(sortedMatch.localTeam, "</h1>\n          </article>\n          <p>VS</p>\n          <article class=\"secondEquipeInformation\">\n          <h1>").concat(sortedMatch.againstTeam, "</h1>\n          </article>\n        </section>\n      </section>\n    </section>\n\n    ");
+    });
+  }
 }
 },{"axios":"../../node_modules/axios/index.js","./alert":"alert.js"}],"index.js":[function(require,module,exports) {
 "use strict";
@@ -12265,9 +12274,13 @@ var _match = require("./match.js");
 // Select elements
 var loginForm = document.querySelector('.loginForm');
 var logOutBtn = document.querySelector('.nav-right');
-var searchBtn = document.querySelector('#searchBtn');
-if (searchBtn) {
-  searchBtn.addEventListener('click', _match.matchInformation);
+var searchFormMatch = document.querySelector('#searchFormMatch');
+if (searchFormMatch) {
+  (0, _match.matchInformation)();
+  searchFormMatch.addEventListener('submit', function (e) {
+    e.preventDefault();
+    (0, _match.matchInformation)();
+  });
 }
 
 // Delegation
@@ -12307,7 +12320,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64072" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51131" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
