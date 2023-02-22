@@ -2,10 +2,14 @@ import axios from "axios";
 import { showAlert } from "./alert";
 
 export const matchInformation = async () => {
+  let currentDate=new Date();
+  let currentDate2=new Date();
+  let threeWeekAgo = currentDate.addDays(- (7*3));
+  let twoMonthAfter = currentDate2.addDays(7*8);
   try {
     const res = await axios({
       method: "get",
-      url: "/api/v1/match?sort=date&date[gt]='2023-01-05'",
+      url: `/api/v1/match?sort=date&date[gt]=${threeWeekAgo}&date[lt]=${twoMonthAfter}`,
     });
     if (res.data.status === "success") {
       init(res.data.data.matchs);
@@ -68,4 +72,12 @@ function init(queryResult) {
     `;
     });
   }
+}
+
+
+
+Date.prototype.addDays = function(days) {
+  var date = new Date(this.valueOf());
+  date.setDate(date.getDate() + days);
+  return date;
 }

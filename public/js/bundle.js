@@ -12083,32 +12083,36 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var matchInformation = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var res;
+    var currentDate, currentDate2, threeWeekAgo, twoMonthAfter, res;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _context.prev = 0;
-          _context.next = 3;
+          currentDate = new Date();
+          currentDate2 = new Date();
+          threeWeekAgo = currentDate.addDays(-(7 * 3));
+          twoMonthAfter = currentDate2.addDays(7 * 8);
+          _context.prev = 4;
+          _context.next = 7;
           return (0, _axios.default)({
             method: "get",
-            url: "/api/v1/match?sort=date&date[gt]='2023-01-05'"
+            url: "/api/v1/match?sort=date&date[gt]=".concat(threeWeekAgo, "&date[lt]=").concat(twoMonthAfter)
           });
-        case 3:
+        case 7:
           res = _context.sent;
           if (res.data.status === "success") {
             init(res.data.data.matchs);
           }
-          _context.next = 10;
+          _context.next = 14;
           break;
-        case 7:
-          _context.prev = 7;
-          _context.t0 = _context["catch"](0);
+        case 11:
+          _context.prev = 11;
+          _context.t0 = _context["catch"](4);
           (0, _alert.showAlert)("error", _context.t0.response.data.message);
-        case 10:
+        case 14:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 7]]);
+    }, _callee, null, [[4, 11]]);
   }));
   return function matchInformation() {
     return _ref.apply(this, arguments);
@@ -12134,6 +12138,11 @@ function init(queryResult) {
     });
   }
 }
+Date.prototype.addDays = function (days) {
+  var date = new Date(this.valueOf());
+  date.setDate(date.getDate() + days);
+  return date;
+};
 },{"axios":"../../node_modules/axios/index.js","./alert":"alert.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
