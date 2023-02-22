@@ -1,19 +1,23 @@
 extends base
 
 
-block content 
-	h1 🚧 Page en construction 🚧
+block content
+	form(id="searchFormMatch" method="POST")
+		p Barre de recherche:
+			input(type="text" name="search" id="searchInformation" placeholder="Entrez le nom de l'équipe")
+		input(type="submit" id='searchBtn')
+	section.mainSection
 		each match in matchs
-			section.mainSection
+			section.matchSection
 				section.matchInformation
 					section.headerInformationMatch
 						h1=match.gymnasium +" : "
 
 					section.bodyInformationMatch
 						article.firstEquipeInformation
-							h1=match.host
+							h1=match.localTeam
 
 						p='VS'
 
 						article.secondEquipeInformation
-							h1=match.host
+							h1=match.againstTeam
