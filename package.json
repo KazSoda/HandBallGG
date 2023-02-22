@@ -6,7 +6,9 @@
 	"scripts": {
 		"dev": "nodemon server.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node server.js"
+		"start": "node server.js",
+		"watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
+		"build:js": "parcel build ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
 	},
 	"repository": {
 		"type": "git",
@@ -36,7 +38,6 @@
 		"morgan": "^1.10.0",
 		"nodemailer": "^6.9.0",
 		"nodemon": "^2.0.20",
-		"parcel-bundler": "^1.8.1",
 		"pug": "^3.0.2",
 		"slugify": "^1.6.5",
 		"validator": "^13.7.0",
@@ -51,6 +52,7 @@
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-prettier": "^4.2.1",
 		"eslint-plugin-react": "^7.32.1",
+		"parcel-bundler": "^1.12.5",
 		"prettier": "^2.8.3"
 	},
 	"engines": {
