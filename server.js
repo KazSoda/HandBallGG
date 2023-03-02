@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
+const fs = require('fs');
+const Equipe = require('./models/equipeModel');
+const Match = require('./models/matchModel');
 const dotenv = require('dotenv');
+const catchAsync = require('./utils/catchAsync');
 
 
 process.on('uncaughtException', err => {
@@ -42,3 +46,54 @@ process.on('unhandledRejection', err => {
 })
 
 
+/*-----------------------------------------------------------------------------------*/
+/* -------------------- Importing data if the database is empty -------------------- */
+/*-----------------------------------------------------------------------------------*/
+
+const Equipes = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/equipes.json`, 'UTF-8'));
+const importEquipes = catchAsync(async (req, res, next) => {
+	console.log("fonction equipe");
+
+	const equipes = await Equipe.find();
+
+
+	if (equipes.length <= 0) {
+		console.log("pas d'equipe")
+		const importDatabase = async () => {
+			try {
+				await Equipe.create(Equipes);
+				console.log("Equipes created");
+				await Match.create(Matchs);
+				console.log("Matchs created");
+			} catch (e) {
+				console.error(e)
+			}
+		}
+		importDatabase();
+	}
+})
+importEquipes()
+
+
+
+const Matchs = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/matchs.json`, 'UTF-8'));
+const importMatch = catchAsync(async (req, res, next) => {
+	console.log("fonction equipe");
+
+	const matchs = await Match.find();
+
+
+	if (matchs.length <= 0) {
+		console.log("pas de match")
+		const importDatabase = async () => {
+			try {
+				await Match.create(Matchs);
+				console.log("Matchs created");
+			} catch (e) {
+				console.error(e)
+			}
+		}
+		importDatabase();
+	}
+})
+importMatch()

@@ -140,5 +140,3 @@ dist
 .hintrc
 
 .idea
-docker-compose.yml
-init.d/scriptMongo
