@@ -45,31 +45,24 @@ function searchMatchByTeam(queryResult, enteredValue) {
 		resSort.forEach(sortedMatch => {
 			let date = new Date(sortedMatch.date).toDateString()
 
-
-
-
-
 			mainSection.innerHTML += `
-
-
-      <section class="matchSection">
-      <section class="matchInformation">
-      <section class="headerInformationMatch">
-      <h1>${sortedMatch.gymnasium} : ${date}</h1>
-        </section>
-        <section class="bodyInformationMatch">
-          <article class="firstEquipeInformation">
-            <h1>${sortedMatch.localTeam}</h1>
-          </article>
-          <p>VS</p>
-          <article class="secondEquipeInformation">
-          <h1>${sortedMatch.againstTeam}</h1>
-          </article>
-        </section>
-      </section>
-    </section>
-
-    `;
+      			<section class="matchSection">
+      				<section class="matchInformation">
+      					<section class="headerInformationMatch">
+      						<h1>${sortedMatch.gymnasium} : ${date}</h1>
+      					</section>
+      					<section class="bodyInformationMatch">
+      						<article class="firstEquipeInformation">
+      							<h1>${sortedMatch.localTeam}</h1>
+      						</article>
+      						<p>VS</p>
+      						<article class="secondEquipeInformation">
+      							<h1>${sortedMatch.againstTeam}</h1>
+      						</article>
+      					</section>
+      				</section>
+    			</section>
+    		`;
 		});
 	}
 }
@@ -81,6 +74,23 @@ document.querySelector("#searchMatchBySelect").addEventListener("change", (e) =>
 	valueSelected = select.options[choice].value;
 	console.log(valueSelected);
 });
+
+
+
+// get the value of the "name" paramater of the current url
+const urlParams = new URLSearchParams(window.location.search);
+const name = urlParams.get('team');
+
+if (name !== null) {
+	console.log(name);
+}
+
+
+
+
+
+
+
 
 
 
