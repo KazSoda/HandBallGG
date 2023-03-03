@@ -1,7 +1,14 @@
 import axios from "axios";
 import { showAlert } from "./alert";
 
-export const matchInformation = async () => {
+Date.prototype.addDays = function (days) {
+	var date = new Date(this.valueOf());
+	date.setDate(date.getDate() + days);
+	return date;
+}
+
+
+const matchInformation = async () => {
 	let currentDate = new Date();
 	let currentDate2 = new Date();
 	let threeWeekAgo = currentDate.addDays(- (7 * 3));
@@ -12,13 +19,7 @@ export const matchInformation = async () => {
 			url: `/api/v1/match?sort=date&date[gt]=${threeWeekAgo}&date[lt]=${twoMonthAfter}`,
 		});
 		if (res.data.status === "success") {
-			let inputSearchBar = document.querySelector("#searchInformation");
-      searchMatchByTeam(res.data.data.matchs, inputSearchBar);
-
-      document.querySelector("#searchMatchBySelect").addEventListener("change", (e) => {
-        let select = document.getElementById("searchMatchBySelect");
-        searchMatchByTeam(res.data.data.matchs, select);
-      });
+			return res.data.data.matchs;
 		}
 	} catch (err) {
 		showAlert("error", err.response.data.message);
@@ -32,10 +33,10 @@ function searchMatchByTeam(queryResult, enteredValue) {
 		if (
 			matchInfo.againstTeam
 				.toUpperCase()
-				.includes(enteredValue.value.toUpperCase()) ||
+				.includes(enteredValue.toUpperCase()) ||
 			matchInfo.localTeam
 				.toUpperCase()
-				.includes(enteredValue.value.toUpperCase())
+				.includes(enteredValue.toUpperCase())
 		) {
 			resSort.push(matchInfo);
 		}
@@ -70,30 +71,39 @@ function searchMatchByTeam(queryResult, enteredValue) {
 }
 
 
-document.querySelector("#searchMatchBySelect").addEventListener("change", (e) => {
-	select = document.getElementById("searchMatchBySelect");
-	choice = select.selectedIndex
-	valueSelected = select.options[choice].value;
-	console.log(valueSelected);
-});
 
 
 
-// get the value of the "name" paramater of the current url
-const urlParams = new URLSearchParams(window.location.search);
-const name = urlParams.get('team');
 
-if (name !== null) {
-	console.log(name);
+export const init = async () => {
+
+	// let data = await matchInformation().then(result => result.data);
+	let data = await matchInformation().then(result => result);
+
+	// Search a match based on the url parameter
+	const urlParams = new URLSearchParams(window.location.search);
+	let name = urlParams.get('team');
+	name = name.replace(/['"]/g, ""); // remove all occurrences of ' and "
+	if (name !== null) {
+		searchMatchByTeam(data, name);
+	}
+
+	// Search a match based on the input value
+	let inputSearchBar = document.querySelector("#searchInformation").value;
+	if (inputSearchBar !== "") {
+		searchMatchByTeam(data, inputSearchBar);
+	}
+
+	// Search a match based on the select value
+	document.querySelector("#searchMatchBySelect").addEventListener("change", (e) => {
+		let select = document.getElementById("searchMatchBySelect").value;
+		if (select != "0") {
+			searchMatchByTeam(data, select);
+		}
+	});
+
+
 }
-
-
-
-
-
-
-
-
 
 
 Date.prototype.addDays = function (days) {

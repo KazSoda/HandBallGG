@@ -1,6 +1,6 @@
 import '@babel/polyfill'
 import { login, logout } from './login.js';
-import {init, matchInformation, test} from './match.js';
+import { init } from './match.js';
 
 // Select elements
 const loginForm = document.querySelector('.loginForm');
@@ -9,10 +9,10 @@ const logOutBtn = document.querySelector('.nav-right');
 const searchFormMatch = document.querySelector('#searchFormMatch');
 
 if (searchFormMatch) {
-    matchInformation()
+    init()
     searchFormMatch.addEventListener('submit', e => {
         e.preventDefault();
-        matchInformation();
+        init();
     })
 }
 
