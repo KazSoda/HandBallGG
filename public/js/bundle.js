@@ -12138,6 +12138,12 @@ function init(queryResult) {
     });
   }
 }
+document.querySelector("#searchMatchBySelect").addEventListener("change", function (e) {
+  select = document.getElementById("searchMatchBySelect");
+  choice = select.selectedIndex;
+  valueSelected = select.options[choice].value;
+  console.log(valueSelected);
+});
 Date.prototype.addDays = function (days) {
   var date = new Date(this.valueOf());
   date.setDate(date.getDate() + days);
@@ -12329,7 +12335,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51131" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56631" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

@@ -75,6 +75,14 @@ function init(queryResult) {
 }
 
 
+document.querySelector("#searchMatchBySelect").addEventListener("change", (e) => {
+  select = document.getElementById("searchMatchBySelect");
+  choice = select.selectedIndex
+  valueSelected = select.options[choice].value;
+  console.log(valueSelected);
+});
+
+
 
 Date.prototype.addDays = function(days) {
   var date = new Date(this.valueOf());

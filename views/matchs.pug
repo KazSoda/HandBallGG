@@ -6,6 +6,12 @@ block content
 		p Barre de recherche:
 			input(type="text" name="search" id="searchInformation" placeholder="Entrez le nom de l'équipe")
 		input(type="submit" id='searchBtn')
+	 
+	select(id="searchMatchBySelect" for="change")
+		option(value='0') -- Select --
+		each match in matchs
+			option(value=match.againstTeam #{variable.select}) #{match.againstTeam}
+	
 	section.mainSection
 		each match in matchs
 			section.matchSection
