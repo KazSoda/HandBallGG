@@ -15,10 +15,10 @@ export const matchInformation = async () => {
 			let inputSearchBar = document.querySelector("#searchInformation");
       searchMatchByTeam(res.data.data.matchs, inputSearchBar);
 
-      // document.querySelector("#searchMatchBySelect").addEventListener("change", (e) => {
-      //   let select = document.getElementById("searchMatchBySelect");
-      //   searchMatchByTeam(res.data.data.matchs, select.value);
-      // });
+      document.querySelector("#searchMatchBySelect").addEventListener("change", (e) => {
+        let select = document.getElementById("searchMatchBySelect");
+        searchMatchByTeam(res.data.data.matchs, select);
+      });
 		}
 	} catch (err) {
 		showAlert("error", err.response.data.message);

@@ -12102,11 +12102,10 @@ var matchInformation = /*#__PURE__*/function () {
           if (res.data.status === "success") {
             inputSearchBar = document.querySelector("#searchInformation");
             searchMatchByTeam(res.data.data.matchs, inputSearchBar);
-
-            // document.querySelector("#searchMatchBySelect").addEventListener("change", (e) => {
-            //   let select = document.getElementById("searchMatchBySelect");
-            //   searchMatchByTeam(res.data.data.matchs, select.value);
-            // });
+            document.querySelector("#searchMatchBySelect").addEventListener("change", function (e) {
+              var select = document.getElementById("searchMatchBySelect");
+              searchMatchByTeam(res.data.data.matchs, select);
+            });
           }
           _context.next = 14;
           break;

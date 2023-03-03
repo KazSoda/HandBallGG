@@ -70,10 +70,12 @@ exports.getEquipesPage = catchAsync(async (req, res, next) => {
 
 exports.getMatchsPage = catchAsync(async (req, res) => {
     const matchs = await Match.find();
+    const equipes = await Equipe.find(); 
 
     res.status(200).render('matchs', {
         title: 'Matchs',
-        matchs
+        matchs,
+        equipes
     })
 })
 
