@@ -122,3 +122,16 @@ exports.getContactPage = (req, res) => {
     })
 }
 
+
+
+
+
+
+/* ----------------------------------------------
+                    Admin pages
+---------------------------------------------- */
+exports.getConnexionPage = (req, res) => {
+    res.status(200).render('connexion', {
+        title: 'Connexion'
+    })
+}
