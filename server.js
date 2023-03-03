@@ -52,7 +52,6 @@ process.on('unhandledRejection', err => {
 
 const Equipes = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/equipes.json`, 'UTF-8'));
 const importEquipes = catchAsync(async (req, res, next) => {
-	console.log("fonction equipe");
 
 	const equipes = await Equipe.find();
 
@@ -78,7 +77,6 @@ importEquipes()
 
 const Matchs = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/matchs.json`, 'UTF-8'));
 const importMatch = catchAsync(async (req, res, next) => {
-	console.log("fonction equipe");
 
 	const matchs = await Match.find();
 
