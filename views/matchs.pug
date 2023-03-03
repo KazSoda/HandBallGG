@@ -10,7 +10,7 @@ block content
 	select(id="searchMatchBySelect" for="change")
 		option(value='0') -- Select --
 		each match in matchs
-			option(value=match.againstTeam #{variable.select}) #{match.againstTeam}
+			option(value=match.againstTeam) #{match.againstTeam}
 	
 	section.mainSection
 		each match in matchs
