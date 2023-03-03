@@ -13,7 +13,12 @@ export const matchInformation = async () => {
 		});
 		if (res.data.status === "success") {
 			let inputSearchBar = document.querySelector("#searchInformation");
-			searchMatchByTeam(res.data.data.matchs, inputSearchBar);
+      searchMatchByTeam(res.data.data.matchs, inputSearchBar);
+
+      // document.querySelector("#searchMatchBySelect").addEventListener("change", (e) => {
+      //   let select = document.getElementById("searchMatchBySelect");
+      //   searchMatchByTeam(res.data.data.matchs, select.value);
+      // });
 		}
 	} catch (err) {
 		showAlert("error", err.response.data.message);
@@ -36,19 +41,12 @@ function searchMatchByTeam(queryResult, enteredValue) {
 		}
 	});
 
-
-
 	if (resSort.length == 0) {
 		mainSection.innerHTML = `<h1>La recherche n'a pas donné de résultats</h1>`;
 	} else {
 		mainSection.innerHTML = ''
 		resSort.forEach(sortedMatch => {
 			let date = new Date(sortedMatch.date).toDateString()
-
-
-
-
-
 			mainSection.innerHTML += `
 
 
@@ -73,15 +71,6 @@ function searchMatchByTeam(queryResult, enteredValue) {
 		});
 	}
 }
-
-
-document.querySelector("#searchMatchBySelect").addEventListener("change", (e) => {
-	select = document.getElementById("searchMatchBySelect");
-	choice = select.selectedIndex
-	valueSelected = select.options[choice].value;
-	console.log(valueSelected);
-});
-
 
 
 Date.prototype.addDays = function (days) {

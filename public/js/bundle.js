@@ -12102,6 +12102,11 @@ var matchInformation = /*#__PURE__*/function () {
           if (res.data.status === "success") {
             inputSearchBar = document.querySelector("#searchInformation");
             searchMatchByTeam(res.data.data.matchs, inputSearchBar);
+
+            // document.querySelector("#searchMatchBySelect").addEventListener("change", (e) => {
+            //   let select = document.getElementById("searchMatchBySelect");
+            //   searchMatchByTeam(res.data.data.matchs, select.value);
+            // });
           }
           _context.next = 14;
           break;
@@ -12138,12 +12143,6 @@ function searchMatchByTeam(queryResult, enteredValue) {
     });
   }
 }
-document.querySelector("#searchMatchBySelect").addEventListener("change", function (e) {
-  select = document.getElementById("searchMatchBySelect");
-  choice = select.selectedIndex;
-  valueSelected = select.options[choice].value;
-  console.log(valueSelected);
-});
 Date.prototype.addDays = function (days) {
   var date = new Date(this.valueOf());
   date.setDate(date.getDate() + days);
@@ -12335,7 +12334,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56631" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56726" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
