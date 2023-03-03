@@ -466,6 +466,43 @@ header .btn {
                      Match
 --------------------------------------------------*/
 
+.mainMatchPage{
+    display: flex;
+    width: 100%;
+}
+
+/* left page part */
+.filterMatchPage{
+    display: flex;
+    width: 15%;
+    flex-direction: column;
+}
+
+form#searchFormMatch{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+select#searchMatchBySelect{
+    width: 50%;
+}
+
+input#searchInformation{
+    width: 150%;
+    height: 30px;
+}
+
+.searchInformation,
+.searchBtn {
+    color: var(--text-color-primary);
+}
+
+/* right page part */
+.mainSection{
+    width: 100%;
+}
+
 .matchSection {
     display: flex;
     justify-content: center;
@@ -475,13 +512,15 @@ header .btn {
     display: flex;
     flex-direction: column;
     background-color: gray;
-    width: 75%;
+    width: 90%;
     margin: 20px;
+    border-radius: 15px 15px 15px 15px;
 }
 
 .headerInformationMatch {
     background-color: rgb(66, 66, 66);
-    height: 12%;
+    height: 60px;
+    border-radius: 15px 15px 0px 0px;
 }
 
 .headerInformationMatch>h1 {
@@ -490,14 +529,16 @@ header .btn {
     height: 100%;
     width: 100%;
     margin: 0px;
-    padding-left: 10px;
+    padding: 0 20px;
+    font-size: 150%;
 }
 
 .bodyInformationMatch {
     display: flex;
     justify-content: space-around;
     background-color: #3b7b1a;
-    height: 350px;
+    height: 450px;
+    border-radius: 0px 0px 15px 15px;
 }
 
 .firstEquipeInformation {
@@ -510,8 +551,12 @@ header .btn {
 
 .firstEquipeInformation,
 .secondEquipeInformation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 35%;
-    height: 90%;
+    height: 400px;
     margin-top: 25px;
 }
 
@@ -520,7 +565,12 @@ header .btn {
     display: flex;
     justify-content: center;
     margin: 5px;
-    font-size: 100%;
+    font-size: 125%;
+}
+
+.firstEquipeInformation>img,
+.secondEquipeInformation>img {
+    width: 60%;
 }
 
 .bodyInformationMatch>p {

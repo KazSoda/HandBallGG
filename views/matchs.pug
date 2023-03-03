@@ -2,28 +2,33 @@ extends base
 
 
 block content
-	form(id="searchFormMatch" method="POST")
-		p Barre de recherche:
-			input(type="text" name="search" id="searchInformation" placeholder="Entrez le nom de l'équipe")
-		input(type="submit" id='searchBtn')
-	 
-	select(id="searchMatchBySelect" for="change")
-		option(value='0') -- Select --
-		each equipe in equipes
-			option(value=equipe.wording) #{equipe.wording}
-	
-	section.mainSection
-		each match in matchs
-			section.matchSection
-				section.matchInformation
-					section.headerInformationMatch
-						h1=match.gymnasium +" : "
+	section.mainMatchPage
+		section.filterMatchPage
+			form(id="searchFormMatch" method="POST")
+				p Barre de recherche:
+					input(type="text" name="search" id="searchInformation" placeholder="Entrez le nom de l'équipe")
+				input.btn(type="submit" id='searchBtn')
+		
+			select(id="searchMatchBySelect" for="change")
+				option(value='0') -- Select --
+				each equipe in equipes
+					option(value=equipe.wording) #{equipe.wording}
+		
+		section.mainSection
+			each match in matchs
+				section.matchSection
+					section.matchInformation
+						section.headerInformationMatch
+							h1=match.gymnasium +" : "
+						section.bodyInformationMatch
+							article.firstEquipeInformation
+								h1="Equipe locale"
+								img(src="img/logo.png", alt="photo")
+								h1=match.localTeam
 
-					section.bodyInformationMatch
-						article.firstEquipeInformation
-							h1=match.localTeam
+							p='VS'
 
-						p='VS'
-
-						article.secondEquipeInformation
-							h1=match.againstTeam
+							article.secondEquipeInformation
+								h1="Equipe adverse"
+								img(src="img/logo.png", alt="photo")
+								h1=match.againstTeam
