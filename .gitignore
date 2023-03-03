@@ -140,3 +140,5 @@ dist
 .hintrc
 
 .idea
+public/js/bundle.js
+public/js/bundle.js.map
