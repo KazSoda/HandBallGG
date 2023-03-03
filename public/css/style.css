@@ -11,6 +11,8 @@
     --accent-danger: #ff4136;
     --accent-error: #be3029;
 
+    --border-norm: #6b6b6b;
+
 
     /* Other */
     --radius-norm: 8px;
@@ -25,7 +27,7 @@
         --bg-color: white;
         --bg-color-darker: #efefef;
         --nav-bg-color: #e0e0e0a9;
-        --shadow-color: #0000007a;
+        --shadow-color: #0000002e;
     }
 
     p,
@@ -41,7 +43,7 @@
     div,
     input,
     textarea,
-    button {
+    .btn {
         color: var(--text-color-primary);
     }
 
@@ -64,9 +66,12 @@
                         PrezArticle
     --------------------------------------------------*/
 
-    .team {
-        background: linear-gradient(rgba(255, 255, 255, 0.7),
-                rgba(255, 255, 255, 0.7)), url(../img/Loisirs.jpg);
+    .team{
+
+        background: linear-gradient(160deg,
+                rgba(255, 255, 255, 0.5),
+                var(--accent-light));
+
     }
 }
 
@@ -94,7 +99,7 @@
     div,
     input,
     textarea,
-    button {
+    .btn {
         color: var(--text-color-primary);
     }
 
@@ -114,10 +119,12 @@
                         PrezArticle
     --------------------------------------------------*/
 
-    .team {
-        background: linear-gradient(rgba(0, 0, 0, 0.5),
-                rgba(0, 0, 0, 0.5)), url(../img/Loisirs.jpg);
+    .team{
+        background: linear-gradient(160deg,
+                rgba(0, 0, 0, 0.5),
+                var(--accent-darker));
     }
+            
 }
 
 
@@ -154,7 +161,7 @@ main {
     flex-wrap: wrap;
 }
 
-button {
+.btn {
     border: none;
     border-radius: var(--radius-norm);
     color: var(--text-color-primary);
@@ -163,9 +170,10 @@ button {
     font-size: 1.2rem;
     cursor: pointer;
     outline: none;
+    text-decoration: none;
 }
 
-button:hover {
+.btn:hover {
     background-color: var(--accent-primary);
 }
 
@@ -288,7 +296,7 @@ header h2 {
     margin: 10px 0;
 }
 
-header button {
+header .btn {
     font-size: 1.2rem;
     cursor: pointer;
     outline: none;
@@ -320,12 +328,9 @@ header button {
 
 .team {
     margin: 20px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     width: 800px;
     border-radius: var(--radius-norm);
-    border: 1px solid var(--text-color-primary);
+    border: 1px solid var(--border-norm);
     box-shadow: 4px 4px 10px var(--shadow-color);
 }
 
@@ -341,18 +346,20 @@ header button {
     justify-content: space-between;
     align-items: center;
     border-radius: var(--radius-norm);
-    -webkit-backdrop-filter: blur(var(--blur-norm));
-    backdrop-filter: blur(var(--blur-norm));
 }
 
 .team img {
-    max-width: 450px;
+    max-width: 420px;
     border-radius: var(--radius-norm);
 }
 
 .team aside {
     font-size: 110%;
     padding: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
 
 
@@ -377,7 +384,7 @@ header button {
 }
 
 
-.partners>section{
+.partners>section {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -459,12 +466,12 @@ header button {
                      Match
 --------------------------------------------------*/
 
-.matchSection{
+.matchSection {
     display: flex;
     justify-content: center;
 }
 
-.matchInformation{
+.matchInformation {
     display: flex;
     flex-direction: column;
     background-color: gray;
@@ -472,12 +479,12 @@ header button {
     margin: 20px;
 }
 
-.headerInformationMatch{
+.headerInformationMatch {
     background-color: rgb(66, 66, 66);
     height: 12%;
 }
 
-.headerInformationMatch>h1{
+.headerInformationMatch>h1 {
     display: flex;
     align-items: center;
     height: 100%;
@@ -486,34 +493,37 @@ header button {
     padding-left: 10px;
 }
 
-.bodyInformationMatch{
+.bodyInformationMatch {
     display: flex;
     justify-content: space-around;
     background-color: #3b7b1a;
     height: 350px;
 }
 
-.firstEquipeInformation{
-    background-color: #1a3a09;
-}
-.secondEquipeInformation{
+.firstEquipeInformation {
     background-color: #1a3a09;
 }
 
-.firstEquipeInformation,.secondEquipeInformation{
+.secondEquipeInformation {
+    background-color: #1a3a09;
+}
+
+.firstEquipeInformation,
+.secondEquipeInformation {
     width: 35%;
     height: 90%;
     margin-top: 25px;
 }
 
-.firstEquipeInformation>h1,.secondEquipeInformation>h1{
+.firstEquipeInformation>h1,
+.secondEquipeInformation>h1 {
     display: flex;
     justify-content: center;
     margin: 5px;
     font-size: 100%;
 }
 
-.bodyInformationMatch>p{
+.bodyInformationMatch>p {
     display: flex;
     align-items: center;
     font-size: 200%;

@@ -12083,7 +12083,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var matchInformation = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var currentDate, currentDate2, threeWeekAgo, twoMonthAfter, res;
+    var currentDate, currentDate2, threeWeekAgo, twoMonthAfter, res, inputSearchBar;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -12100,7 +12100,8 @@ var matchInformation = /*#__PURE__*/function () {
         case 7:
           res = _context.sent;
           if (res.data.status === "success") {
-            init(res.data.data.matchs);
+            inputSearchBar = document.querySelector("#searchInformation");
+            searchMatchByTeam(res.data.data.matchs, inputSearchBar);
           }
           _context.next = 14;
           break;
@@ -12119,12 +12120,11 @@ var matchInformation = /*#__PURE__*/function () {
   };
 }();
 exports.matchInformation = matchInformation;
-function init(queryResult) {
-  var inputSearchBar = document.querySelector("#searchInformation");
+function searchMatchByTeam(queryResult, enteredValue) {
   var mainSection = document.querySelector(".mainSection");
   var resSort = [];
   queryResult.forEach(function (matchInfo, index, matchInfoFull) {
-    if (matchInfo.againstTeam.toUpperCase().includes(inputSearchBar.value.toUpperCase()) || matchInfo.localTeam.toUpperCase().includes(inputSearchBar.value.toUpperCase())) {
+    if (matchInfo.againstTeam.toUpperCase().includes(enteredValue.value.toUpperCase()) || matchInfo.localTeam.toUpperCase().includes(enteredValue.value.toUpperCase())) {
       resSort.push(matchInfo);
     }
   });
