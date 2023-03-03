@@ -12,25 +12,25 @@ export const matchInformation = async () => {
       url: `/api/v1/match?sort=date&date[gt]=${threeWeekAgo}&date[lt]=${twoMonthAfter}`,
     });
     if (res.data.status === "success") {
-      init(res.data.data.matchs);
+      let inputSearchBar = document.querySelector("#searchInformation");
+      searchMatchByTeam(res.data.data.matchs, inputSearchBar);
     }
   } catch (err) {
     showAlert("error", err.response.data.message);
   }
 };
 
-function init(queryResult) {
-  let inputSearchBar = document.querySelector("#searchInformation");
+function searchMatchByTeam(queryResult, enteredValue) {
   let mainSection = document.querySelector(".mainSection");
   let resSort = [];
   queryResult.forEach((matchInfo, index, matchInfoFull) => {
     if (
       matchInfo.againstTeam
         .toUpperCase()
-        .includes(inputSearchBar.value.toUpperCase()) ||
+        .includes(enteredValue.value.toUpperCase()) ||
       matchInfo.localTeam
         .toUpperCase()
-        .includes(inputSearchBar.value.toUpperCase())
+        .includes(enteredValue.value.toUpperCase())
     ) {
       resSort.push(matchInfo);
     }
