@@ -410,7 +410,9 @@ header .btn {
                      Footer
 --------------------------------------------------*/
 
-
+footer * {
+    text-decoration: none;
+}
 
 
 

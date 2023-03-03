@@ -30,4 +30,6 @@ router.get('/planningBenevoles' , viewController.getPlanningBenevolesPage);
 router.get('/contact', viewController.getContactPage);
 
 
+router.get('/connexion', viewController.getConnexionPage);
+
 module.exports = router;
