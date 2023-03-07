@@ -1,5 +1,29 @@
-extends base
+html 
+	head 
+		title HanballGG | #{title}
+		link(rel='stylesheet', href='/css/style.css')
+		link(rel='shortcut icon', href='/img/favicon.ico')
+		meta(http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://cdnjs.cloudflare.com; script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' http://cdnjs.cloudflare.com ")
 
 
-block content 
-    h1 🚧 Page en construction 🚧
+	body.loginpage
+		main.login 
+			section#login
+				form.loginForm
+					h1 Connexion
+					section
+						section.credentials
+							label Email
+							input(type='email', name='email', placeholder='user@autocars.eu.org', id='email')
+						section.credentials
+							label Mot de passe
+							input(type='password', name='password', placeholder='********', id='password')
+					section.login-btn
+						input(type='submit', value='Se connecter')
+
+			section#logo
+				img(src='img/logo.png', alt='logo')
+				h2 AutoCars
+				section 
+				
+	script(src='js/bundle.js')
