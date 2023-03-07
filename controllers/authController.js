@@ -50,7 +50,6 @@ exports.signup = catchAsync(async (req, res, next) => {
             newUser
         }
     });
-
 });
 
 

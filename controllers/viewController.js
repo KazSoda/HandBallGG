@@ -79,7 +79,25 @@ exports.getMatchsPage = catchAsync(async (req, res) => {
     })
 })
 
+/* ----------------------------------------------
+                ConsultationUtilisateur
+---------------------------------------------- */
 
+exports.getUsersPage = (req, res) => {
+    res.status(200).render('users', {
+        title: 'ConsulterUtilisateurs'
+    }) 
+}
+
+/* ----------------------------------------------
+                CréationUtilisateur
+---------------------------------------------- */
+
+exports.getCreationUser = (req, res) => {
+    res.status(200).render('creationUser', {
+        title: 'CreationUtilisateur'
+    }) 
+}
 
 /* ----------------------------------------------
                       Shop
