@@ -20,7 +20,6 @@ router.get('/equipes', viewController.getEquipesPage);
 
 router.get('/matchs', viewController.getMatchsPage);
 
-
 router.get('/boutique', viewController.getShopPage);
 
 
@@ -29,6 +28,9 @@ router.get('/entrainements', viewController.getTrainingPage);
 router.get('/planningBenevoles' , viewController.getPlanningBenevolesPage);
 router.get('/contact', viewController.getContactPage);
 
+/*Utilisateurs*/
+router.get('/utilisateurs', viewController.getUsersPage);
+router.get('/creationUtilisateur', viewController.getCreationUser);
 
 router.get('/connexion', viewController.getConnexionPage);
 
