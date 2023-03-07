@@ -6,7 +6,7 @@ export const login = async (email, password) => {
 
     let logo = document.querySelector('#logo');
     let info = document.querySelector('#logo section');
-
+    console.log(email, password)
     info.innerHTML = '<div class="spinner"></div>'
     try {
         const res = await axios({
@@ -21,28 +21,11 @@ export const login = async (email, password) => {
         if (res.data.status === 'success') {
 
             logo.style.backgroundColor = 'green';
-            info.innerHTML = `<p style="margin:0 ">Bienvenue ${res.data.fname}</p>`;
+            info.innerHTML = `<p style="margin:0 ">Bienvenue ${res.data.firstName}</p>`;
 
-
-
-            if (res.data.role === 'admin') {
-                window.setTimeout(() => {
-                    location.assign('/accueilAdmin');
-                }, 1500);
-                // location.assign('/accueilAdmin');
-            }
-            if (res.data.role === 'chief') {
-                window.setTimeout(() => {
-                    location.assign('/accueilChef');
-                }, 1500);
-                // location.assign('/accueilChef');
-            }
-            if (res.data.role === 'employee') {
-                window.setTimeout(() => {
-                    location.assign('/accueilEmployee');
-                }, 1500);
-                // location.assign('/accueilEmployee');
-            }
+            window.setTimeout(() => {
+                location.assign('/');
+            }, 1500);
         }
     }
     catch (err) {
@@ -64,7 +47,7 @@ export const logout = async () => {
 
         if (res.data.status === 'success') {
             // redirect to the login page
-            location.assign('/connexion');
+            location.assign('/');
         }
 
     } catch (err) {

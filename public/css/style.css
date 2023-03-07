@@ -177,7 +177,44 @@ main {
     background-color: var(--accent-primary);
 }
 
+input,
+select {
+    background-color: #5b5b5b7a;
+    border: none;
+    border-radius: var(--border-norm);
+    color: var(--text-color-primary);
+    padding: 10px 20px;
+    width: 210px;
+    margin: 5px 0;
+    border-radius: var(--radius-lighter);
+}
 
+input[type=submit],
+input[type=reset] {
+    margin: 0 5px;
+    width: 150px;
+}
+
+label {
+    color: var(--text-color-primary);
+}
+
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(farthest-side, #000000 94%, #0000) top/6.4px 6.4px no-repeat,
+        conic-gradient(#0000 30%, #000000);
+    -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 6.4px), #000 0);
+    animation: spinner-c7wet2 1s infinite linear;
+}
+
+@keyframes spinner-c7wet2 {
+    100% {
+        transform: rotate(1turn);
+    }
+}
 
 
 
@@ -298,6 +335,11 @@ nav>section>div:hover .nav-dropdown {
     justify-content: center;
 }
 
+.loginForm {
+    background-color: #333333;
+    border-top-left-radius: var(--radius-norm);
+    border-bottom-left-radius: var(--radius-norm);
+}
 
 
 .loginpage form {
@@ -331,10 +373,12 @@ nav>section>div:hover .nav-dropdown {
     width: 225px;
 }
 
-.loginpage img{
+.loginpage img {
     width: 70%;
     margin-bottom: 20px;
 }
+
+
 
 
 /*--------------------------------------------------
