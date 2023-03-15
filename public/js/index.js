@@ -17,6 +17,8 @@ if (searchFormMatch) {
     })
 }
 
+
+
 // Delegation
 if (loginForm) {
     loginForm.addEventListener('submit', e => {
@@ -31,14 +33,3 @@ if (loginForm) {
 if (logOutBtn) {
     logOutBtn.addEventListener('click', logout);
 }
-
-
-
-
-
-
-
-
-
-
-
