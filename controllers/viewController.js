@@ -71,7 +71,7 @@ exports.getEquipesPage = catchAsync(async (req, res, next) => {
 
 exports.getMatchsPage = catchAsync(async (req, res) => {
     const matchs = await Match.find();
-    const equipes = await Equipe.find(); 
+    const equipes = await Equipe.find();
 
     res.status(200).render('matchs', {
         title: 'Matchs',
@@ -86,11 +86,11 @@ exports.getMatchsPage = catchAsync(async (req, res) => {
 
 exports.getUsersPage = catchAsync(async (req, res) => {
     const users = await User.find();
-    
+
     res.status(200).render('users', {
         title: 'Utilisateurs',
         users
-    }) 
+    })
 })
 
 /* ----------------------------------------------
@@ -100,7 +100,7 @@ exports.getUsersPage = catchAsync(async (req, res) => {
 exports.getCreationUser = (req, res) => {
     res.status(200).render('creationUser', {
         title: 'Creation Utilisateur'
-    }) 
+    })
 }
 
 /* ----------------------------------------------
@@ -110,7 +110,7 @@ exports.getCreationUser = (req, res) => {
 exports.getShopPage = (req, res) => {
     res.status(200).render('shop', {
         title: 'Boutique'
-    }) 
+    })
 }
 
 

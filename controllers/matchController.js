@@ -41,7 +41,7 @@ exports.createMatch = catchAsync(async (req, res) => {
 exports.getOneMatch = catchAsync(async (req, res, next) => {
     const match = await Match.findById(req.params.id);
 
-    if (!match){
+    if (!match) {
         return next(new AppError('Aucun match avec cet ID', 404));
     }
 
@@ -60,7 +60,7 @@ exports.updateMatch = catchAsync(async (req, res, next) => {
         new: true,
         runValidators: true
     })
-    if (!match){
+    if (!match) {
         return next(new AppError('Aucun match avec cet ID', 404));
     }
 
@@ -77,12 +77,12 @@ exports.updateMatch = catchAsync(async (req, res, next) => {
 exports.deleteMatch = catchAsync(async (req, res, next) => {
     const match = await Match.findByIdAndDelete(req.params.id);
 
-    if(!match){
+    if (!match) {
         return next(new AppError('Aucun match avec cet ID', 404));
     }
 
     res.status(204).json({
-		status: 'success',
-		data: null
-	})
+        status: 'success',
+        data: null
+    })
 })

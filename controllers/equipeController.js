@@ -99,10 +99,8 @@ exports.delEquipe = catchAsync(async (req, res, next) => {
 })
 
 exports.updateEquipe = catchAsync(async (req, res, next) => {
-    // console.log(req.file)
-    // console.log(req.body)
 
-    if(req.file) req.body.photo = req.file.filename;
+    if (req.file) req.body.photo = req.file.filename;
 
     const updateEquipe = await Equipe.findByIdAndUpdate(req.params.id, req.body, {
         new: true,

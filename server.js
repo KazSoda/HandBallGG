@@ -57,13 +57,10 @@ const importEquipes = catchAsync(async (req, res, next) => {
 
 
 	if (equipes.length <= 0) {
-		console.log("pas d'equipe")
 		const importDatabase = async () => {
 			try {
 				await Equipe.create(Equipes);
 				console.log("Equipes created");
-				await Match.create(Matchs);
-				console.log("Matchs created");
 			} catch (e) {
 				console.error(e)
 			}
@@ -82,7 +79,6 @@ const importMatch = catchAsync(async (req, res, next) => {
 
 
 	if (matchs.length <= 0) {
-		console.log("pas de match")
 		const importDatabase = async () => {
 			try {
 				await Match.create(Matchs);

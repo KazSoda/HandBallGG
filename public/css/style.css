@@ -68,15 +68,14 @@
     --------------------------------------------------*/
 
     .team {
-
         background: linear-gradient(160deg,
                 rgba(255, 255, 255, 0.5),
                 var(--accent-light));
-
     }
 }
 
 @media (prefers-color-scheme: dark) {
+
     :root {
         /* Colors */
         --text-color-primary: white;
@@ -127,6 +126,12 @@
                 var(--accent-darker));
     }
 
+    .team:hover {
+        background: linear-gradient(160deg,
+                rgba(32, 79, 18, 0.5),
+                var(--accent-darker));
+    }
+
 }
 
 
@@ -140,14 +145,12 @@ html,
 body {
     margin: 0;
     padding: 0;
-
     background-color: var(--bg-color);
 }
 
 * {
     font-family: 'Roboto', sans-serif;
-    transition: ease-in-out;
-    transition-duration: 200ms;
+    transition: 200ms ease-in-out;
     scroll-behavior: smooth;
     -webkit-user-select: none;
     user-select: none;
@@ -381,7 +384,7 @@ nav>section>div:hover .nav-dropdown {
 }
 
 
-.deconnexion:hover{
+.deconnexion:hover {
     background-color: var(--accent-danger);
 }
 
@@ -798,8 +801,3 @@ tbody td {
 .formDeleteUser>button:hover {
     text-decoration: underline;
 }
-
-
-
-
-

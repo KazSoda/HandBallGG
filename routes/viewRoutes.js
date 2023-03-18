@@ -16,7 +16,7 @@ router.get('/historique', viewController.getHistoryPage);
 router.get('/partenaires', viewController.getPartners);
 
 
-router.get('/equipes', authController.isLoggedIn , viewController.getEquipesPage);
+router.get('/equipes', authController.isLoggedIn, viewController.getEquipesPage);
 
 
 router.get('/matchs', viewController.getMatchsPage);
@@ -26,7 +26,7 @@ router.get('/boutique', viewController.getShopPage);
 
 router.get('/inscriptions', viewController.getJoinUsPage);
 router.get('/entrainements', viewController.getTrainingPage);
-router.get('/planningBenevoles' , viewController.getPlanningBenevolesPage);
+router.get('/planningBenevoles', viewController.getPlanningBenevolesPage);
 router.get('/contact', viewController.getContactPage);
 
 /*Utilisateurs*/

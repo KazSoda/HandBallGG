@@ -14,11 +14,11 @@ html
 		//- if not, display the default navbar
 		if user 
 			if user.role == 'Admin'	
-				include navbarAdmin
+				include _navbarAdmin
 			else if user.role == 'User'
-				include navbarUser
+				include _navbarUser
 		else
-			include navbar
+			include _navbar
 
 		block content
 
