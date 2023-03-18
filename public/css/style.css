@@ -700,3 +700,95 @@ input#searchInformation {
     align-items: center;
     font-size: 200%;
 }
+
+
+/*--------------------------------------------------
+                    Creation User
+--------------------------------------------------*/
+  
+  .formUser {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    max-width: 500px;
+  }
+  
+  .formUser > label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .formUser > input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+  
+  .formUser > input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .formUser > input[type="submit"]:hover {
+    background-color: #0069d9;
+  }
+  
+  .formUser > input[type="submit"]:active {
+    background-color: #0053a3;
+  }
+
+  .formUser > .choiceRole{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .formUser > .choiceRole > input{
+    width: 50px;
+  }
+
+/*--------------------------------------------------
+                    Gestion Users
+--------------------------------------------------*/
+  
+  .gestionUser {
+    margin: 10px;
+    border-collapse: collapse;
+    max-width: 800px;
+  }
+  
+  .gestionUser > thead th, tbody td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+  }
+  
+  .gestionUser > thead th {
+    background-color: #eee;
+  }
+  
+  .gestionUser > tbody > tr {
+    color: var(--text-color-primary);
+  }
+
+  .gestionUser > tbody td:last-child {
+    text-align: center;
+  }
+  
+  .formDeleteUser > button {
+    background-color: transparent;
+    color: #007bff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .formDeleteUser > button:hover {
+    text-decoration: underline;
+  }
+  

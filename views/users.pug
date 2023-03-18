@@ -1,4 +1,29 @@
 extends base
 
 block content
-    h1 Consulter Utilisateur
+
+	h1 Gestion des utilisateurs
+	table.gestionUser
+		thead
+			tr
+				th Nom
+				th Prénom
+				th Adresse e-mail
+				th Mot de passe
+				th role
+				th Actions
+		tbody
+		each user in users
+			tr
+				td= user.firstName
+				td= user.lastName
+				td= user.email
+				td= user.password
+				td= user.role
+				td
+					a(href=`/utilisateurs/${user.id}/modifier`) Modifier
+					form.formDeleteUser(action=`/api/v1/users/${user.id}?_method=DELETE`, method='delete')
+						button(type='submit') Supprimer
+
+	p
+		a(href='/creationUtilisateur') Créer un nouvel utilisateur

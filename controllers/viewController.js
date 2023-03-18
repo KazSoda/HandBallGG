@@ -1,6 +1,7 @@
 const catchAsync = require('../utils/catchAsync');
 const Equipe = require('../models/equipeModel');
 const Match = require('../models/matchModel');
+const User = require('../models/userModel');
 
 exports.getHomePage = (req, res) => {
     res.status(200).render('homepage', {
@@ -83,11 +84,14 @@ exports.getMatchsPage = catchAsync(async (req, res) => {
                 ConsultationUtilisateur
 ---------------------------------------------- */
 
-exports.getUsersPage = (req, res) => {
+exports.getUsersPage = catchAsync(async (req, res) => {
+    const users = await User.find();
+    
     res.status(200).render('users', {
-        title: 'ConsulterUtilisateurs'
+        title: 'ConsulterUtilisateurs',
+        users
     }) 
-}
+})
 
 /* ----------------------------------------------
                 CréationUtilisateur

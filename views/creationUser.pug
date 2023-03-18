@@ -1,4 +1,28 @@
 extends base
 
 block content
-    h1 Création Utilisateur
+	h1 Créer un nouvel utilisateur
+	form.formUser(action='/utilisateurs', method='POST')
+		label(for='nom') Nom :
+		input(type='text', id='nom', name='nom')
+
+		label(for='prenom') Prénom :
+		input(type='text', id='prenom', name='prenom')
+
+		label.choiceRole(for='role')
+			label(for='admin') Admin
+			input(type='radio', id='admin', name='role', value='admin')
+
+			label(for='utilisateur') Utilisateur
+			input(type='radio', id='utilisateur', name='role', value='utilisateur')
+
+		label(for='email') Adresse e-mail :
+		input(type='email', id='email', name='email')
+
+		label(for='password') Mot de passe :
+		input(type='password', id='password', name='password')
+
+		label(for='password-confirm') Confirmez le mot de passe :
+		input(type='password', id='password-confirm', name='password-confirm')
+
+		input(type='submit', value='Créer un compte')
