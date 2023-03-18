@@ -82,11 +82,13 @@ export const init = async () => {
 
 	// Search a match based on the url parameter
 	const urlParams = new URLSearchParams(window.location.search);
-	console.log(urlParams.get('team'));
+
 	let name = urlParams.get('team');
 	if (name !== null) {
 		name = name.replace(/['"]/g, ""); // remove all occurrences of ' and "
 		searchMatchByTeam(data, name);
+		// remove the url parameter without reloading the page
+		window.history.replaceState({}, document.title, "/" + "match");
 	}
 
 	// Search a match based on the input value
