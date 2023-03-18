@@ -52,7 +52,7 @@ exports.resizeEquipePhoto = catchAsync(async (req, res, next) => {
         .resize(2000, 1333)
         .toFormat('jpeg')
         .jpeg({ quality: 90 })
-        .toFile(`public/img/${req.file.filename}`);
+        .toFile(`public/img/equipes/${req.file.filename}`);
 
     next();
 });

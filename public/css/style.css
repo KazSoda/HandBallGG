@@ -25,7 +25,8 @@
         /* Colors */
         --text-color-primary: black;
         --bg-color: white;
-        --bg-color-darker: #efefef;
+        --bg-color-dark: #efefef;
+        --bg-color-darker: #c0c0c0;
         --nav-bg-color: #e0e0e0a9;
         --shadow-color: #0000002e;
     }
@@ -80,7 +81,8 @@
         /* Colors */
         --text-color-primary: white;
         --bg-color: #161616;
-        --bg-color-darker: #171717;
+        --bg-color-dark: #171717;
+        --bg-color-darker: #333333;
         --nav-bg-color: #0d0d0da9;
         --shadow-color: #7474744f;
     }
@@ -336,7 +338,7 @@ nav>section>div:hover .nav-dropdown {
 }
 
 .loginForm {
-    background-color: #333333;
+    background-color: var(--bg-color-darker);
     border-top-left-radius: var(--radius-norm);
     border-bottom-left-radius: var(--radius-norm);
 }
@@ -378,6 +380,10 @@ nav>section>div:hover .nav-dropdown {
     margin-bottom: 20px;
 }
 
+
+.deconnexion:hover{
+    background-color: var(--accent-danger);
+}
 
 
 
@@ -705,90 +711,95 @@ input#searchInformation {
 /*--------------------------------------------------
                     Creation User
 --------------------------------------------------*/
-  
-  .formUser {
+
+.formUser {
     display: flex;
     flex-direction: column;
     align-items: baseline;
     max-width: 500px;
-  }
-  
-  .formUser > label {
+}
+
+.formUser>label {
     display: block;
     margin-bottom: 5px;
-  }
-  
-  .formUser > input {
+}
+
+.formUser>input {
     display: block;
     width: 100%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
     margin-bottom: 10px;
-  }
-  
-  .formUser > input[type="submit"] {
+}
+
+.formUser>input[type="submit"] {
     background-color: #007bff;
     color: #fff;
     border: none;
     cursor: pointer;
-  }
-  
-  .formUser > input[type="submit"]:hover {
-    background-color: #0069d9;
-  }
-  
-  .formUser > input[type="submit"]:active {
-    background-color: #0053a3;
-  }
+}
 
-  .formUser > .choiceRole{
+.formUser>input[type="submit"]:hover {
+    background-color: #0069d9;
+}
+
+.formUser>input[type="submit"]:active {
+    background-color: #0053a3;
+}
+
+.formUser>.choiceRole {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-  }
+}
 
-  .formUser > .choiceRole > input{
+.formUser>.choiceRole>input {
     width: 50px;
-  }
+}
 
 /*--------------------------------------------------
                     Gestion Users
 --------------------------------------------------*/
-  
-  .gestionUser {
+
+.gestionUser {
     margin: 10px;
     border-collapse: collapse;
     max-width: 800px;
-  }
-  
-  .gestionUser > thead th, tbody td {
+}
+
+.gestionUser>thead th,
+tbody td {
     padding: 10px;
     text-align: left;
     border: 1px solid #ccc;
-  }
-  
-  .gestionUser > thead th {
-    background-color: #eee;
-  }
-  
-  .gestionUser > tbody > tr {
-    color: var(--text-color-primary);
-  }
+}
 
-  .gestionUser > tbody td:last-child {
+.gestionUser>thead th {
+    background-color: #eee;
+}
+
+.gestionUser>tbody>tr {
+    color: var(--text-color-primary);
+}
+
+.gestionUser>tbody td:last-child {
     text-align: center;
-  }
-  
-  .formDeleteUser > button {
+}
+
+.formDeleteUser>button {
     background-color: transparent;
     color: #007bff;
     border: none;
     cursor: pointer;
-  }
-  
-  .formDeleteUser > button:hover {
+}
+
+.formDeleteUser>button:hover {
     text-decoration: underline;
-  }
-  
+}
+
+
+
+
+

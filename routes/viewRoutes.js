@@ -1,11 +1,12 @@
 const viewController = require('../controllers/viewController');
 const express = require('express');
+const authController = require('../controllers/authController');
 
 
 const router = express.Router();
 
 // Global
-router.get('/', viewController.getHomePage);
+router.get('/', authController.isLoggedIn, viewController.getHomePage);
 
 router.get('/actualites', viewController.getNewsPage);
 
@@ -15,7 +16,7 @@ router.get('/historique', viewController.getHistoryPage);
 router.get('/partenaires', viewController.getPartners);
 
 
-router.get('/equipes', viewController.getEquipesPage);
+router.get('/equipes', authController.isLoggedIn , viewController.getEquipesPage);
 
 
 router.get('/matchs', viewController.getMatchsPage);

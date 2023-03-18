@@ -5,7 +5,7 @@ import { init } from './match.js';
 
 // Select elements
 const loginForm = document.querySelector('.loginForm');
-const logOutBtn = document.querySelector('.nav-right');
+const logOutBtn = document.querySelector('.deconnexion');
 
 const searchFormMatch = document.querySelector('#searchFormMatch');
 
@@ -31,5 +31,6 @@ if (loginForm) {
 
 
 if (logOutBtn) {
+    // console.log("logout");
     logOutBtn.addEventListener('click', logout);
 }

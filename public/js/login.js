@@ -6,7 +6,6 @@ export const login = async (email, password) => {
 
     let logo = document.querySelector('#logo');
     let info = document.querySelector('#logo section');
-    console.log(email, password)
     info.innerHTML = '<div class="spinner"></div>'
     try {
         const res = await axios({
@@ -21,7 +20,8 @@ export const login = async (email, password) => {
         if (res.data.status === 'success') {
 
             logo.style.backgroundColor = 'green';
-            info.innerHTML = `<p style="margin:0 ">Bienvenue ${res.data.firstName}</p>`;
+            console.log(res.data);
+            info.innerHTML = `<p style="margin:0 ">Bienvenue ${res.data.data.user.firstName}</p>`;
 
             window.setTimeout(() => {
                 location.assign('/');
@@ -38,12 +38,13 @@ export const login = async (email, password) => {
 
 
 export const logout = async () => {
-    // console.log("logout");
+    console.log("logout");
     try {
         const res = await axios({
             method: 'get',
-            url: '/api/v1/users/logout',
+            url: '/api/v1/users/deconnexion',
         })
+        console.log(res.data);
 
         if (res.data.status === 'success') {
             // redirect to the login page

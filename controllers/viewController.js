@@ -88,7 +88,7 @@ exports.getUsersPage = catchAsync(async (req, res) => {
     const users = await User.find();
     
     res.status(200).render('users', {
-        title: 'ConsulterUtilisateurs',
+        title: 'Utilisateurs',
         users
     }) 
 })
@@ -99,7 +99,7 @@ exports.getUsersPage = catchAsync(async (req, res) => {
 
 exports.getCreationUser = (req, res) => {
     res.status(200).render('creationUser', {
-        title: 'CreationUtilisateur'
+        title: 'Creation Utilisateur'
     }) 
 }
 
