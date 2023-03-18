@@ -1,6 +1,7 @@
 const express = require('express');
 const equipeController = require('../controllers/equipeController');
 
+
 const router = express.Router();
 
 // Global
@@ -12,7 +13,7 @@ router
 router
     .route('/:id')
     .get(equipeController.getOneEquipe)
-    .patch(equipeController.UpdateEquipe)
+    .patch(equipeController.uploadEquipePhoto, equipeController.resizeEquipePhoto, equipeController.updateEquipe)
     .delete(equipeController.delEquipe)
 
 

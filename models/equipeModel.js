@@ -26,8 +26,7 @@ const equipeSchema = new mongoose.Schema({
 
     photo: {
         type: String,
-        required: [true, 'Une équipe doit avoir une photo'],
-        trim: true,
+        default: 'default.jpg',
     },
 
     urlCalendar: {
