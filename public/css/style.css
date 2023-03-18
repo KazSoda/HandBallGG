@@ -10,6 +10,8 @@
     --accent-warning: #ff851b;
     --accent-danger: #ff4136;
     --accent-error: #be3029;
+    --accent-info: #0080f1e0;
+
 
     --border-norm: #6b6b6b;
 
@@ -84,6 +86,7 @@
         --bg-color-darker: #333333;
         --nav-bg-color: #0d0d0da9;
         --shadow-color: #7474744f;
+        --shadow-hover-color: #5857575e;
     }
 
 
@@ -121,15 +124,19 @@
     --------------------------------------------------*/
 
     .team {
-        background: linear-gradient(160deg,
+        /* background: linear-gradient(160deg,
                 rgba(0, 0, 0, 0.5),
-                var(--accent-darker));
+                var(--accent-darker)); */
+        background: linear-gradient(152deg, #9ebd13a8 0%, #008552b4 100%);
     }
 
     .team:hover {
-        background: linear-gradient(160deg,
+        /* background: linear-gradient(160deg,
                 rgba(32, 79, 18, 0.5),
-                var(--accent-darker));
+                var(--accent-darker)); */
+        background: linear-gradient(152deg, #9ebd13 0%, #008552 100%);
+        box-shadow: 5px 10px 46px var(--shadow-hover-color);
+
     }
 
 }
@@ -146,6 +153,11 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--bg-color);
+
+    background-image: url("./../img/bg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 * {
@@ -239,13 +251,20 @@ label {
 
 
 .alert--success {
-	background-color: #00ff00;
+    background-color: #00ff00;
 }
 
 .alert--error {
-	background-color: #ff0000;
+    background-color: #ff0000;
 }
 
+.btn-danger:hover {
+    background-color: var(--accent-danger);
+}
+
+.btn-edit:hover {
+    background-color: var(--accent-info);
+}
 
 
 /*--------------------------------------------------
@@ -517,8 +536,17 @@ header .btn {
     padding: 0 10px 10px 10px !important;
 }
 
+i.bi p,
+i.bi h3 {
+    margin: 2px 5px 2px 15px;
+}
+
+i.bi h3 {
+    font-size: 150%;
+}
+
 i.bi p {
-    margin: 5px 5px 5px 15px;
+    font-size: 95%;
 }
 
 i.bi {
@@ -529,15 +557,23 @@ i.bi {
     flex-direction: row;
 }
 
-.tableWithoutBorder td{
+.tableWithoutBorder td {
     border: 0 !important;
 }
 
-.tableWithoutBorder i{
+.tableWithoutBorder i {
     color: var(--text-color-primary);
 }
 
-
+.team>div.confirmDelete {
+    background-color: #0000004d;
+    position: absolute;
+    width: inherit;
+    box-sizing: border-box;
+    backdrop-filter: blur(15px);
+    height: 800px;
+    display: none;
+}
 
 
 

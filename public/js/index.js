@@ -42,13 +42,34 @@ if (manageEquipe) {
     let updateEquipeList = document.querySelectorAll('.updateEquipe');
     let deleteEquipeList = document.querySelectorAll('.deleteEquipe');
 
+    let askDelete = document.querySelectorAll('.askDeleteEquipe');
+    for (let i = 0; i < askDelete.length; i++) {
+        askDelete[i].addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelectorAll('.confirmDelete')[i].style.display = 'block';
+        })
+    }
+
+    let deleteNo = document.querySelectorAll('.deleteNo')
+    
+    deleteNo.forEach(el => {
+        el.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelectorAll('.confirmDelete').forEach(item => {
+                item.style.display = "none"
+            })
+        })
+    })
+
     let equipeID = "";
 
     for (let i = 0; i < deleteEquipeList.length; i++) {
         deleteEquipeList[i].addEventListener('click', e => {
             e.preventDefault();
             equipeID = e.target.className.split(' ')[3];
-            deleteEquipe(equipeID);
+            deleteEquipe(equipeID, e.target.parentElement.parentElement)
+
+            // get the parent element of the button and remove it
         })
     }
 

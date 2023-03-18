@@ -88,7 +88,7 @@ export const init = async () => {
 		name = name.replace(/['"]/g, ""); // remove all occurrences of ' and "
 		searchMatchByTeam(data, name);
 		// remove the url parameter without reloading the page
-		window.history.replaceState({}, document.title, "/" + "match");
+		window.history.replaceState({}, document.title, "/" + "matchs");
 	}
 
 	// Search a match based on the input value

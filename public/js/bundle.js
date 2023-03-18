@@ -12146,7 +12146,7 @@ var init = /*#__PURE__*/function () {
             name = name.replace(/['"]/g, ""); // remove all occurrences of ' and "
             searchMatchByTeam(data, name);
             // remove the url parameter without reloading the page
-            window.history.replaceState({}, document.title, "/" + "match");
+            window.history.replaceState({}, document.title, "/" + "matchs");
           }
 
           // Search a match based on the input value
@@ -12193,7 +12193,7 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var deleteEquipe = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(id) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(id, elToRemove) {
     var res;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
@@ -12211,6 +12211,7 @@ var deleteEquipe = /*#__PURE__*/function () {
             // window.setTimeout(() => {
             //     location.assign("/equipes");
             // }, 1500);
+            elToRemove.remove();
           }
           _context.next = 10;
           break;
@@ -12224,7 +12225,7 @@ var deleteEquipe = /*#__PURE__*/function () {
       }
     }, _callee, null, [[0, 7]]);
   }));
-  return function deleteEquipe(_x) {
+  return function deleteEquipe(_x, _x2) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -12395,12 +12396,33 @@ if (logOutBtn) {
 if (manageEquipe) {
   var updateEquipeList = document.querySelectorAll('.updateEquipe');
   var deleteEquipeList = document.querySelectorAll('.deleteEquipe');
+  var askDelete = document.querySelectorAll('.askDeleteEquipe');
+  var _loop = function _loop(i) {
+    askDelete[i].addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelectorAll('.confirmDelete')[i].style.display = 'block';
+    });
+  };
+  for (var i = 0; i < askDelete.length; i++) {
+    _loop(i);
+  }
+  var deleteNo = document.querySelectorAll('.deleteNo');
+  deleteNo.forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelectorAll('.confirmDelete').forEach(function (item) {
+        item.style.display = "none";
+      });
+    });
+  });
   var equipeID = "";
-  for (var i = 0; i < deleteEquipeList.length; i++) {
-    deleteEquipeList[i].addEventListener('click', function (e) {
+  for (var _i = 0; _i < deleteEquipeList.length; _i++) {
+    deleteEquipeList[_i].addEventListener('click', function (e) {
       e.preventDefault();
       equipeID = e.target.className.split(' ')[3];
-      (0, _equipe.deleteEquipe)(equipeID);
+      (0, _equipe.deleteEquipe)(equipeID, e.target.parentElement.parentElement);
+
+      // get the parent element of the button and remove it
     });
   }
 
@@ -12446,7 +12468,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63940" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51453" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

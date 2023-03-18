@@ -2,7 +2,7 @@ import axios from "axios";
 import { showAlert } from "./alert";
 
 
-export const deleteEquipe = async (id) => {
+export const deleteEquipe = async (id, elToRemove) => {
     try {
         const res = await axios({
             method: "DELETE",
@@ -15,7 +15,9 @@ export const deleteEquipe = async (id) => {
             // window.setTimeout(() => {
             //     location.assign("/equipes");
             // }, 1500);
+            elToRemove.remove();
         }
+
     } catch (err) {
         showAlert("error", err.response.data.message);
     }
