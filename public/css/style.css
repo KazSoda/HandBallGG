@@ -882,15 +882,60 @@ footer * {
     text-decoration: none;
 }
 
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px 20px 20px;
+    background-color: #33333342;
+    border-top-left-radius: var(--radius-norm);
+    opacity: 0.7;
+    border-top-right-radius: var(--radius-norm);
+}
+
+footer .content {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+footer .links {
+    display: flex;
+    flex-direction: column;
+}
+
+footer .links a {
+    margin-bottom: 10px;
+}
+
+footer i.bi{
+    justify-content: left;
+}
+
+footer i.bi::before{
+    margin-right: 10px;
+}
+
+footer .contact div {
+    padding: 7px;
+}
 
 
 
+footer h3::after {
+    content: " ";
+    display: block;
+    width: 65px;
+    height: 1px;
+    background-color: var(--text-color-primary);
+    margin-top: 7px;
+}
 
-
-
-
-
-
+footer>h3::after{
+    width: 100%;
+}
 
 
 
