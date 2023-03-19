@@ -31,6 +31,7 @@
         --bg-color-darker: #c0c0c0;
         --nav-bg-color: #e0e0e0a9;
         --shadow-color: #0000002e;
+        --translucid: #bdfccb8a;
     }
 
     p,
@@ -87,6 +88,7 @@
         --nav-bg-color: #0d0d0da9;
         --shadow-color: #7474744f;
         --shadow-hover-color: #5857575e;
+        --translucid: #001e078a;
     }
 
 
@@ -269,7 +271,7 @@ label {
 
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 
@@ -612,6 +614,127 @@ i.bi {
 }
 
 
+
+
+.wrapper {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+}
+
+.wrapper .button {
+    display: inline-block;
+    height: 60px;
+    width: 60px;
+    float: left;
+    margin: 0 5px;
+    overflow: hidden;
+    color: #fff;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+    display: flex;
+    background-color: #3b3a3a;
+}
+
+.wrapper .button:hover {
+    width: 255px;
+}
+
+.wrapper .button .icon {
+    display: inline-block;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    border-radius: 50px;
+    box-sizing: border-box;
+    box-shadow: inherit;
+    box-shadow: inherit;
+    line-height: 60px;
+    transition: all 0.3s ease-out;
+}
+
+.wrapper .button .icon p {
+    font-size: 60px;
+    line-height: 60px;
+    margin: 0 13px;
+    transition: all 0.3s ease-out;
+}
+
+.wrapper .button:hover .icon p {
+    color: var(--text-color-primary);
+}
+
+.wrapper .button span {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 60px;
+    margin-left: 10px;
+    transition: all 0.3s ease-out;
+}
+
+.wrapper a {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper .button:hover .icon {
+    background: linear-gradient(90deg, #f8ff00 0%, #3ad59f 100%);
+    box-shadow: inset -7px -7px 10px 0px rgb(0 0 0 / 26%), 7px 7px 20px 0px rgb(68 68 68 / 27%), 4px 4px 5px 0px rgb(0 0 0 / 24%);
+}
+
+
+
+
+.modal {
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--translucid);
+    backdrop-filter: blur(100px);
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+
+
+.modal-content {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.modal-body {
+    min-width: 500px;
+    background-color: var(--shadow-color);
+    padding: 30px 50px;
+    border-radius: var(--radius-norm);
+}
+
+.form-group {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.modal-body input {
+    width: 100%;
+}
+
+
+
+
+
+
 /*--------------------------------------------------
                      Partners
 --------------------------------------------------*/
@@ -910,11 +1033,11 @@ footer .links a {
     margin-bottom: 10px;
 }
 
-footer i.bi{
+footer i.bi {
     justify-content: left;
 }
 
-footer i.bi::before{
+footer i.bi::before {
     margin-right: 10px;
 }
 
@@ -933,7 +1056,7 @@ footer h3::after {
     margin-top: 7px;
 }
 
-footer>h3::after{
+footer>h3::after {
     width: 100%;
 }
 
@@ -1059,7 +1182,10 @@ footer>h3::after{
         justify-content: space-around;
     }
 
-
+    .modal-body{
+        min-width: auto;
+        padding: 15px 30px;
+    }
 
 
     /*--------------------------------------------------

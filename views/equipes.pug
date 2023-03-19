@@ -19,7 +19,7 @@ block content
 					aside 
 						div
 							i(class="bi bi-people-fill")
-								h3=equipe.wording 
+								h3.wording=equipe.wording 
 							
 							table(class='tableWithoutBorder')
 								if equipe.comment
@@ -27,19 +27,19 @@ block content
 										td
 											i(class="bi bi-chat-dots")
 										td 
-											p=equipe.comment
+											p.comment=equipe.comment
 								if equipe.trainer	
 									tr
 										td
 											i(class="bi bi-person-badge")
 										td
-											p=equipe.trainer
+											p.trainer=equipe.trainer
 								if equipe.slot
 									tr
 										td
 											i(class="bi bi-calendar-range")
 										td
-											p=equipe.slot
+											p.slot=equipe.slot
 
 						a.btn(href="/matchs?team='"+equipe.wording+"'")
 							i(class="bi bi-calendar-event")
@@ -53,4 +53,63 @@ block content
 						button(class="btn btn-danger askDeleteEquipe") 
 							i(class="bi bi-trash3")
 								p Supprimer
-			
+		if user && user.role == 'Admin'	|| user && user.role == 'User'
+			//- add a button to create a new team with the classes : btn and btn-success
+			.wrapper.adminEquipeC
+				.button
+					.icon
+						p +
+					span Créer une équipe
+
+					
+	if user && user.role == 'Admin'	|| user && user.role == 'User'
+		.modal.hidden
+		.modal-content.createEquipe.hidden
+			.modal-header
+				h2 Créer une équipe
+			.modal-body
+				form
+					.form-group
+						label(for="wording") Nom de l'équipe
+						input(type="text" name="wording" id="wording" required)
+					.form-group
+						label(for="trainer") Entraîneur
+						input(type="text" name="trainer" id="trainer" required)
+					.form-group
+						label(for="slot") Horaires
+						input(type="text" name="slot" id="slot" required)
+					.form-group
+						label(for="comment") Commentaire
+						input(type="text" name="comment" id="comment" required)
+					//- .form-group
+					//- 	label(for="photo") Photo
+					//- 	input(type="file" accept="image/*" name="photo" id="photo" required)
+					.form-group
+						button(type="submit" class="btn btn-success") Créer
+			.modal-footer
+				button(type="button" class="btn btn-danger close") Fermer
+
+		.modal-content.updateEquipeForm.hidden
+			.modal-header
+				h2 Modifier une équipe
+			.modal-body
+				form
+					.form-group
+						label(for="wording") Nom de l'équipe
+						input(type="text" name="wording" id="wording")
+					.form-group
+						label(for="trainer") Entraîneur
+						input(type="text" name="trainer" id="trainer")
+					.form-group
+						label(for="slot") Horaires
+						input(type="text" name="slot" id="slot")
+					.form-group
+						label(for="comment") Commentaire
+						input(type="text" name="comment" id="comment")
+					.form-group
+						label(for="photo") Photo
+						input(type="file" accept="image/*" name="photo" id="photo" required)
+					.form-group
+						button(type="submit" class="btn btn-success") Créer
+			.modal-footer
+				button(type="button" class="btn btn-danger close") Fermer

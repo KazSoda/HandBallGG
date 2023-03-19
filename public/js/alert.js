@@ -13,5 +13,5 @@ export const showAlert = (type, msg) => {
     document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
     window.setTimeout(() => {
         document.querySelector('.alert').remove();
-    }, 5000);
+    }, 6000);
 }
