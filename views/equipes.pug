@@ -9,8 +9,9 @@ block content
 				if user && user.role == 'Admin'	
 					div(class="confirmDelete")
 						h3 Êtes vous sur de vouloir supprimer l'équipe ?
-						button(class="btn btn-danger deleteEquipe "+equipe.id) Oui
-						button(class="btn deleteNo") Non
+						div 
+							button(class="btn btn-danger deleteEquipe "+equipe.id) Oui
+							button(class="btn deleteNo") Non
 				div 
 					//- display the image of the team from the img folder
 					img(src='img/equipes/'+equipe.photo, alt=equipe.wording)

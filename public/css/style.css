@@ -188,6 +188,7 @@ main {
     cursor: pointer;
     outline: none;
     text-decoration: none;
+    margin: 5px;
 }
 
 .btn:hover {
@@ -492,7 +493,7 @@ header .btn {
 
 
 /*--------------------------------------------------
-                     PrezArticle
+                     Equipes
 --------------------------------------------------*/
 
 .team {
@@ -573,9 +574,12 @@ i.bi {
     backdrop-filter: blur(15px);
     height: 800px;
     display: none;
+    text-align: center;
 }
 
-
+.team aside div {
+    overflow: auto;
+}
 
 
 /*--------------------------------------------------
@@ -610,66 +614,6 @@ i.bi {
 
 
 
-
-
-
-/*--------------------------------------------------
-                     Footer
---------------------------------------------------*/
-
-footer * {
-    text-decoration: none;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*--------------------------------------------------
-                     Responsive
---------------------------------------------------*/
-
-@media only screen and (max-width: 800px) {
-    header {
-        flex-direction: column !important;
-    }
-
-    .imgPrez {
-        background-size: 280px !important;
-    }
-
-    .playerHome {
-        width: 255px !important;
-    }
-
-    header h1 {
-        font-size: 60px !important;
-    }
-
-    header h2 {
-        font-size: 30px !important;
-    }
-
-    .textPrez {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-
-}
 
 
 
@@ -882,4 +826,161 @@ tbody td {
 
 .formDeleteUser>button:hover {
     text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*--------------------------------------------------
+                     Footer
+--------------------------------------------------*/
+
+footer * {
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*--------------------------------------------------
+                     Responsive
+--------------------------------------------------*/
+
+@media only screen and (max-width: 800px) {
+    header {
+        flex-direction: column !important;
+    }
+
+    .imgPrez {
+        background-size: 280px !important;
+    }
+
+    .playerHome {
+        width: 255px !important;
+    }
+
+    header h1 {
+        font-size: 60px !important;
+    }
+
+    header h2 {
+        font-size: 30px !important;
+    }
+
+    .textPrez {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+
+
+    /*--------------------------------------------------
+                            Equipes
+    --------------------------------------------------*/
+    .team {
+        width: 90%;
+    }
+
+    .team>div {
+        flex-direction: column;
+    }
+
+    .team img {
+        max-width: 100%;
+    }
+
+    .team * {
+        max-height: initial;
+    }
+
+    .adminEquipeUD {
+        flex-direction: row !important;
+    }
+
+    .adminEquipeUD * {
+        font-size: medium;
+    }
+
+    .team>div.confirmDelete {
+        height: 520px;
+    }
+
+    .confirmDelete>div {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
 }

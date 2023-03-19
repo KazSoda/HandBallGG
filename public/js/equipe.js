@@ -11,11 +11,8 @@ export const deleteEquipe = async (id, elToRemove) => {
 
 
         if (res.data === "") {
-            showAlert("success", "Équipe supprimée avec succès");
-            // window.setTimeout(() => {
-            //     location.assign("/equipes");
-            // }, 1500);
             elToRemove.remove();
+            showAlert("success", "Équipe supprimée avec succès");
         }
 
     } catch (err) {

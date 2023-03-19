@@ -12207,11 +12207,8 @@ var deleteEquipe = /*#__PURE__*/function () {
         case 3:
           res = _context.sent;
           if (res.data === "") {
-            (0, _alert.showAlert)("success", "Équipe supprimée avec succès");
-            // window.setTimeout(() => {
-            //     location.assign("/equipes");
-            // }, 1500);
             elToRemove.remove();
+            (0, _alert.showAlert)("success", "Équipe supprimée avec succès");
           }
           _context.next = 10;
           break;

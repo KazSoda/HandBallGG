@@ -1,6 +1,7 @@
 
 
 const Equipe = require('../models/equipeModel')
+const Match = require('../models/matchModel')
 const catchAsync = require('../utils/catchAsync')
 const AppError = require('../utils/appError')
 const APIFeatures = require('../utils/apiFeatures')
@@ -86,12 +87,17 @@ exports.createEquipe = catchAsync(async (req, res) => {
 })
 
 exports.delEquipe = catchAsync(async (req, res, next) => {
+    const equipeName = await Equipe.findById(req.params.id).select('wording');
     const delEquipe = await Equipe.findByIdAndDelete(req.params.id)
 
     if (!delEquipe) {
         return next(new AppError('Aucune équipe trouvé à cette id', 404))
     }
 
+
+    const delMatchs = await Match.deleteMany({ $or: [{ localTeam: equipeName.wording }, { againstTeam: equipeName.wording }] })
+
+    
     res.status(204).json({
         status: 'success',
         data: null
