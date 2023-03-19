@@ -46,12 +46,16 @@ if (manageEquipe) {
     for (let i = 0; i < askDelete.length; i++) {
         askDelete[i].addEventListener('click', e => {
             e.preventDefault();
-            document.querySelectorAll('.confirmDelete')[i].style.display = 'block';
+            let confirmDelete = document.querySelectorAll('.confirmDelete')[i]
+            let parentHeight = e.target.parentElement.parentElement.parentElement.parentElement.clientHeight;
+
+            confirmDelete.style.display = "flex";
+            confirmDelete.style.height = `${parentHeight}px`;
         })
     }
 
     let deleteNo = document.querySelectorAll('.deleteNo')
-    
+
     deleteNo.forEach(el => {
         el.addEventListener('click', e => {
             e.preventDefault();
@@ -89,4 +93,57 @@ if (manageEquipe) {
     //         deleteOperation(operationID);
     //     }
     // })
+}
+
+
+
+
+
+
+/*------------------------------------------------------------
+                    ~ Hamburger Menu ~
+------------------------------------------------------------*/
+
+let ouvert = false;
+const menu = document.querySelector('nav>section');
+
+document.querySelector('.hambuger').addEventListener('click', hamburgerMenu);
+
+
+function hamburgerMenu() {
+    if (ouvert) {
+        menu.classList.add('hidden');
+        ouvert = false;
+    } else {
+        menu.classList.remove('hidden');
+        ouvert = true;
+    }
+}
+
+const menuLinks = document.querySelectorAll('nav>section>a');
+
+
+
+for (let i = 0; i < menuLinks.length; i++) {
+    menuLinks[i].addEventListener('click', closeMenu)
+}
+
+function closeMenu() {
+
+    if (window.innerWidth < 980) {
+        menu.classList.add('hidden');
+        ouvert = false;
+    }
+}
+
+
+
+if (window.innerWidth > 980) {
+    menu.classList.remove('hidden');
+}
+
+
+
+if (window.innerWidth < 980) {
+    menu.classList.add('hidden');
 }
