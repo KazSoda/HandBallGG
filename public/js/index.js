@@ -210,22 +210,44 @@ if (updateEquipeForm) {
         el.addEventListener('click', e => {
             e.preventDefault();
 
-            const id = e.target.className.split(' ')[3];
 
-            const wording = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.wording');
-            const trainer = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.trainer');
-            const slot = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.slot');
-            const comment = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.comment');
+            let team = e.target.parentElement.parentElement.parentElement.parentElement;
+            let id =  e.target.parentElement.parentElement.parentElement.className.split(' ')[3]
+            // Get the team details to fill the form from the DOM (sometimes it was not withing with the first parentElement so I had to do it like this)
+            if (e.target.parentElement.classList.contains('team')) {
+                team = e.target.parentElement;
+            } else if (e.target.parentElement.parentElement.classList.contains('team')) {
+                team = e.target.parentElement.parentElement;
+            } else if (e.target.parentElement.parentElement.parentElement.classList.contains('team')) {
+                team = e.target.parentElement.parentElement.parentElement;
+            } else if (e.target.parentElement.parentElement.parentElement.parentElement.classList.contains('team')) {
+                team = e.target.parentElement.parentElement.parentElement.parentElement;
+            }
+
+            if(e.target.parentElement.parentElement.className.split(' ').length === 4) {
+                id = e.target.parentElement.parentElement.className.split(' ')[3];
+            } else if(e.target.parentElement.className.split(' ').length === 4) {
+                id = e.target.parentElement.className.split(' ')[3];
+            } else if(e.target.className.split(' ').length === 4) {
+                id = e.target.className.split(' ')[3];
+            }
+
+            console.log(id);
+
+            const wording = team.querySelector('.wording');
+            const trainer = team.querySelector('.trainer');
+            const slot = team.querySelector('.slot');
+            const comment = team.querySelector('.comment');
 
             const wordingForm = document.querySelector('.updateEquipeForm #wording');
             const trainerForm = document.querySelector('.updateEquipeForm #trainer');
             const slotForm = document.querySelector('.updateEquipeForm #slot');
             const commentForm = document.querySelector('.updateEquipeForm #comment');
 
-            wordingForm.value = wording.textContent;
-            trainerForm.value = trainer.textContent;
-            slotForm.value = slot.textContent;
-            commentForm.value = comment.textContent;
+            if (wording !== null) wordingForm.value = wording.textContent;
+            if (trainer !== null) trainerForm.value = trainer.textContent;
+            if (slot !== null) slotForm.value = slot.textContent;
+            if (comment !== null) commentForm.value = comment.textContent;
 
 
             modal.classList.remove('hidden');

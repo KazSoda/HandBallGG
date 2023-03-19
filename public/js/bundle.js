@@ -12295,7 +12295,7 @@ var deleteEquipe = /*#__PURE__*/function () {
         case 3:
           res = _context3.sent;
           if (res.data === "") {
-            elToRemove.remove();
+            elToRemove.parentElement.remove();
             (0, _alert.showAlert)("success", "Équipe supprimée avec succès");
           }
           _context3.next = 10;
@@ -12601,19 +12601,38 @@ if (updateEquipeForm) {
   updateEquipeForm.forEach(function (el) {
     el.addEventListener('click', function (e) {
       e.preventDefault();
-      var id = e.target.className.split(' ')[3];
-      var wording = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.wording');
-      var trainer = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.trainer');
-      var slot = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.slot');
-      var comment = e.target.parentElement.parentElement.parentElement.parentElement.querySelector('.comment');
+      var team = e.target.parentElement.parentElement.parentElement.parentElement;
+      var id = e.target.parentElement.parentElement.parentElement.className.split(' ')[3];
+      // Get the team details to fill the form from the DOM (sometimes it was not withing with the first parentElement so I had to do it like this)
+      if (e.target.parentElement.classList.contains('team')) {
+        team = e.target.parentElement;
+      } else if (e.target.parentElement.parentElement.classList.contains('team')) {
+        team = e.target.parentElement.parentElement;
+      } else if (e.target.parentElement.parentElement.parentElement.classList.contains('team')) {
+        team = e.target.parentElement.parentElement.parentElement;
+      } else if (e.target.parentElement.parentElement.parentElement.parentElement.classList.contains('team')) {
+        team = e.target.parentElement.parentElement.parentElement.parentElement;
+      }
+      if (e.target.parentElement.parentElement.className.split(' ').length === 4) {
+        id = e.target.parentElement.parentElement.className.split(' ')[3];
+      } else if (e.target.parentElement.className.split(' ').length === 4) {
+        id = e.target.parentElement.className.split(' ')[3];
+      } else if (e.target.className.split(' ').length === 4) {
+        id = e.target.className.split(' ')[3];
+      }
+      console.log(id);
+      var wording = team.querySelector('.wording');
+      var trainer = team.querySelector('.trainer');
+      var slot = team.querySelector('.slot');
+      var comment = team.querySelector('.comment');
       var wordingForm = document.querySelector('.updateEquipeForm #wording');
       var trainerForm = document.querySelector('.updateEquipeForm #trainer');
       var slotForm = document.querySelector('.updateEquipeForm #slot');
       var commentForm = document.querySelector('.updateEquipeForm #comment');
-      wordingForm.value = wording.textContent;
-      trainerForm.value = trainer.textContent;
-      slotForm.value = slot.textContent;
-      commentForm.value = comment.textContent;
+      if (wording !== null) wordingForm.value = wording.textContent;
+      if (trainer !== null) trainerForm.value = trainer.textContent;
+      if (slot !== null) slotForm.value = slot.textContent;
+      if (comment !== null) commentForm.value = comment.textContent;
       _modal.classList.remove('hidden');
       _modalContent.classList.remove('hidden');
       _modal.addEventListener('click', function (e) {

@@ -67,7 +67,7 @@ export const deleteEquipe = async (id, elToRemove) => {
 
 
         if (res.data === "") {
-            elToRemove.remove();
+            elToRemove.parentElement.remove();
             showAlert("success", "Équipe supprimée avec succès");
         }
 

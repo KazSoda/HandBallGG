@@ -557,7 +557,8 @@ header .btn {
     padding: 35px 10px 35px 35px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
+    width: 100%;
     justify-content: space-around;
 }
 
@@ -620,6 +621,7 @@ i.bi {
     position: fixed;
     bottom: 50px;
     right: 50px;
+    z-index: 1;
 }
 
 .wrapper .button {
