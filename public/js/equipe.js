@@ -32,7 +32,7 @@ export const createEquipe = async (wording, trainer, slot, comment) => {
     }
 }
 
-export const updateEquipe = async (data, id) => {
+export const updateEquipe = async (data, id, team) => {
     try {
         const res = await axios({
             method: "PATCH",
@@ -41,11 +41,29 @@ export const updateEquipe = async (data, id) => {
         });
 
         if (res.data.status === "success") {
-            console.log(res.data.data);
             showAlert("success", "Équipe modifiée avec succès");
             window.setTimeout(() => {
                 const modal = document.querySelector('.modal');
                 const modalContent = document.querySelector('.modal-content');
+
+
+                if (data.get('wording') !== "") {
+                    team.querySelector('.wording').textContent = data.get('wording');
+                }
+                if (data.get('trainer') !== "") {
+                    team.querySelector('.trainer').textContent = data.get('trainer');
+                }
+                if (data.get('slot') !== "") {
+                    team.querySelector('.slot').textContent = data.get('slot');
+                }
+                if (data.get('comment') !== "") {
+                    team.querySelector('.comment').textContent = data.get('comment');
+                }
+                if (data.get('photo') !== "") {
+                    team.querySelector('.photo').src = "img/equipes/" + res.data.data.updateEquipe.photo;
+                }
+
+
 
                 modal.classList.add('hidden');
                 modalContent.classList.add('hidden');

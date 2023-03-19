@@ -232,8 +232,6 @@ if (updateEquipeForm) {
                 id = e.target.className.split(' ')[3];
             }
 
-            console.log(id);
-
             const wording = team.querySelector('.wording');
             const trainer = team.querySelector('.trainer');
             const slot = team.querySelector('.slot');
@@ -276,9 +274,7 @@ if (updateEquipeForm) {
                     form.append('photo', document.querySelector('.updateEquipeForm #photo').files[0]);
                 }
 
-                console.log(document.querySelector('.updateEquipeForm #photo').files[0]);
-
-                updateEquipe(form, id);
+                updateEquipe(form, id, team);
 
                 modal.classList.add('hidden');
                 modalContent.classList.add('hidden');

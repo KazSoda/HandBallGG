@@ -12239,7 +12239,7 @@ var createEquipe = /*#__PURE__*/function () {
 }();
 exports.createEquipe = createEquipe;
 var updateEquipe = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(data, id) {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(data, id, team) {
     var res;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
@@ -12254,11 +12254,25 @@ var updateEquipe = /*#__PURE__*/function () {
         case 3:
           res = _context2.sent;
           if (res.data.status === "success") {
-            console.log(res.data.data);
             (0, _alert.showAlert)("success", "Équipe modifiée avec succès");
             window.setTimeout(function () {
               var modal = document.querySelector('.modal');
               var modalContent = document.querySelector('.modal-content');
+              if (data.get('wording') !== "") {
+                team.querySelector('.wording').textContent = data.get('wording');
+              }
+              if (data.get('trainer') !== "") {
+                team.querySelector('.trainer').textContent = data.get('trainer');
+              }
+              if (data.get('slot') !== "") {
+                team.querySelector('.slot').textContent = data.get('slot');
+              }
+              if (data.get('comment') !== "") {
+                team.querySelector('.comment').textContent = data.get('comment');
+              }
+              if (data.get('photo') !== "") {
+                team.querySelector('.photo').src = "img/equipes/" + res.data.data.updateEquipe.photo;
+              }
               modal.classList.add('hidden');
               modalContent.classList.add('hidden');
             }, 1500);
@@ -12275,7 +12289,7 @@ var updateEquipe = /*#__PURE__*/function () {
       }
     }, _callee2, null, [[0, 7]]);
   }));
-  return function updateEquipe(_x5, _x6) {
+  return function updateEquipe(_x5, _x6, _x7) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -12310,7 +12324,7 @@ var deleteEquipe = /*#__PURE__*/function () {
       }
     }, _callee3, null, [[0, 7]]);
   }));
-  return function deleteEquipe(_x7, _x8) {
+  return function deleteEquipe(_x8, _x9) {
     return _ref3.apply(this, arguments);
   };
 }();
@@ -12620,7 +12634,6 @@ if (updateEquipeForm) {
       } else if (e.target.className.split(' ').length === 4) {
         id = e.target.className.split(' ')[3];
       }
-      console.log(id);
       var wording = team.querySelector('.wording');
       var trainer = team.querySelector('.trainer');
       var slot = team.querySelector('.slot');
@@ -12653,8 +12666,7 @@ if (updateEquipeForm) {
         if (document.querySelector('.updateEquipeForm #photo').files[0] !== undefined) {
           form.append('photo', document.querySelector('.updateEquipeForm #photo').files[0]);
         }
-        console.log(document.querySelector('.updateEquipeForm #photo').files[0]);
-        (0, _equipe.updateEquipe)(form, id);
+        (0, _equipe.updateEquipe)(form, id, team);
         _modal.classList.add('hidden');
         _modalContent.classList.add('hidden');
         wordingForm.textContent = "";

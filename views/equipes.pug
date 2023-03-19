@@ -14,7 +14,7 @@ block content
 							button(class="btn deleteNo") Non
 				div 
 					//- display the image of the team from the img folder
-					img(src='img/equipes/'+equipe.photo, alt=equipe.wording)
+					img(src='img/equipes/'+equipe.photo, alt=equipe.wording class='photo')
 
 					aside 
 						div
@@ -71,16 +71,16 @@ block content
 				form
 					.form-group
 						label(for="wording") Nom de l'équipe
-						input(type="text" name="wording" id="wording" required)
+						input(type="text" name="wording" id="wording" placeholder="Poussins" required)
 					.form-group
 						label(for="trainer") Entraîneur
-						input(type="text" name="trainer" id="trainer" required)
+						input(type="text" name="trainer" id="trainer" placeholder="Didier" required)
 					.form-group
 						label(for="slot") Horaires
-						input(type="text" name="slot" id="slot" required)
+						input(type="text" name="slot" id="slot" placeholder="Mardi 14h30" required)
 					.form-group
 						label(for="comment") Commentaire
-						input(type="text" name="comment" id="comment" required)
+						input(type="text" name="comment" id="comment" placeholder="Equipe de 2-5 ans" required)
 					//- .form-group
 					//- 	label(for="photo") Photo
 					//- 	input(type="file" accept="image/*" name="photo" id="photo" required)
@@ -96,16 +96,16 @@ block content
 				form
 					.form-group
 						label(for="wording") Nom de l'équipe
-						input(type="text" name="wording" id="wording")
+						input(type="text" name="wording" placeholder="Poussins" id="wording")
 					.form-group
 						label(for="trainer") Entraîneur
-						input(type="text" name="trainer" id="trainer")
+						input(type="text" name="trainer" placeholder="Didier" id="trainer")
 					.form-group
 						label(for="slot") Horaires
-						input(type="text" name="slot" id="slot")
+						input(type="text" name="slot" placeholder="Mardi 14h30" id="slot")
 					.form-group
 						label(for="comment") Commentaire
-						input(type="text" name="comment" id="comment")
+						input(type="text" name="comment" placeholder="Equipe de 2-5 ans" id="comment")
 					.form-group
 						label(for="photo") Photo
 						input(type="file" accept="image/*" name="photo" id="photo" required)
