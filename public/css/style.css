@@ -1013,8 +1013,31 @@ footer * {
         align-items: center;
         justify-content: space-around;
     }
-}
 
+
+
+
+    /*--------------------------------------------------
+                            Login
+    --------------------------------------------------*/
+
+    #login {
+        width: 85%;
+        height: 100%;
+    }
+
+    #login,
+    .loginForm {
+        border-radius: var(--radius-norm);
+        border-radius: var(--radius-norm);
+        background-color: #33333342;
+    }
+
+    #logo {
+        display: none;
+
+    }
+}
 
 
 
