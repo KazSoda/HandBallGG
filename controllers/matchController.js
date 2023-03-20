@@ -58,16 +58,19 @@ exports.getICS = catchAsync(async (req, res) => {
 		console.log(error)
 	}
 
-	let icsFileName = `event-${Date.now()}.ics`
+	// let icsFileName = `event-${Date.now()}.ics`
 
-	writeFileSync(`${__dirname}/${icsFileName}`, value)
+
+	res.send(value);
+
+	// writeFileSync(`${__dirname}/${icsFileName}`, value)
 
 	// send to the user the created file for him to download it
-	res.download(`${__dirname}/${icsFileName}`, (err) => {
-		if (err) {
-			console.log(err)
-		}
-	})
+	// res.download(`${__dirname}/${icsFileName}`, (err) => {
+	// 	if (err) {
+	// 		console.log(err)
+	// 	}
+	// })
 
 
 	// wait for the download to finish and then delete the file
