@@ -21,9 +21,47 @@ block content
 				td= user.password
 				td= user.role
 				td
-					a(href=`/utilisateurs/${user.id}/modifier`) Modifier
-					form.formDeleteUser(action=`/api/v1/users/${user.id}?_method=DELETE`, method='delete')
-						button(type='submit') Supprimer
-
+					div(class="confirmDelete hidden")
+						h3 Êtes vous sur de vouloir supprimer l'équipe ?
+						div 
+							button(class="btn btn-danger deleteUser "+user.id) Oui
+							button(class="btn deleteNo") Non
+					div(class="adminUserUD")
+						button(class="btn btn-edit updateUser "+user.id) 
+							i(class="bi bi-pencil-square")
+								p Modifier
+						button(class="btn btn-danger askDeleteUser") 
+							i(class="bi bi-trash3")
+								p Supprimer
 	p
 		a(href='/creationUtilisateur') Créer un nouvel utilisateur
+
+
+		.modal-content.updateUserForm.hidden
+			.modal-header
+				h2 Modifier une équipe
+			.modal-body
+				form
+					.form-group
+						label(for="firstName") Prénom de l'utilisateur
+						input(type="text" name="firstName" placeholder="Prénom" id="firstName")
+					.form-group
+						label(for="lastName") Nom de l'utilisateur
+						input(type="text" name="lastName" placeholder="Nom" id="lastName")
+					.form-group
+						label(for="email") Email
+						input(type="text" name="email" placeholder="example@gmail.com" id="email")
+					.form-group
+						label(for="password") Mot de passe
+						input(type="text" name="password" placeholder="**********" id="password")
+					.form-group
+						label.choiceRole(for='role')
+							label(for='Admin') Admin
+							input(type='radio', class='Admin', name='role', value='Admin')
+
+							label(for='User') Utilisateur
+							input(type='radio', class='User', name='role', value='User')
+					.form-group
+						button(type="submit" class="btn btn-success") Modifier
+			.modal-footer
+				button(type="button" class="btn btn-danger close") Fermer

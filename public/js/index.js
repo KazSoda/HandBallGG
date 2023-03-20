@@ -1,7 +1,7 @@
 import '@babel/polyfill'
 import { login, logout } from './login.js';
 import { init } from './match.js';
-import { registerUser } from './createUser';
+import { registerUser, deleteUser } from './user';
 import { createEquipe, updateEquipe, deleteEquipe } from './equipe';
 
 
@@ -11,8 +11,10 @@ const logOutBtn = document.querySelector('.deconnexion');
 
 const searchFormMatch = document.querySelector('#searchFormMatch');
 const manageEquipe = document.querySelector('.adminEquipeUD');
+const manageUser = document.querySelector('.adminUserUD');
 const createEquipeForm = document.querySelector('.adminEquipeC');
 const updateEquipeForm = document.querySelectorAll('.adminEquipeUD .updateEquipe');
+const updateUserForm = document.querySelectorAll('.adminUserUD .updateUser');
 const registerForm = document.querySelector('.formCreateUser');
 
 if (searchFormMatch) {
@@ -60,8 +62,50 @@ if (registerForm) {
     })
 }
 
+/*------------------------------------------------------------
+                        ~ Delete Users ~
+------------------------------------------------------------*/
 
+if (manageUser) {
+    let deleteUserList = document.querySelectorAll('.deleteUser');
 
+    let askDelete = document.querySelectorAll('.askDeleteUser');
+    for (let i = 0; i < askDelete.length; i++) {
+        askDelete[i].addEventListener('click', e => {
+            e.preventDefault();
+            
+            let confirmDelete = document.querySelectorAll('.confirmDelete')[i];
+            
+            //enlever classe hidden a confirmDelete
+            confirmDelete.classList.remove('hidden');
+
+            confirmDelete.style.display = "flex";
+        })
+    }
+
+    let deleteNo = document.querySelectorAll('.deleteNo')
+
+    deleteNo.forEach(el => {
+        el.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelectorAll('.confirmDelete').forEach(item => {
+                item.style.display = "none"
+            })
+        })
+    })
+
+    let userID = "";
+
+    for (let i = 0; i < deleteUserList.length; i++) {
+        deleteUserList[i].addEventListener('click', e => {
+            e.preventDefault();
+            userID = e.target.className.split(' ')[3];
+            deleteUser(userID, e.target.parentElement.parentElement)
+
+            // get the parent element of the button and remove it
+        })
+    }
+}
 
 
 /*------------------------------------------------------------
