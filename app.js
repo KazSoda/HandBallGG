@@ -7,6 +7,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+var cors = require('cors')
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -37,6 +38,11 @@ const limiter = rateLimit({
 })
 
 app.use('/api', limiter);
+
+
+app.use(cors())
+
+
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '50kb' }));
