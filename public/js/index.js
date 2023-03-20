@@ -1,6 +1,6 @@
 import '@babel/polyfill'
 import { login, logout } from './login.js';
-import { init } from './match.js';
+import { init, displayCalendar, resizeCalendar, changeWeek} from './match.js';
 import { registerUser, deleteUser } from './user';
 import { createEquipe, updateEquipe, deleteEquipe } from './equipe';
 
@@ -23,7 +23,32 @@ if (searchFormMatch) {
         e.preventDefault();
         init();
     })
+
+
+    displayCalendar();
+
+    window.addEventListener('resize', () => {
+        resizeCalendar();
+    })
+
+
+    document.querySelector('.navbar-calendar .prev').addEventListener('click', () => {
+       changeWeek('prev')
+    })
+
+    document.querySelector('.navbar-calendar .next').addEventListener('click', () => {
+        changeWeek('next')
+    })
+
 }
+
+
+
+
+
+
+
+
 
 // Delegation
 if (loginForm) {
@@ -56,7 +81,7 @@ if (registerForm) {
         const password = document.querySelector('.password').value;
         const passwordConfirm = document.querySelector('.passwordConfirm').value;
 
-        console.log(fname,lname, role, email, password, passwordConfirm);
+        console.log(fname, lname, role, email, password, passwordConfirm);
 
         registerUser(fname, lname, role, email, password, passwordConfirm);
     })
@@ -73,9 +98,9 @@ if (manageUser) {
     for (let i = 0; i < askDelete.length; i++) {
         askDelete[i].addEventListener('click', e => {
             e.preventDefault();
-            
+
             let confirmDelete = document.querySelectorAll('.confirmDelete')[i];
-            
+
             //enlever classe hidden a confirmDelete
             confirmDelete.classList.remove('hidden');
 
@@ -274,7 +299,7 @@ if (updateEquipeForm) {
 
 
             let team = e.target.parentElement.parentElement.parentElement.parentElement;
-            let id =  e.target.parentElement.parentElement.parentElement.className.split(' ')[3]
+            let id = e.target.parentElement.parentElement.parentElement.className.split(' ')[3]
             // Get the team details to fill the form from the DOM (sometimes it was not withing with the first parentElement so I had to do it like this)
             if (e.target.parentElement.classList.contains('team')) {
                 team = e.target.parentElement;
@@ -286,11 +311,11 @@ if (updateEquipeForm) {
                 team = e.target.parentElement.parentElement.parentElement.parentElement;
             }
 
-            if(e.target.parentElement.parentElement.className.split(' ').length === 4) {
+            if (e.target.parentElement.parentElement.className.split(' ').length === 4) {
                 id = e.target.parentElement.parentElement.className.split(' ')[3];
-            } else if(e.target.parentElement.className.split(' ').length === 4) {
+            } else if (e.target.parentElement.className.split(' ').length === 4) {
                 id = e.target.parentElement.className.split(' ')[3];
-            } else if(e.target.className.split(' ').length === 4) {
+            } else if (e.target.className.split(' ').length === 4) {
                 id = e.target.className.split(' ')[3];
             }
 
