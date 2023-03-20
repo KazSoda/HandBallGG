@@ -1025,6 +1025,9 @@ footer .content {
     width: 100%;
     flex-wrap: wrap;
 }
+footer a:hover {
+    color: #2ecc40;
+}
 
 footer .links {
     display: flex;
