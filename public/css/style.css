@@ -1239,6 +1239,21 @@ footer>h3::after {
         display: none;
 
     }
+
+
+    /*--------------------------------------------------
+                        Creation User
+    --------------------------------------------------*/
+
+    .formCreateUser{
+        width: 90%;
+        padding: 1em;
+        padding-right: 0;
+    }
+
+    .formCreateUser>input{
+        width: 90%;
+    }
 }
 
 
