@@ -57,6 +57,7 @@ function searchMatchByTeam(queryResult, enteredValue) {
       					<section class="bodyInformationMatch">
       						<article class="firstEquipeInformation">
       							<h1>${sortedMatch.localTeam}</h1>
+								<img src="img/logo.png" alt="photo">
       						</article>
       						<p>VS</p>
       						<article class="secondEquipeInformation">
@@ -69,7 +70,6 @@ function searchMatchByTeam(queryResult, enteredValue) {
 		});
 	}
 }
-
 
 
 

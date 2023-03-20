@@ -12153,7 +12153,7 @@ function searchMatchByTeam(queryResult, enteredValue) {
     mainSection.innerHTML = '';
     resSort.forEach(function (sortedMatch) {
       var date = new Date(sortedMatch.date).toDateString();
-      mainSection.innerHTML += "\n      \t\t\t<section class=\"matchSection\">\n      \t\t\t\t<section class=\"matchInformation\">\n      \t\t\t\t\t<section class=\"headerInformationMatch\">\n      \t\t\t\t\t\t<h1>".concat(sortedMatch.gymnasium, " : ").concat(date, "</h1>\n      \t\t\t\t\t</section>\n      \t\t\t\t\t<section class=\"bodyInformationMatch\">\n      \t\t\t\t\t\t<article class=\"firstEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>").concat(sortedMatch.localTeam, "</h1>\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t\t<p>VS</p>\n      \t\t\t\t\t\t<article class=\"secondEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>").concat(sortedMatch.againstTeam, "</h1>\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t</section>\n      \t\t\t\t</section>\n    \t\t\t</section>\n    \t\t");
+      mainSection.innerHTML += "\n      \t\t\t<section class=\"matchSection\">\n      \t\t\t\t<section class=\"matchInformation\">\n      \t\t\t\t\t<section class=\"headerInformationMatch\">\n      \t\t\t\t\t\t<h1>".concat(sortedMatch.gymnasium, " : ").concat(date, "</h1>\n      \t\t\t\t\t</section>\n      \t\t\t\t\t<section class=\"bodyInformationMatch\">\n      \t\t\t\t\t\t<article class=\"firstEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>").concat(sortedMatch.localTeam, "</h1>\n\t\t\t\t\t\t\t\t<img src=\"img/logo.png\" alt=\"photo\">\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t\t<p>VS</p>\n      \t\t\t\t\t\t<article class=\"secondEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>").concat(sortedMatch.againstTeam, "</h1>\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t</section>\n      \t\t\t\t</section>\n    \t\t\t</section>\n    \t\t");
     });
   }
 }
@@ -12824,7 +12824,11 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+<<<<<<< HEAD
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "60076" + '/');
+=======
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64762" + '/');
+>>>>>>> 361291cd9f9a1897546cd7954cfba004c1a5c337
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
