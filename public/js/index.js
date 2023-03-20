@@ -1,6 +1,7 @@
 import '@babel/polyfill'
 import { login, logout } from './login.js';
 import { init } from './match.js';
+import { registerUser } from './createUser';
 import { createEquipe, updateEquipe, deleteEquipe } from './equipe';
 
 
@@ -12,6 +13,7 @@ const searchFormMatch = document.querySelector('#searchFormMatch');
 const manageEquipe = document.querySelector('.adminEquipeUD');
 const createEquipeForm = document.querySelector('.adminEquipeC');
 const updateEquipeForm = document.querySelectorAll('.adminEquipeUD .updateEquipe');
+const registerForm = document.querySelector('.formCreateUser');
 
 if (searchFormMatch) {
     init()
@@ -20,8 +22,6 @@ if (searchFormMatch) {
         init();
     })
 }
-
-
 
 // Delegation
 if (loginForm) {
@@ -38,9 +38,27 @@ if (logOutBtn) {
     logOutBtn.addEventListener('click', logout);
 }
 
+/*------------------------------------------------------------
+                        ~ Create Users ~
+------------------------------------------------------------*/
 
+if (registerForm) {
+    registerForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const fname = document.querySelector('.fname').value;
+        const lname = document.querySelector('.lname').value;
+        let role = document.querySelector('input[name="role"]:checked').value;
+        if (role === "Admin") role = "Admin";
+        if (role === "User") role = "User";
+        const email = document.querySelector('.email').value;
+        const password = document.querySelector('.password').value;
+        const passwordConfirm = document.querySelector('.passwordConfirm').value;
 
+        console.log(fname,lname, role, email, password, passwordConfirm);
 
+        registerUser(fname, lname, role, email, password, passwordConfirm);
+    })
+}
 
 
 

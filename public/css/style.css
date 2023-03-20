@@ -896,19 +896,19 @@ input#searchInformation {
                     Creation User
 --------------------------------------------------*/
 
-.formUser {
+.formCreateUser {
     display: flex;
     flex-direction: column;
     align-items: baseline;
     max-width: 500px;
 }
 
-.formUser>label {
+.formCreateUser>label {
     display: block;
     margin-bottom: 5px;
 }
 
-.formUser>input {
+.formCreateUser>input {
     display: block;
     width: 100%;
     padding: 10px;
@@ -917,29 +917,29 @@ input#searchInformation {
     margin-bottom: 10px;
 }
 
-.formUser>input[type="submit"] {
+.formCreateUser>input[type="submit"] {
     background-color: #007bff;
     color: #fff;
     border: none;
     cursor: pointer;
 }
 
-.formUser>input[type="submit"]:hover {
+.formCreateUser>input[type="submit"]:hover {
     background-color: #0069d9;
 }
 
-.formUser>input[type="submit"]:active {
+.formCreateUser>input[type="submit"]:active {
     background-color: #0053a3;
 }
 
-.formUser>.choiceRole {
+.formCreateUser>.choiceRole {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
 }
 
-.formUser>.choiceRole>input {
+.formCreateUser>.choiceRole>input {
     width: 50px;
 }
 
