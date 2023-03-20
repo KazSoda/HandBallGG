@@ -900,7 +900,11 @@ input#searchInformation {
     display: flex;
     flex-direction: column;
     align-items: baseline;
+    width: 50%;
     max-width: 500px;
+    padding: 1.5em;
+    background: black;
+    border-radius: 12px;
 }
 
 .formCreateUser>label {
@@ -918,7 +922,7 @@ input#searchInformation {
 }
 
 .formCreateUser>input[type="submit"] {
-    background-color: #007bff;
+    background: #008552;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -935,12 +939,34 @@ input#searchInformation {
 .formCreateUser>.choiceRole {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     width: 100%;
 }
 
 .formCreateUser>.choiceRole>input {
     width: 50px;
+}
+
+.styleCreation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.choiceUser , .choiceAdmin{
+    display: flex;
+    flex-direction: row;
+}
+
+.formCreateUser>.choiceRole>*>input{
+    width: 100%;
+}
+
+.formCreateUser>.choiceRole>*>label{
+    padding-right: 10px;
+}
+.formCreateUser>label{
+    padding-top: 0.7em;
 }
 
 /*--------------------------------------------------
@@ -1212,6 +1238,21 @@ footer>h3::after {
     #logo {
         display: none;
 
+    }
+
+
+    /*--------------------------------------------------
+                        Creation User
+    --------------------------------------------------*/
+
+    .formCreateUser{
+        width: 90%;
+        padding: 1em;
+        padding-right: 0;
+    }
+
+    .formCreateUser>input{
+        width: 90%;
     }
 }
 

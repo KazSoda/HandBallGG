@@ -1,5 +1,47 @@
 import axios from "axios";
 import { showAlert } from "./alert";
+import Calendar from '@toast-ui/calendar';
+import '@toast-ui/calendar/dist/toastui-calendar.min.css';
+
+
+const calendar = new Calendar('#calendar', {
+	defaultView: 'week',
+	useFormPopup: false,
+	useCreationPopup: false,
+	useDetailPopup: true,
+	isReadOnly: true,
+	usageStatistics: false,
+	allday: false,
+
+	theme: {
+		common: {
+			backgroundColor: 'var(--bg-color)',
+		},
+	},
+	week: {
+		startDayOfWeek: 1,
+		dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+		narrowWeekend: true,	
+		taskView: false,  // e.g. true, false, or ['task', 'milestone']
+	},
+	month: {
+		startDayOfWeek: 1,
+		dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+		narrowWeekend: true,
+		taskView: false,  // e.g. true, false, or ['task', 'milestone']
+	},
+	template: {
+		time(event) {
+			const { start, end, title } = event;
+
+			return `<span style="color: black;">${formatTime(start)}~${formatTime(end)} ${title}</span>`;
+		},
+		allday(event) {
+			return `<span style="color: gray;">${event.title}</span>`;
+		},
+	},
+});
+
 
 Date.prototype.addDays = function (days) {
 	var date = new Date(this.valueOf());
@@ -45,8 +87,16 @@ function searchMatchByTeam(queryResult, enteredValue) {
 	if (resSort.length == 0) {
 		mainSection.innerHTML = `<h1>La recherche n'a pas donné de résultats</h1>`;
 	} else {
+
+
+
 		mainSection.innerHTML = ''
 		resSort.forEach(sortedMatch => {
+
+			calendar.createEvents(sortedMatch);
+
+
+
 			let date = new Date(sortedMatch.date).toDateString()
 			mainSection.innerHTML += `
       			<section class="matchSection">
@@ -109,8 +159,40 @@ export const init = async () => {
 }
 
 
+
+
+
+export const displayCalendar = () => {
+
+	calendar.render();
+}
+// execute a function on windows resize
+
+export const resizeCalendar = () => {
+	let width = window.innerWidth;
+	if (width < 800) {
+		calendar.changeView('day');
+		calendar.render();
+	} else if (width > 800) {
+		calendar.changeView('week');
+		calendar.render();
+	}
+};
+
+
+export const changeWeek = (type) => {
+	if (type == 'next') {
+		calendar.move(1);
+	}
+	if (type == 'prev') {
+		calendar.move(-1);
+	}
+}
+
+
 Date.prototype.addDays = function (days) {
 	var date = new Date(this.valueOf());
 	date.setDate(date.getDate() + days);
 	return date;
 }
+
