@@ -8,14 +8,14 @@
 
 # Sujet choisis :
 
-Pour ce TP nous avons choisis de reprendre notre projet de SAE du S4. Un projet de site de handball de l’équipe féminine de Guilherand-Granges. Dans ce TP, nous allons Dockeriser notre application.
+Pour ce TP nous avons choisi de reprendre notre projet de SAÉ du S4. Un projet de site de handball de l’équipe féminine de Guilherand-Granges. Dans ce TP, nous allons Dockeriser notre application.
 
 <br>
 <br>
 
 # Dockerfile :
 -	Placez-vous à la racine du projet « cd ‘PATH/’HandBallGG
--	Ensuite créer un Dockerfile avec votre éditeur de texte préférer (vim/nano)
+-	Ensuite créez un Dockerfile avec votre éditeur de texte préférer (vim/nano)
 -	Voici ensuite notre Dockerfile :
 
 ![Dockerfile](https://i.imgur.com/iL88t7x.png)
@@ -25,7 +25,7 @@ Pour ce TP nous avons choisis de reprendre notre projet de SAE du S4. Un projet 
 
 # Docker-compose.yml :
 
--	Ensuite créer un fichier docker-compose.yml avec votre éditeur de texte préférer (vim/nano)
+-	Ensuite créez un fichier docker-compose.yml avec votre éditeur de texte préférer (vim/nano)
 -	Voici ensuite notre docker-compose :
 
 ![docker-compose](https://i.imgur.com/1n4EkVd.png)
