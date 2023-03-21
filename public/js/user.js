@@ -1,5 +1,6 @@
 import axios from "axios";
 import { showAlert } from "./alert";
+const bcrypt = require("bcryptjs");
 
 export const registerUser = async (fname, lname, role, email, password, passwordConfirm) => {
     try {
@@ -41,8 +42,18 @@ export const registerUser = async (fname, lname, role, email, password, password
     }
 }
 
-export const updateUser = async (result, id, team) => {
-    let data = JSON.parse(result)
+export const updateUser = async (result, id, pwd, roleChanged) => {
+    let data = JSON.parse(result);
+
+    if (roleChanged) {
+        //add roleChanged to data object for patch request
+        data.role = roleChanged;
+    }
+    if (pwd) {
+        //add passwordChanged hash to data object for patch request
+        pwd = await bcrypt.hash(pwd, 14);
+        data.password = pwd;
+    }
     try {
         const res = await axios({
             method: "PATCH",
@@ -51,27 +62,10 @@ export const updateUser = async (result, id, team) => {
         });
 
         if (res.data.status === "success") {
-            console.log(res.data);
             showAlert("success", "Utilisateur modifié avec succès");
             window.setTimeout(() => {
                 const modal = document.querySelector('.modal');
                 const modalContent = document.querySelector('.modal-content');
-                let infoUser = res.data.data.updateUser;
-                /*if (infoUser.firstName !== "") {
-                    console.log("coucou");
-                    team.querySelector('.firstName').value = infoUser.firstName;
-                    //document.getElementById('firstName').value = res.data.data.updateUser.firstName;
-                }
-                if (data.get('lastName') !== "") {
-                    document.getElementById('lastName').value = data.get('lastName');
-                }
-                if (data.get('email') !== "") {
-                    document.getElementById('email').value = data.get('email');
-                }
-                if (data.get('password') !== "") {
-                    document.getElementById('password').value = data.get('password');
-                }*/
-
                 modal.classList.add('hidden');
                 modalContent.classList.add('hidden');
             }, 1500);

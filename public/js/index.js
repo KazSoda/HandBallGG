@@ -1,6 +1,6 @@
 import '@babel/polyfill'
 import { login, logout } from './login.js';
-import { init, displayCalendar, resizeCalendar, changeWeek } from './match.js';
+import { init, displayCalendar, resizeCalendar, changeWeek, changeCalendarView, animation } from './match.js';
 import { registerUser, deleteUser, updateUser } from './user';
 import { createEquipe, updateEquipe, deleteEquipe } from './equipe';
 import axios from 'axios';
@@ -42,6 +42,23 @@ if (searchFormMatch) {
 
     document.querySelector('.navbar-calendar .today').addEventListener('click', () => {
         changeWeek('today')
+    })
+
+    document.querySelector('.navbar-calendar .day').addEventListener('click', () => {
+        changeCalendarView('day');
+    })
+
+    document.querySelector('.navbar-calendar .week').addEventListener('click', () => {
+        changeCalendarView('week');
+    })
+
+    document.querySelector('.navbar-calendar .month').addEventListener('click', () => {
+        changeCalendarView('month');
+    })
+
+
+    window.addEventListener('load', (event) => {
+        animation();
     })
 }
 
@@ -142,20 +159,7 @@ if (updateUserForm) {
         el.addEventListener('click', e => {
             e.preventDefault();
 
-
-            let team = e.target.parentElement.parentElement.parentElement.parentElement;
-            let id = e.target.parentElement.parentElement.parentElement.className.split(' ')[3]
-
-            // Get the team details to fill the form from the DOM (sometimes it was not withing with the first parentElement so I had to do it like this)
-            if (e.target.parentElement.classList.contains('team')) {
-                team = e.target.parentElement;
-            } else if (e.target.parentElement.parentElement.classList.contains('team')) {
-                team = e.target.parentElement.parentElement;
-            } else if (e.target.parentElement.parentElement.parentElement.classList.contains('team')) {
-                team = e.target.parentElement.parentElement.parentElement;
-            } else if (e.target.parentElement.parentElement.parentElement.parentElement.classList.contains('team')) {
-                team = e.target.parentElement.parentElement.parentElement.parentElement;
-            }
+            let id = e.target.parentElement.parentElement.parentElement.className.split(' ')[3];
 
             if (e.target.parentElement.parentElement.className.split(' ').length === 4) {
                 id = e.target.parentElement.parentElement.className.split(' ')[3];
@@ -164,7 +168,7 @@ if (updateUserForm) {
             } else if (e.target.className.split(' ').length === 4) {
                 id = e.target.className.split(' ')[3];
             }
-            console.log(team);
+
             async function findUser(id) {
                 try {
                     const res = await axios({
@@ -174,11 +178,6 @@ if (updateUserForm) {
                     if (res.data.status === 'success') {
                         let userData = res.data.data.user;
 
-                        /*const firstName = team.querySelector('.firstName');
-                        const lastName = team.querySelector('.lastName');
-                        const email = team.querySelector('.email');
-                        const password = team.querySelector('.password');*/
-
                         const firstNameForm = document.querySelector('.updateUserForm #firstName');
                         const lastNameForm = document.querySelector('.updateUserForm #lastName');
                         const emailForm = document.querySelector('.updateUserForm #email');
@@ -186,8 +185,6 @@ if (updateUserForm) {
                         if (firstName !== null) firstNameForm.value = userData.firstName;
                         if (lastName !== null) lastNameForm.value = userData.lastName;
                         if (email !== null) emailForm.value = userData.email;
-
-                        //console.log(firstNameForm.value, lastNameForm.value, emailForm.value, passwordForm.value);
 
                         modal.classList.remove('hidden');
                         modalContent.classList.remove('hidden');
@@ -205,16 +202,25 @@ if (updateUserForm) {
                         validateForm.addEventListener('click', e => {
                             e.preventDefault();
 
+                            const selectRoleChanged = document.querySelector('.choiceRole input[name="role"]:checked');
+                            let roleChanged = "";
+
+                            if (selectRoleChanged !== null) {
+                                roleChanged = selectRoleChanged.value;
+                            }
                             const form = new FormData();
 
                             form.append('firstName', firstNameForm.value);
                             form.append('lastName', lastNameForm.value);
                             form.append('email', emailForm.value);
-                            let dataUser = JSON.stringify({ 'firstName': firstNameForm.value, 'lastName': lastNameForm.value, 'email': emailForm.value })
-                            //form.append('password', passwordForm.value);
 
-                            //console.log(form.get('firstName'), form.get('lastName'), form.get('email'), form.get('password'));
-                            updateUser(dataUser, id, team);
+                            let dataUser = JSON.stringify({
+                                'firstName': firstNameForm.value, 'lastName': lastNameForm.value, 'email': emailForm.value
+                            });
+
+                            let pwd = document.querySelector('.updateUserForm #password').value;
+                            if (pwd === "") pwd = null;
+                            updateUser(dataUser, id, pwd, roleChanged);
 
                             modal.classList.add('hidden');
                             modalContent.classList.add('hidden');
@@ -222,17 +228,13 @@ if (updateUserForm) {
                             firstNameForm.textContent = "";
                             lastNameForm.textContent = "";
                             emailForm.textContent = "";
-                            passwordForm.textContent = "";
-
                         })
-
                     }
                 }
                 catch (err) {
                     showAlert('error', err.response.data.message);
                 }
             }
-
             findUser(id);
         })
     })

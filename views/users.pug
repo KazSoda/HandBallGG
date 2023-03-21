@@ -1,67 +1,65 @@
 extends base
 
 block content
+	div.mainSectionGestionUser
+		h1 Gestion des utilisateurs
+		table.gestionUser
+			thead
+				tr
+					th Nom
+					th Prénom
+					th Adresse e-mail
+					th Rôle
+					th Actions
+			tbody
+			each user in users
+				tr
+					td= user.firstName
+					td= user.lastName
+					td= user.email
+					td= user.role
+					td
+						div(class="confirmDelete hidden")
+							h3 Êtes vous sur de vouloir supprimer l'équipe ?
+							div 
+								button(class="btn btn-danger deleteUser "+user.id) Oui
+								button(class="btn deleteNo") Non
+						div(class="adminUserUD")
+							button(class="btn btn-edit updateUser "+user.id) 
+								i(class="bi bi-pencil-square")
+									p Modifier
+							button(class="btn btn-danger askDeleteUser") 
+								i(class="bi bi-trash3")
+									p Supprimer
+		p
+			a(href='/creationUtilisateur') Créer un nouvel utilisateur
 
-	h1 Gestion des utilisateurs
-	table.gestionUser
-		thead
-			tr
-				th Nom
-				th Prénom
-				th Adresse e-mail
-				th Mot de passe
-				th role
-				th Actions
-		tbody
-		each user in users
-			tr
-				td= user.firstName
-				td= user.lastName
-				td= user.email
-				td= user.password
-				td= user.role
-				td
-					div(class="confirmDelete hidden")
-						h3 Êtes vous sur de vouloir supprimer l'équipe ?
-						div 
-							button(class="btn btn-danger deleteUser "+user.id) Oui
-							button(class="btn deleteNo") Non
-					div(class="adminUserUD")
-						button(class="btn btn-edit updateUser "+user.id) 
-							i(class="bi bi-pencil-square")
-								p Modifier
-						button(class="btn btn-danger askDeleteUser") 
-							i(class="bi bi-trash3")
-								p Supprimer
-	p
-		a(href='/creationUtilisateur') Créer un nouvel utilisateur
+			.modal.hidden
+			.modal-content.updateUserForm.hidden
+				.modal-header
+					h2 Modifier une équipe
+				.modal-body
+					form
+						.form-group
+							label(for="firstName") Prénom de l'utilisateur
+							input(type="text" name="firstName" placeholder="Prénom" id="firstName")
+						.form-group
+							label(for="lastName") Nom de l'utilisateur
+							input(type="text" name="lastName" placeholder="Nom" id="lastName")
+						.form-group
+							label(for="email") Email
+							input(type="text" name="email" placeholder="example@gmail.com" id="email")
+						.form-group
+							label(for="password") Mot de passe
+							input(type="text" name="password" placeholder="**********" id="password")
+						.form-group
+							label.choiceRole(for='role')
+								label(for='Admin') Admin
+								input(type='radio', id='role', name='role', value='Admin')
 
-		.modal.hidden
-		.modal-content.updateUserForm.hidden
-			.modal-header
-				h2 Modifier une équipe
-			.modal-body
-				form
-					.form-group
-						label(for="firstName") Prénom de l'utilisateur
-						input(type="text" name="firstName" placeholder="Prénom" id="firstName")
-					.form-group
-						label(for="lastName") Nom de l'utilisateur
-						input(type="text" name="lastName" placeholder="Nom" id="lastName")
-					.form-group
-						label(for="email") Email
-						input(type="text" name="email" placeholder="example@gmail.com" id="email")
-					.form-group
-						label(for="password") Mot de passe
-						input(type="text" name="password" placeholder="**********" id="password")
-					.form-group
-						label.choiceRole(for='role')
-							label(for='Admin') Admin
-							input(type='radio', class='Admin', name='role', value='Admin')
-
-							label(for='User') Utilisateur
-							input(type='radio', class='User', name='role', value='User')
-					.form-group
-						button(type="submit" class="btn btn-success") Modifier
-			.modal-footer
-				button(type="button" class="btn btn-danger close") Fermer
+								label(for='User') Utilisateur
+								input(type='radio', id='role', name='role', value='User')
+						.form-group
+							button(type="submit" class="btn btn-success") Modifier
+				.modal-footer
+					button(type="button" class="btn btn-danger close") Fermer

@@ -783,26 +783,12 @@ i.bi {
     width: 100%;
 }
 
-/* left page part */
-.filterMatchPage {
-    display: flex;
-    width: 15%;
-    flex-direction: column;
-}
+
 
 form#searchFormMatch {
     display: flex;
     flex-direction: column;
-    width: 50%;
-}
-
-select#searchMatchBySelect {
-    width: 50%;
-}
-
-input#searchInformation {
-    width: 150%;
-    height: 30px;
+    align-items: center;
 }
 
 .searchInformation,
@@ -811,11 +797,14 @@ input#searchInformation {
 }
 
 /* right page part */
+
+.bandeauDefilant{
+    overflow: hidden;
+}
 .mainSection {
     width: 100%;
     display: flex;
     flex-direction: row;
-    overflow: hidden;
 }
 
 .matchSection {
@@ -843,7 +832,7 @@ input#searchInformation {
     justify-content: center;
 }
 
-.headerInformationMatch>h1{
+.headerInformationMatch>h1 {
     margin: 5px;
 }
 
@@ -882,20 +871,71 @@ input#searchInformation {
 }
 
 .firstEquipeInformation>h1,
-.secondEquipeInformation>h1{
+.secondEquipeInformation>h1 {
     margin: 5px;
     font-size: 1em;
     text-align: center;
 }
 
-.matchInformation:first-child {
-    animation: tourner 60s infinite linear;
+.calendarDisplay {
+    display: flex;
+    margin: 15px;
+    width: 100%;
 }
 
-@keyframes tourner {
-    from {transform: translateX(0);}
-    to {transform: translate(-6000px);}
+#calendar {
+    height: 800px;
+    overflow: auto;
+    width: 95%;
 }
+
+.navigate, .view, .filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color-darker);
+    border-radius: var(--radius-norm);
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+aside.options-team {
+    width: 245px;
+    padding-right: 15px;
+}
+
+button.btn.today {
+    width: 100%;
+}
+
+button.btn.prev {
+    width: 45%;
+}
+
+button.btn.next {
+    width: 45%;
+}
+
+.view button {
+    width: 100%;
+}
+
+
+aside.options-team button {
+    padding: 8px !important;
+}
+
+.today i.bi::before,
+.day  i.bi::before,
+.week i.bi::before,
+.month i.bi::before {
+    margin-right: 10px;
+}
+
+
+
+
 
 /*--------------------------------------------------
                     Creation User
@@ -978,21 +1018,29 @@ input#searchInformation {
                     Gestion Users
 --------------------------------------------------*/
 
+.mainSectionGestionUser{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .gestionUser {
     margin: 10px;
     border-collapse: collapse;
-    max-width: 800px;
+    /*max-width: 800px;*/
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .gestionUser>thead th,
 tbody td {
     padding: 10px;
     text-align: left;
-    border: 1px solid #ccc;
+    border: 1px solid var(--accent-primary);
 }
 
 .gestionUser>thead th {
-    background-color: #eee;
+    background-color: var(--accent-darker);
 }
 
 .gestionUser>tbody>tr {
@@ -1261,6 +1309,14 @@ footer>h3::after {
     }
 }
 
+/*--------------------------------------------------
+                    Gestion Users
+--------------------------------------------------*/
+@media only screen and (max-width: 900px) {
+    .gestionUser .btn{
+        width: 90%;
+    }
+}
 
 
 @media only screen and (max-width: 980px) {
