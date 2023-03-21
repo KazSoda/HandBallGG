@@ -1316,6 +1316,9 @@ footer>h3::after {
     .gestionUser .btn{
         width: 90%;
     }
+    .mainSectionGestionUser{
+        overflow: auto;
+    }
 }
 
 
