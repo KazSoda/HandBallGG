@@ -36,6 +36,12 @@ const matchSchema = new mongoose.Schema({
         default: null,
     },
 
+    dateEnd: {
+        type: Date,
+        trim: true,
+        default: null,
+    },
+
     weekNumber: {
         type: Number,
         trim: true,

@@ -325,7 +325,7 @@ nav>section {
 }
 
 nav img {
-    max-width: 70px;
+    max-width: 40px;
 }
 
 nav a {
@@ -948,12 +948,101 @@ aside.options-team button {
 
 
 .toastui-calendar-detail-container,
-.toastui-calendar-popup-arrow.toastui-calendar-left .toastui-calendar-popup-arrow-fill {
+.toastui-calendar-popup-arrow.toastui-calendar-left .toastui-calendar-popup-arrow-fill,
+.toastui-calendar-form-container {
     background-color: #000000a1 !important;
     border-radius: var(--radius-norm) !important;
     backdrop-filter: blur(50px) !important;
 }
 
+.toastui-calendar-form-container input {
+    width: auto;
+}
+
+.toastui-calendar-floating-layer * {
+    box-sizing: revert !important;
+}
+
+.toastui-calendar-floating-layer td,
+.toastui-calendar-floating-layer tr {
+    padding: 6px;
+}
+
+
+.toastui-calendar-floating-layer table * {
+    color: white;
+    text-align: center;
+    font-size: small !important;
+}
+
+.toastui-calendar-floating-layer tbody tr:nth-child(odd) {
+    background-color: #00000000 !important;
+}
+
+.toastui-calendar-floating-layer tbody tr:nth-child(even) {
+    background-color: #ffffff14 !important;
+}
+
+.toastui-calendar-floating-layer tbody tr:hover td {
+    background-color: #ffffff43 !important;
+}
+
+.toastui-calendar-floating-layer tbody tr:hover td:hover {
+    background-color: #ffffff95 !important;
+}
+
+.toastui-calendar-floating-layer tbody * {
+
+    border: 1px solid var(--bg-color-darker);
+    ;
+}
+
+.toastui-calendar-popup-date-picker {
+    width: 205px !important;
+}
+
+.toastui-calendar-dropdown-section.toastui-calendar-state-section,
+.toastui-calendar-popup-section-item.toastui-calendar-popup-section-allday,
+.toastui-calendar-popup-section-item.toastui-calendar-popup-button {
+    display: none !important;
+    ;
+}
+
+.toastui-calendar-popup-button.toastui-calendar-popup-close {
+    background-color: #00000000 !important;
+}
+
+.toastui-calendar-icon.toastui-calendar-ic-close {
+    filter: brightness(10) !important;
+}
+
+.toastui-calendar-popup-container input {
+    margin: 0 !important;
+    background-color: #00000000 !important;
+}
+
+.toastui-calendar-popup-section-item {
+    background-color: #5b5b5b7a !important;
+}
+
+.tui-timepicker-select {
+    max-width: 60px !important;
+    margin-right: 10px !important;
+    height: 30px;
+    padding: 0 10;
+}
+
+.tui-timepicker-row {
+    display: flex;
+}
+
+.toastui-calendar-popup-section:last-child {
+    margin-top: 15px;
+}
+
+.toastui-calendar-detail-item:last-child {
+    display: none;
+}
 
 
 /*--------------------------------------------------

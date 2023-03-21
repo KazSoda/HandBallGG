@@ -28,13 +28,32 @@ Date.prototype.addMinutes = function (m) {
 
 const calendar = new Calendar('#calendar', {
 	defaultView: 'week',
-	useCreationPopup: true,
+	useCreationPopup: false,
 	useFormPopup: true,
 	isReadOnly: false,
-
 	useDetailPopup: true,
 	usageStatistics: false,
-
+	useCreationPopup: {
+		template: {
+			title() {
+				return 'Create Schedule';
+			},
+			attendees(schedule) {
+				const attendees = schedule.attendees || [];
+				return `
+                    <div class="tui-full-calendar-form-section">
+                        <label class="tui-full-calendar-label">Attendees</label>
+                        <input type="text" class="tui-full-calendar-input tui-full-calendar-attendees" value="${attendees.join(', ')}">
+                    </div>
+                `;
+			},
+		},
+		beforeCreateSchedule(scheduleData) {
+			const attendees = scheduleData.attendees.split(',').map(attendee => attendee.trim());
+			scheduleData.attendees = attendees;
+			return scheduleData;
+		},
+	},
 	theme: {
 		common: {
 			backgroundColor: 'var(--nav-bg-color)',
@@ -48,7 +67,6 @@ const calendar = new Calendar('#calendar', {
 		dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
 		narrowWeekend: false,
 		taskView: false,  // e.g. true, false, or ['task', 'milestone']
-		hourStart: 6,
 		eventView: ['time'],
 	},
 	month: {
@@ -56,7 +74,6 @@ const calendar = new Calendar('#calendar', {
 		dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
 		narrowWeekend: true,
 		taskView: false,  // e.g. true, false, or ['task', 'milestone']
-		hourStart: 6,
 		eventView: ['time'],
 	},
 	template: {
@@ -128,7 +145,11 @@ function searchMatchByTeam(queryResult, enteredValue) {
 			calendarMatchTemp.id = sortedMatch._id;
 			calendarMatchTemp.title = sortedMatch.localTeam + " VS " + sortedMatch.againstTeam;
 			calendarMatchTemp.start = sortedMatch.date;
-			calendarMatchTemp.end = new Date(sortedMatch.date).addMinutes(90);
+			if (sortedMatch.dateEnd) {
+				calendarMatchTemp.end = sortedMatch.dateEnd;
+			} else {
+				calendarMatchTemp.end = new Date(sortedMatch.date).addMinutes(90);
+			}
 			calendarMatchTemp.isAllDay = false;
 			calendarMatchTemp.category = 'time';
 			calendarMatchTemp.dueDateClass = '';
@@ -179,21 +200,52 @@ function searchMatchByTeam(queryResult, enteredValue) {
 // creating an event
 calendar.on('beforeCreateEvent', (eventObj) => {
 	console.log(eventObj);
-	// calendar.createEvents([
-	// 	{
-	// 		...eventObj,
-	// 		id: uuid(),
-	// 	},
-	// ]);
+
 });
 
 
-// updating an event
-calendar.on('beforeUpdateEvent', ({ event, change }) => {
-	console.log(change);
-	// calendar.updateEvent(event.id, event.calendarId, change);
-});
 
+calendar.on({
+	'beforeUpdateEvent': function (e) {
+		let updatedFields = {};
+		if (e.changes.start) {
+			updatedFields.date = e.changes.start.d.d;
+		}
+		if (e.changes.end) {
+			updatedFields.dateEnd = e.changes.end.d.d;
+		}
+		if (e.changes.title) {
+			let title = e.changes.title.split(" VS ");
+			updatedFields.localTeam = title[0];
+			updatedFields.againstTeam = title[1];
+		}
+		if (e.changes.location) {
+			updatedFields.gymnasium = e.changes.location;
+		}
+		if (e.changes.attendees) {
+			updatedFields.localTeam = e.changes.attendees[0];
+			updatedFields.againstTeam = e.changes.attendees[1];
+		}
+		console.log(updatedFields);
+		console.log('beforeUpdateSchedule', e);
+
+		try {
+			const res = axios({
+				method: 'patch',
+				url: `/api/v1/match/${e.event.id}`,
+				data: updatedFields
+			})
+
+			if (res.data === '') {
+				calendar.updateEvent(e.event.id, '#calendar', e.changes);
+				showAlert("success", "Équipe modifiée avec succès");
+			}
+		} catch (err) {
+			showAlert("error", err.response.data.message);
+		}
+
+	},
+});
 
 // deleting an event
 calendar.on('beforeDeleteEvent', async (eventObj) => {
