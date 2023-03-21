@@ -811,11 +811,14 @@ input#searchInformation {
 }
 
 /* right page part */
+
+.bandeauDefilant{
+    overflow: hidden;
+}
 .mainSection {
     width: 100%;
     display: flex;
     flex-direction: row;
-    overflow: hidden;
 }
 
 .matchSection {
@@ -886,15 +889,6 @@ input#searchInformation {
     margin: 5px;
     font-size: 1em;
     text-align: center;
-}
-
-.matchInformation:first-child {
-    animation: tourner 60s infinite linear;
-}
-
-@keyframes tourner {
-    from {transform: translateX(0);}
-    to {transform: translate(-6000px);}
 }
 
 /*--------------------------------------------------

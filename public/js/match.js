@@ -150,9 +150,25 @@ function searchMatchByTeam(queryResult, enteredValue) {
 	}
 }
 
+export const animation = () => {
+	let anim = document.querySelector('.mainSection');
+	let nbMatch = anim.children.length;
+	let oui = -500*nbMatch+document.querySelector('.bandeauDefilant').offsetWidth;
 
-
-
+	console.log("coucou")
+	anim.animate(
+		[
+			// keyframes
+			{ transform: "translateX(0%)" },
+			{ transform: "translateX("+oui+"px)" },
+		],
+		{
+			// timing options
+			duration: 2900*nbMatch,
+			iterations: Infinity,
+		}
+	);
+}
 
 export const init = async () => {
 
@@ -193,6 +209,8 @@ export const init = async () => {
 			displayCalendar();
 		}
 	});
+
+	animation();
 
 
 

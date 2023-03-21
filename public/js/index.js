@@ -1,6 +1,6 @@
 import '@babel/polyfill'
 import { login, logout } from './login.js';
-import { init, displayCalendar, resizeCalendar, changeWeek } from './match.js';
+import { init, displayCalendar, resizeCalendar, changeWeek, animation} from './match.js';
 import { registerUser, deleteUser, updateUser } from './user';
 import { createEquipe, updateEquipe, deleteEquipe } from './equipe';
 import axios from 'axios';
@@ -42,6 +42,11 @@ if (searchFormMatch) {
 
     document.querySelector('.navbar-calendar .today').addEventListener('click', () => {
         changeWeek('today')
+    })
+
+    window.addEventListener('load', (event) => {
+        console.log('La page est complètement chargée');
+        animation();
     })
 }
 

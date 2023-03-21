@@ -35841,7 +35841,7 @@ module.exports = reloadCSS;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.resizeCalendar = exports.init = exports.displayCalendar = exports.changeWeek = void 0;
+exports.resizeCalendar = exports.init = exports.displayCalendar = exports.changeWeek = exports.animation = void 0;
 var _axios = _interopRequireDefault(require("axios"));
 var _alert = require("./alert");
 var _calendar = _interopRequireDefault(require("@toast-ui/calendar"));
@@ -35977,6 +35977,24 @@ function searchMatchByTeam(queryResult, enteredValue) {
     calendar.createEvents(calendarMatch);
   }
 }
+var animation = function animation() {
+  var anim = document.querySelector('.mainSection');
+  var nbMatch = anim.children.length;
+  var oui = -500 * nbMatch + document.querySelector('.bandeauDefilant').offsetWidth;
+  console.log("coucou");
+  anim.animate([
+  // keyframes
+  {
+    transform: "translateX(0%)"
+  }, {
+    transform: "translateX(" + oui + "px)"
+  }], {
+    // timing options
+    duration: 2900 * nbMatch,
+    iterations: Infinity
+  });
+};
+exports.animation = animation;
 var init = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
     var data, urlParams, name, inputSearchBar;
@@ -36020,7 +36038,8 @@ var init = /*#__PURE__*/function () {
               displayCalendar();
             }
           });
-        case 8:
+          animation();
+        case 9:
         case "end":
           return _context2.stop();
       }
@@ -36561,6 +36580,10 @@ if (searchFormMatch) {
   document.querySelector('.navbar-calendar .today').addEventListener('click', function () {
     (0, _match.changeWeek)('today');
   });
+  window.addEventListener('load', function (event) {
+    console.log('La page est complètement chargée');
+    (0, _match.animation)();
+  });
 }
 
 // Delegation
@@ -36961,7 +36984,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63959" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55303" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
