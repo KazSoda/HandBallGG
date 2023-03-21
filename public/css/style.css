@@ -783,26 +783,12 @@ i.bi {
     width: 100%;
 }
 
-/* left page part */
-.filterMatchPage {
-    display: flex;
-    width: 15%;
-    flex-direction: column;
-}
+
 
 form#searchFormMatch {
     display: flex;
     flex-direction: column;
-    width: 50%;
-}
-
-select#searchMatchBySelect {
-    width: 50%;
-}
-
-input#searchInformation {
-    width: 150%;
-    height: 30px;
+    align-items: center;
 }
 
 .searchInformation,
@@ -843,7 +829,7 @@ input#searchInformation {
     justify-content: center;
 }
 
-.headerInformationMatch>h1{
+.headerInformationMatch>h1 {
     margin: 5px;
 }
 
@@ -882,7 +868,7 @@ input#searchInformation {
 }
 
 .firstEquipeInformation>h1,
-.secondEquipeInformation>h1{
+.secondEquipeInformation>h1 {
     margin: 5px;
     font-size: 1em;
     text-align: center;
@@ -893,9 +879,74 @@ input#searchInformation {
 }
 
 @keyframes tourner {
-    from {transform: translateX(0);}
-    to {transform: translate(-6000px);}
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translate(-6000px);
+    }
 }
+
+
+.calendarDisplay {
+    display: flex;
+    margin: 15px;
+    width: 100%;
+}
+
+#calendar {
+    height: 800px;
+    overflow: auto;
+    width: 95%;
+}
+
+.navigate, .view, .filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color-darker);
+    border-radius: var(--radius-norm);
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+aside.options-team {
+    width: 245px;
+    padding-right: 15px;
+}
+
+button.btn.today {
+    width: 100%;
+}
+
+button.btn.prev {
+    width: 45%;
+}
+
+button.btn.next {
+    width: 45%;
+}
+
+.view button {
+    width: 100%;
+}
+
+
+aside.options-team button {
+    padding: 8px !important;
+}
+
+.today i.bi::before,
+.day  i.bi::before, 
+.week i.bi::before,
+.month i.bi::before {
+    margin-right: 10px;
+}
+
+
+
 
 
 /*--------------------------------------------------
@@ -953,25 +1004,28 @@ input#searchInformation {
     width: 50px;
 }
 
-.styleCreation{
+.styleCreation {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
-.choiceUser , .choiceAdmin{
+
+.choiceUser,
+.choiceAdmin {
     display: flex;
     flex-direction: row;
 }
 
-.formCreateUser>.choiceRole>*>input{
+.formCreateUser>.choiceRole>*>input {
     width: 100%;
 }
 
-.formCreateUser>.choiceRole>*>label{
+.formCreateUser>.choiceRole>*>label {
     padding-right: 10px;
 }
-.formCreateUser>label{
+
+.formCreateUser>label {
     padding-top: 0.7em;
 }
 
@@ -1057,6 +1111,7 @@ footer .content {
     width: 100%;
     flex-wrap: wrap;
 }
+
 footer a:hover {
     color: #2ecc40;
 }
@@ -1219,7 +1274,7 @@ footer>h3::after {
         justify-content: space-around;
     }
 
-    .modal-body{
+    .modal-body {
         min-width: auto;
         padding: 15px 30px;
     }
@@ -1251,13 +1306,13 @@ footer>h3::after {
                         Creation User
     --------------------------------------------------*/
 
-    .formCreateUser{
+    .formCreateUser {
         width: 90%;
         padding: 1em;
         padding-right: 0;
     }
 
-    .formCreateUser>input{
+    .formCreateUser>input {
         width: 90%;
     }
 }
