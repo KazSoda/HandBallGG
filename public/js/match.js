@@ -140,7 +140,7 @@ function searchMatchByTeam(queryResult, enteredValue) {
       						<p>VS</p>
       						<article class="secondEquipeInformation">
       							<h1>Equipe adverse</h1>
-      							<img src="img/logo.png" alt="photoEnemyTeam">
+      							<img src="img/${sortedMatch.againstTeam}.png" alt="photoEnemyTeam">
       							<h1>${sortedMatch.againstTeam}</h1>
       						</article>
       					</section>
@@ -150,12 +150,32 @@ function searchMatchByTeam(queryResult, enteredValue) {
 		});
 
 		calendar.createEvents(calendarMatch);
+
+		animation();
 	}
 }
 
-
-
-
+export const animation = () => {
+	let anim = document.querySelector('.mainSection');
+	let nbMatch = anim.children.length;
+	let oui = -500 * nbMatch + document.querySelector('.bandeauDefilant').offsetWidth;
+	let iterations = 0
+	if (nbMatch > 1) {
+		iterations = Infinity
+	}
+	anim.animate(
+		[
+			// keyframes
+			{ transform: "translateX(0%)" },
+			{ transform: "translateX(" + oui + "px)" },
+		],
+		{
+			// timing options
+			duration: 2900*nbMatch,
+			iterations,
+		}
+	);
+}
 
 export const init = async () => {
 
@@ -167,7 +187,7 @@ export const init = async () => {
 
 	let name = urlParams.get('team');
 	let inputSearchBar = document.querySelector("#searchInformation").value;
-	
+
 	if (name !== null) {
 		name = name.replace(/['"]/g, ""); // remove all occurrences of ' and "
 		calendar.clear();
@@ -176,7 +196,7 @@ export const init = async () => {
 		window.history.replaceState({}, document.title, "/" + "matchs");
 		displayCalendar();
 	} else if (inputSearchBar !== "") {
-	// Search a match based on the input value
+		// Search a match based on the input value
 		calendar.clear();
 		searchMatchByTeam(data, inputSearchBar);
 		displayCalendar();
@@ -184,7 +204,7 @@ export const init = async () => {
 		calendar.clear();
 		searchMatchByTeam(data, "");
 		displayCalendar();
-	} 
+	}
 
 
 	// Search a match based on the select value
@@ -196,6 +216,8 @@ export const init = async () => {
 			displayCalendar();
 		}
 	});
+
+	animation();
 
 
 
@@ -246,5 +268,7 @@ export const changeWeek = (type) => {
 }
 
 
-
+export const changeCalendarView = (type) => {
+	calendar.changeView(type);
+}
 

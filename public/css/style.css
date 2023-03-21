@@ -797,11 +797,14 @@ form#searchFormMatch {
 }
 
 /* right page part */
+
+.bandeauDefilant{
+    overflow: hidden;
+}
 .mainSection {
     width: 100%;
     display: flex;
     flex-direction: row;
-    overflow: hidden;
 }
 
 .matchSection {
@@ -874,21 +877,6 @@ form#searchFormMatch {
     text-align: center;
 }
 
-.matchInformation:first-child {
-    animation: tourner 60s infinite linear;
-}
-
-@keyframes tourner {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translate(-6000px);
-    }
-}
-
-
 .calendarDisplay {
     display: flex;
     margin: 15px;
@@ -939,7 +927,7 @@ aside.options-team button {
 }
 
 .today i.bi::before,
-.day  i.bi::before, 
+.day  i.bi::before,
 .week i.bi::before,
 .month i.bi::before {
     margin-right: 10px;
@@ -1004,28 +992,25 @@ aside.options-team button {
     width: 50px;
 }
 
-.styleCreation {
+.styleCreation{
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
-
-.choiceUser,
-.choiceAdmin {
+.choiceUser , .choiceAdmin{
     display: flex;
     flex-direction: row;
 }
 
-.formCreateUser>.choiceRole>*>input {
+.formCreateUser>.choiceRole>*>input{
     width: 100%;
 }
 
-.formCreateUser>.choiceRole>*>label {
+.formCreateUser>.choiceRole>*>label{
     padding-right: 10px;
 }
-
-.formCreateUser>label {
+.formCreateUser>label{
     padding-top: 0.7em;
 }
 
@@ -1119,7 +1104,6 @@ footer .content {
     width: 100%;
     flex-wrap: wrap;
 }
-
 footer a:hover {
     color: #2ecc40;
 }
@@ -1282,7 +1266,7 @@ footer>h3::after {
         justify-content: space-around;
     }
 
-    .modal-body {
+    .modal-body{
         min-width: auto;
         padding: 15px 30px;
     }
@@ -1314,13 +1298,13 @@ footer>h3::after {
                         Creation User
     --------------------------------------------------*/
 
-    .formCreateUser {
+    .formCreateUser{
         width: 90%;
         padding: 1em;
         padding-right: 0;
     }
 
-    .formCreateUser>input {
+    .formCreateUser>input{
         width: 90%;
     }
 }
