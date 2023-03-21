@@ -129,7 +129,7 @@ function searchMatchByTeam(queryResult, enteredValue) {
 			calendarMatch.push(calendarMatchTemp);
 
 
-			let date = new Date(sortedMatch.date).toDateString()
+			let date = new Date(sortedMatch.date).toLocaleString()
 			mainSection.innerHTML += `
       			<section class="matchSection">
       				<section class="matchInformation">
@@ -138,11 +138,14 @@ function searchMatchByTeam(queryResult, enteredValue) {
       					</section>
       					<section class="bodyInformationMatch">
       						<article class="firstEquipeInformation">
-      							<h1>${sortedMatch.localTeam}</h1>
+      							<h1>Equipe locale</h1>
 								<img src="img/logo.png" alt="photo">
+								<h1>${sortedMatch.localTeam}</h1>
       						</article>
       						<p>VS</p>
       						<article class="secondEquipeInformation">
+      							<h1>Equipe adverse</h1>
+      							<img src="img/logo.png" alt="photoEnemyTeam">
       							<h1>${sortedMatch.againstTeam}</h1>
       						</article>
       					</section>
