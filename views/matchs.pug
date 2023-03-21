@@ -25,44 +25,58 @@ block content
 								img(src="img/logo.png", alt="photo")
 								h1=match.againstTeam
 
-	.navbar-calendar 
-		button(class="button is-rounded today") Today
-		button(class="button is-rounded prev")
-			img(alt="prev" src="./images/ic-arrow-line-left.png" srcset="./images/ic-arrow-line-left@2x.png 2x, ./images/ic-arrow-line-left@3x.png 3x")
-		button(class="button is-rounded next")
-			img(alt="next" src="./images/ic-arrow-line-right.png" srcset="./images/ic-arrow-line-right@2x.png 2x, ./images/ic-arrow-line-right@3x.png 3x")
-		span.navbar--range
+	.calendarDisplay
+		aside.options-team
+			.navbar-calendar 
+				.navigate
+					p Navigation
+					button(class="btn today")
+						i(class="bi bi-calendar3-event") Aujourd'hui
+					button(class="btn prev" )
+						i(class="bi bi-caret-left")
+					button(class="btn next")
+						i(class="bi bi-caret-right")
+				.view
+					p Affichage
+					button(class="btn day")
+						i(class="bi bi-calendar3-event") Jour
+					button(class="btn month")
+						i(class="bi bi-calendar3") Mois
+					button(class="btn week")
+						i(class="bi bi-calendar3-week") Semaine
+				
+				span.navbar--range
 
-	
-	div(id="calendar" style="height: 800px; overflow: auto;")
+				.filter
+					form(id="searchFormMatch" method="POST")
+						p Recherche
+						input(type="text" name="search" id="searchInformation" placeholder="Entrez le nom de l'équipe")
+						input.btn(type="submit" id='searchBtn')
+
+					select(id="searchMatchBySelect" for="change")
+						option(value='0') -- Select --
+						each equipe in equipes
+							option(value=equipe.wording) #{equipe.wording}
+
+		div(id="calendar")
 
 	
 	section.mainMatchPage
-		section.filterMatchPage
-			form(id="searchFormMatch" method="POST")
-				p Barre de recherche:
-					input(type="text" name="search" id="searchInformation" placeholder="Entrez le nom de l'équipe")
-				input.btn(type="submit" id='searchBtn')
-
-			select(id="searchMatchBySelect" for="change")
-				option(value='0') -- Select --
-				each equipe in equipes
-					option(value=equipe.wording) #{equipe.wording}
+		if user && user.role == 'Admin' || user && user.role == 'User'
+			//- add a button to create a new team with the classes : btn and btn-success
+			.wrapper.adminEquipeC
+				.button
+					.icon
+						p +
+					span Créer un match
 
 
-						//if user && user.role == 'Admin'
-						//	div(class="adminEquipeUD")
-						//		//- add a button to update the team with the id of the team as a class with the classes : btn and btn-warning
-						//		button(class="btn btn-edit updateEquipe " + match.id)
-						//			i(class="bi bi-pencil-square")
-						//				p Modifier
-						//		button(class="btn btn-danger askDeleteEquipe")
-						//			i(class="bi bi-trash3")
-						//				p Supprimer
-			if user && user.role == 'Admin' || user && user.role == 'User'
-				//- add a button to create a new team with the classes : btn and btn-success
-				.wrapper.adminEquipeC
-					.button
-						.icon
-							p +
-						span Créer un match
+						//-if user && user.role == 'Admin'
+						//-	div(class="adminEquipeUD")
+						//-		//- add a button to update the team with the id of the team as a class with the classes : btn and btn-warning
+						//-		button(class="btn btn-edit updateEquipe " + match.id)
+						//-			i(class="bi bi-pencil-square")
+						//-				p Modifier
+						//-		button(class="btn btn-danger askDeleteEquipe")
+						//-			i(class="bi bi-trash3")
+						//-				p Supprimer

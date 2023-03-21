@@ -31,24 +31,27 @@ const calendar = new Calendar('#calendar', {
 	useDetailPopup: true,
 	isReadOnly: true,
 	usageStatistics: false,
-	allday: false,
 
 	theme: {
 		common: {
-			backgroundColor: 'var(--bg-color)',
+			backgroundColor: 'var(--nav-bg-color)',
 		},
 	},
 	week: {
 		startDayOfWeek: 1,
 		dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-		narrowWeekend: true,
+		narrowWeekend: false,
 		taskView: false,  // e.g. true, false, or ['task', 'milestone']
+		hourStart: 6,
+		eventView: ['time'],
 	},
 	month: {
 		startDayOfWeek: 1,
 		dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
 		narrowWeekend: true,
 		taskView: false,  // e.g. true, false, or ['task', 'milestone']
+		hourStart: 6,
+		eventView: ['time'],
 	},
 	template: {
 		time(event) {
@@ -114,8 +117,8 @@ function searchMatchByTeam(queryResult, enteredValue) {
 			calendarMatchTemp.category = 'time';
 			calendarMatchTemp.dueDateClass = '';
 			calendarMatchTemp.color = '#ffffff';
-			calendarMatchTemp.bgColor = '#9e5fff';
-			calendarMatchTemp.dragBgColor = '#9e5fff';
+			calendarMatchTemp.bgColor = 'linear-gradient(152deg, #9ebd13a8 0%, #008552b4 100%)';
+			calendarMatchTemp.dragBgColor = 'linear-gradient(152deg, #9ebd13a8 0%, #008552b4 100%)';
 			calendarMatchTemp.location = sortedMatch.gymnasium;
 
 			calendarMatch.push(calendarMatchTemp);
