@@ -171,7 +171,7 @@ export const animation = () => {
 		],
 		{
 			// timing options
-			duration: 3200*nbMatch,
+			duration: 4000*nbMatch,
 			iterations,
 		}
 	);

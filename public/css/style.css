@@ -851,6 +851,7 @@ form#searchFormMatch {
 }
 
 .bodyInformationMatch>p{
+    font-size: 2em;
     text-align: center;
 }
 
@@ -866,7 +867,7 @@ form#searchFormMatch {
 .secondEquipeInformation {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     margin: 15px;
     border-radius: 15px;
@@ -882,7 +883,7 @@ form#searchFormMatch {
 .firstEquipeInformation>h1,
 .secondEquipeInformation>h1 {
     margin: 5px;
-    font-size: 1em;
+    font-size: 0.9em;
     text-align: center;
 }
 

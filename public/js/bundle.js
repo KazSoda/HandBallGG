@@ -35997,7 +35997,7 @@ var animation = function animation() {
     transform: "translateX(" + oui + "px)"
   }], {
     // timing options
-    duration: 3200 * nbMatch,
+    duration: 4000 * nbMatch,
     iterations: iterations
   });
 };
