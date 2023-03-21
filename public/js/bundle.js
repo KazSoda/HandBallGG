@@ -35992,18 +35992,21 @@ var init = /*#__PURE__*/function () {
           // Search a match based on the url parameter
           urlParams = new URLSearchParams(window.location.search);
           name = urlParams.get('team');
+          inputSearchBar = document.querySelector("#searchInformation").value;
           if (name !== null) {
             name = name.replace(/['"]/g, ""); // remove all occurrences of ' and "
+            calendar.clear();
             searchMatchByTeam(data, name);
             // remove the url parameter without reloading the page
             window.history.replaceState({}, document.title, "/" + "matchs");
-          }
-
-          // Search a match based on the input value
-          inputSearchBar = document.querySelector("#searchInformation").value;
-          if (inputSearchBar !== "") {
+            displayCalendar();
+          } else if (inputSearchBar !== "") {
+            // Search a match based on the input value
+            calendar.clear();
             searchMatchByTeam(data, inputSearchBar);
+            displayCalendar();
           } else {
+            calendar.clear();
             searchMatchByTeam(data, "");
             displayCalendar();
           }
@@ -36012,10 +36015,12 @@ var init = /*#__PURE__*/function () {
           document.querySelector("#searchMatchBySelect").addEventListener("change", function (e) {
             var select = document.getElementById("searchMatchBySelect").value;
             if (select != "0") {
+              calendar.clear();
               searchMatchByTeam(data, select);
+              displayCalendar();
             }
           });
-        case 9:
+        case 8:
         case "end":
           return _context2.stop();
       }
