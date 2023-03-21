@@ -1,9 +1,11 @@
 import '@babel/polyfill'
 import { login, logout } from './login.js';
-import { init } from './match.js';
-import { registerUser, deleteUser } from './user';
+import { init, displayCalendar, resizeCalendar, changeWeek } from './match.js';
+import { registerUser, deleteUser, updateUser } from './user';
 import { createEquipe, updateEquipe, deleteEquipe } from './equipe';
-
+import axios from 'axios';
+import { async } from 'regenerator-runtime';
+import { showAlert } from "./alert";
 
 // Select elements
 const loginForm = document.querySelector('.loginForm');
@@ -23,6 +25,23 @@ if (searchFormMatch) {
         e.preventDefault();
         init();
     })
+
+    displayCalendar();
+
+    window.addEventListener('resize', () => {
+        resizeCalendar();
+    })
+
+
+    document.querySelector('.navbar-calendar .prev').addEventListener('click', () => {
+        changeWeek('prev')
+    })
+
+    document.querySelector('.navbar-calendar .next').addEventListener('click', () => {
+        changeWeek('next')
+    })
+
+
 }
 
 // Delegation
@@ -56,7 +75,7 @@ if (registerForm) {
         const password = document.querySelector('.password').value;
         const passwordConfirm = document.querySelector('.passwordConfirm').value;
 
-        console.log(fname,lname, role, email, password, passwordConfirm);
+        console.log(fname, lname, role, email, password, passwordConfirm);
 
         registerUser(fname, lname, role, email, password, passwordConfirm);
     })
@@ -73,9 +92,9 @@ if (manageUser) {
     for (let i = 0; i < askDelete.length; i++) {
         askDelete[i].addEventListener('click', e => {
             e.preventDefault();
-            
+
             let confirmDelete = document.querySelectorAll('.confirmDelete')[i];
-            
+
             //enlever classe hidden a confirmDelete
             confirmDelete.classList.remove('hidden');
 
@@ -105,6 +124,117 @@ if (manageUser) {
             // get the parent element of the button and remove it
         })
     }
+}
+
+/*------------------------------------------------------------
+                        ~ Update Users ~
+------------------------------------------------------------*/
+
+if (updateUserForm) {
+    const modal = document.querySelector('.modal');
+    const modalContent = document.querySelector('.updateUserForm');
+    const modalFooter = document.querySelector('.updateUserForm .modal-footer');
+    const validateForm = document.querySelector('.updateUserForm .btn-success');
+
+
+    updateUserForm.forEach(el => {
+        el.addEventListener('click', e => {
+            e.preventDefault();
+
+
+            let team = e.target.parentElement.parentElement.parentElement.parentElement;
+            let id = e.target.parentElement.parentElement.parentElement.className.split(' ')[3]
+
+            // Get the team details to fill the form from the DOM (sometimes it was not withing with the first parentElement so I had to do it like this)
+            if (e.target.parentElement.classList.contains('team')) {
+                team = e.target.parentElement;
+            } else if (e.target.parentElement.parentElement.classList.contains('team')) {
+                team = e.target.parentElement.parentElement;
+            } else if (e.target.parentElement.parentElement.parentElement.classList.contains('team')) {
+                team = e.target.parentElement.parentElement.parentElement;
+            } else if (e.target.parentElement.parentElement.parentElement.parentElement.classList.contains('team')) {
+                team = e.target.parentElement.parentElement.parentElement.parentElement;
+            }
+
+            if (e.target.parentElement.parentElement.className.split(' ').length === 4) {
+                id = e.target.parentElement.parentElement.className.split(' ')[3];
+            } else if (e.target.parentElement.className.split(' ').length === 4) {
+                id = e.target.parentElement.className.split(' ')[3];
+            } else if (e.target.className.split(' ').length === 4) {
+                id = e.target.className.split(' ')[3];
+            }
+            console.log(team);
+            async function findUser(id) {
+                try {
+                    const res = await axios({
+                        method: 'get',
+                        url: `/api/v1/users/${id}`,
+                    })
+                    if (res.data.status === 'success') {
+                        let userData = res.data.data.user;
+
+                        /*const firstName = team.querySelector('.firstName');
+                        const lastName = team.querySelector('.lastName');
+                        const email = team.querySelector('.email');
+                        const password = team.querySelector('.password');*/
+
+                        const firstNameForm = document.querySelector('.updateUserForm #firstName');
+                        const lastNameForm = document.querySelector('.updateUserForm #lastName');
+                        const emailForm = document.querySelector('.updateUserForm #email');
+
+                        if (firstName !== null) firstNameForm.value = userData.firstName;
+                        if (lastName !== null) lastNameForm.value = userData.lastName;
+                        if (email !== null) emailForm.value = userData.email;
+
+                        //console.log(firstNameForm.value, lastNameForm.value, emailForm.value, passwordForm.value);
+
+                        modal.classList.remove('hidden');
+                        modalContent.classList.remove('hidden');
+
+                        modal.addEventListener('click', e => {
+                            modal.classList.add('hidden');
+                            modalContent.classList.add('hidden');
+                        })
+
+                        modalFooter.addEventListener('click', e => {
+                            modal.classList.add('hidden');
+                            modalContent.classList.add('hidden');
+                        })
+
+                        validateForm.addEventListener('click', e => {
+                            e.preventDefault();
+
+                            const form = new FormData();
+
+                            form.append('firstName', firstNameForm.value);
+                            form.append('lastName', lastNameForm.value);
+                            form.append('email', emailForm.value);
+                            let dataUser = JSON.stringify({ 'firstName': firstNameForm.value, 'lastName': lastNameForm.value, 'email': emailForm.value })
+                            //form.append('password', passwordForm.value);
+
+                            //console.log(form.get('firstName'), form.get('lastName'), form.get('email'), form.get('password'));
+                            updateUser(dataUser, id, team);
+
+                            modal.classList.add('hidden');
+                            modalContent.classList.add('hidden');
+
+                            firstNameForm.textContent = "";
+                            lastNameForm.textContent = "";
+                            emailForm.textContent = "";
+                            passwordForm.textContent = "";
+
+                        })
+
+                    }
+                }
+                catch (err) {
+                    showAlert('error', err.response.data.message);
+                }
+            }
+
+            findUser(id);
+        })
+    })
 }
 
 
@@ -274,7 +404,7 @@ if (updateEquipeForm) {
 
 
             let team = e.target.parentElement.parentElement.parentElement.parentElement;
-            let id =  e.target.parentElement.parentElement.parentElement.className.split(' ')[3]
+            let id = e.target.parentElement.parentElement.parentElement.className.split(' ')[3]
             // Get the team details to fill the form from the DOM (sometimes it was not withing with the first parentElement so I had to do it like this)
             if (e.target.parentElement.classList.contains('team')) {
                 team = e.target.parentElement;
@@ -286,11 +416,11 @@ if (updateEquipeForm) {
                 team = e.target.parentElement.parentElement.parentElement.parentElement;
             }
 
-            if(e.target.parentElement.parentElement.className.split(' ').length === 4) {
+            if (e.target.parentElement.parentElement.className.split(' ').length === 4) {
                 id = e.target.parentElement.parentElement.className.split(' ')[3];
-            } else if(e.target.parentElement.className.split(' ').length === 4) {
+            } else if (e.target.parentElement.className.split(' ').length === 4) {
                 id = e.target.parentElement.className.split(' ')[3];
-            } else if(e.target.className.split(' ').length === 4) {
+            } else if (e.target.className.split(' ').length === 4) {
                 id = e.target.className.split(' ')[3];
             }
 
@@ -308,7 +438,6 @@ if (updateEquipeForm) {
             if (trainer !== null) trainerForm.value = trainer.textContent;
             if (slot !== null) slotForm.value = slot.textContent;
             if (comment !== null) commentForm.value = comment.textContent;
-
 
             modal.classList.remove('hidden');
             modalContent.classList.remove('hidden');

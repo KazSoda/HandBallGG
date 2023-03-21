@@ -2,6 +2,20 @@ extends base
 
 
 block content
+	
+
+	.navbar-calendar 
+		button(class="button is-rounded today") Today
+		button(class="button is-rounded prev")
+			img(alt="prev" src="./images/ic-arrow-line-left.png" srcset="./images/ic-arrow-line-left@2x.png 2x, ./images/ic-arrow-line-left@3x.png 3x")
+		button(class="button is-rounded next")
+			img(alt="next" src="./images/ic-arrow-line-right.png" srcset="./images/ic-arrow-line-right@2x.png 2x, ./images/ic-arrow-line-right@3x.png 3x")
+		span.navbar--range
+
+	
+	div(id="calendar" style="height: 800px; overflow: auto;")
+
+	
 	section.mainMatchPage
 		section.filterMatchPage
 			form(id="searchFormMatch" method="POST")
