@@ -798,9 +798,10 @@ form#searchFormMatch {
 
 /* right page part */
 
-.bandeauDefilant{
+.bandeauDefilant {
     overflow: hidden;
 }
+
 .mainSection {
     width: 100%;
     display: flex;
@@ -899,7 +900,9 @@ form#searchFormMatch {
     width: 95%;
 }
 
-.navigate, .view, .filter {
+.navigate,
+.view,
+.filter {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -937,13 +940,19 @@ aside.options-team button {
 }
 
 .today i.bi::before,
-.day  i.bi::before,
+.day i.bi::before,
 .week i.bi::before,
 .month i.bi::before {
     margin-right: 10px;
 }
 
 
+.toastui-calendar-detail-container,
+.toastui-calendar-popup-arrow.toastui-calendar-left .toastui-calendar-popup-arrow-fill {
+    background-color: #000000a1 !important;
+    border-radius: var(--radius-norm) !important;
+    backdrop-filter: blur(50px) !important;
+}
 
 
 
@@ -1002,25 +1011,28 @@ aside.options-team button {
     width: 50px;
 }
 
-.styleCreation{
+.styleCreation {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
-.choiceUser , .choiceAdmin{
+
+.choiceUser,
+.choiceAdmin {
     display: flex;
     flex-direction: row;
 }
 
-.formCreateUser>.choiceRole>*>input{
+.formCreateUser>.choiceRole>*>input {
     width: 100%;
 }
 
-.formCreateUser>.choiceRole>*>label{
+.formCreateUser>.choiceRole>*>label {
     padding-right: 10px;
 }
-.formCreateUser>label{
+
+.formCreateUser>label {
     padding-top: 0.7em;
 }
 
@@ -1114,6 +1126,7 @@ footer .content {
     width: 100%;
     flex-wrap: wrap;
 }
+
 footer a:hover {
     color: #2ecc40;
 }
@@ -1276,7 +1289,7 @@ footer>h3::after {
         justify-content: space-around;
     }
 
-    .modal-body{
+    .modal-body {
         min-width: auto;
         padding: 15px 30px;
     }
@@ -1308,13 +1321,13 @@ footer>h3::after {
                         Creation User
     --------------------------------------------------*/
 
-    .formCreateUser{
+    .formCreateUser {
         width: 90%;
         padding: 1em;
         padding-right: 0;
     }
 
-    .formCreateUser>input{
+    .formCreateUser>input {
         width: 90%;
     }
 }
