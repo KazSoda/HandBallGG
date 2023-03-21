@@ -4,7 +4,6 @@ import { init, displayCalendar, resizeCalendar, changeWeek } from './match.js';
 import { registerUser, deleteUser, updateUser } from './user';
 import { createEquipe, updateEquipe, deleteEquipe } from './equipe';
 import axios from 'axios';
-import { async } from 'regenerator-runtime';
 import { showAlert } from "./alert";
 
 // Select elements
@@ -41,7 +40,9 @@ if (searchFormMatch) {
         changeWeek('next')
     })
 
-
+    document.querySelector('.navbar-calendar .today').addEventListener('click', () => {
+        changeWeek('today')
+    })
 }
 
 // Delegation

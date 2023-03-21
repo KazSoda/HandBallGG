@@ -3,6 +3,26 @@ import { showAlert } from "./alert";
 import Calendar from '@toast-ui/calendar';
 import '@toast-ui/calendar/dist/toastui-calendar.min.css';
 
+function formatTime(time) {
+	const hours = time.getHours();
+	const minutes = time.getMinutes();
+	return `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+}
+
+
+Date.prototype.addDays = function (days) {
+	var date = new Date(this.valueOf());
+	date.setDate(date.getDate() + days);
+	return date;
+}
+
+Date.prototype.addMinutes = function (m) {
+	this.setTime(this.getTime() + (m * 60 * 1000));
+	return this;
+}
+
+
+
 
 const calendar = new Calendar('#calendar', {
 	defaultView: 'week',
@@ -21,7 +41,7 @@ const calendar = new Calendar('#calendar', {
 	week: {
 		startDayOfWeek: 1,
 		dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-		narrowWeekend: true,	
+		narrowWeekend: true,
 		taskView: false,  // e.g. true, false, or ['task', 'milestone']
 	},
 	month: {
@@ -33,8 +53,7 @@ const calendar = new Calendar('#calendar', {
 	template: {
 		time(event) {
 			const { start, end, title } = event;
-
-			return `<span style="color: black;">${formatTime(start)}~${formatTime(end)} ${title}</span>`;
+			return `<span>${title}</span>`;
 		},
 		allday(event) {
 			return `<span style="color: gray;">${event.title}</span>`;
@@ -43,11 +62,11 @@ const calendar = new Calendar('#calendar', {
 });
 
 
-Date.prototype.addDays = function (days) {
-	var date = new Date(this.valueOf());
-	date.setDate(date.getDate() + days);
-	return date;
-}
+
+
+
+
+
 
 
 const matchInformation = async () => {
@@ -88,13 +107,26 @@ function searchMatchByTeam(queryResult, enteredValue) {
 		mainSection.innerHTML = `<h1>La recherche n'a pas donné de résultats</h1>`;
 	} else {
 
-
+		let calendarMatch = []
 
 		mainSection.innerHTML = ''
 		resSort.forEach(sortedMatch => {
 
-			calendar.createEvents(sortedMatch);
 
+			let calendarMatchTemp = {}
+			calendarMatchTemp.id = sortedMatch._id;
+			calendarMatchTemp.title = sortedMatch.localTeam + " VS " + sortedMatch.againstTeam;
+			calendarMatchTemp.start = sortedMatch.date;
+			calendarMatchTemp.end = new Date(sortedMatch.date).addMinutes(90);
+			calendarMatchTemp.isAllDay = false;
+			calendarMatchTemp.category = 'time';
+			calendarMatchTemp.dueDateClass = '';
+			calendarMatchTemp.color = '#ffffff';
+			calendarMatchTemp.bgColor = '#9e5fff';
+			calendarMatchTemp.dragBgColor = '#9e5fff';
+			calendarMatchTemp.location = sortedMatch.gymnasium;
+
+			calendarMatch.push(calendarMatchTemp);
 
 
 			let date = new Date(sortedMatch.date).toDateString()
@@ -118,6 +150,8 @@ function searchMatchByTeam(queryResult, enteredValue) {
     			</section>
     		`;
 		});
+
+		calendar.createEvents(calendarMatch);
 	}
 }
 
@@ -145,6 +179,9 @@ export const init = async () => {
 	let inputSearchBar = document.querySelector("#searchInformation").value;
 	if (inputSearchBar !== "") {
 		searchMatchByTeam(data, inputSearchBar);
+	} else {
+		searchMatchByTeam(data, "");
+		displayCalendar();
 	}
 
 	// Search a match based on the select value
@@ -156,6 +193,7 @@ export const init = async () => {
 	});
 
 
+
 }
 
 
@@ -163,9 +201,10 @@ export const init = async () => {
 
 
 export const displayCalendar = () => {
-
 	calendar.render();
 }
+
+
 // execute a function on windows resize
 
 export const resizeCalendar = () => {
@@ -180,19 +219,27 @@ export const resizeCalendar = () => {
 };
 
 
+// add the calendar display dates range to the .navbar--range using the calendar.getDate() method and translate the dates to a readable format in french
+function displayCalendarRange() {
+	let dateRange = calendar.getDate().d.d.addDays(-1).toLocaleDateString('fr-FR') + ' - ' + calendar.getDate().d.d.addDays(5).toLocaleDateString('fr-FR');
+	document.querySelector('.navbar--range').innerHTML = dateRange;
+}
+
 export const changeWeek = (type) => {
 	if (type == 'next') {
 		calendar.move(1);
+		displayCalendarRange();
 	}
 	if (type == 'prev') {
 		calendar.move(-1);
+		displayCalendarRange();
+	}
+	if (type == 'today') {
+		calendar.today();
+		displayCalendarRange();
 	}
 }
 
 
-Date.prototype.addDays = function (days) {
-	var date = new Date(this.valueOf());
-	date.setDate(date.getDate() + days);
-	return date;
-}
+
 
