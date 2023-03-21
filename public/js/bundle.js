@@ -35975,7 +35975,7 @@ function searchMatchByTeam(queryResult, enteredValue) {
       calendarMatchTemp.location = sortedMatch.gymnasium;
       calendarMatch.push(calendarMatchTemp);
       var date = new Date(sortedMatch.date).toLocaleString();
-      mainSection.innerHTML += "\n      \t\t\t<section class=\"matchSection\">\n      \t\t\t\t<section class=\"matchInformation\">\n      \t\t\t\t\t<section class=\"headerInformationMatch\">\n      \t\t\t\t\t\t<h1>".concat(sortedMatch.gymnasium, " : ").concat(date, "</h1>\n      \t\t\t\t\t</section>\n      \t\t\t\t\t<section class=\"bodyInformationMatch\">\n      \t\t\t\t\t\t<article class=\"firstEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>Equipe locale</h1>\n\t\t\t\t\t\t\t\t<img src=\"img/logo.png\" alt=\"photo\">\n\t\t\t\t\t\t\t\t<h1>").concat(sortedMatch.localTeam, "</h1>\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t\t<p>VS</p>\n      \t\t\t\t\t\t<article class=\"secondEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>Equipe adverse</h1>\n      \t\t\t\t\t\t\t<img src=\"img/").concat(sortedMatch.againstTeam, ".png\" alt=\"photoEnemyTeam\">\n      \t\t\t\t\t\t\t<h1>").concat(sortedMatch.againstTeam, "</h1>\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t</section>\n      \t\t\t\t</section>\n    \t\t\t</section>\n    \t\t");
+      mainSection.innerHTML += "\n      \t\t\t<section class=\"matchSection\">\n      \t\t\t\t<section class=\"matchInformation\">\n      \t\t\t\t\t<section class=\"headerInformationMatch\">\n      \t\t\t\t\t\t<h1>".concat(sortedMatch.gymnasium, " : ").concat(date, "</h1>\n      \t\t\t\t\t</section>\n      \t\t\t\t\t<section class=\"bodyInformationMatch\">\n      \t\t\t\t\t\t<article class=\"firstEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>Equipe locale</h1>\n\t\t\t\t\t\t\t\t<img src=\"img/logo.png\" alt=\"photo\">\n\t\t\t\t\t\t\t\t<h1>").concat(sortedMatch.localTeam, "</h1>\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t\t<p>VS</p>\n      \t\t\t\t\t\t<article class=\"secondEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>Equipe adverse</h1>\n      \t\t\t\t\t\t\t<img src=\"img/rivals/").concat(sortedMatch.againstTeam, ".png\" alt=\"photoEnemyTeam\">\n      \t\t\t\t\t\t\t<h1>").concat(sortedMatch.againstTeam, "</h1>\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t</section>\n      \t\t\t\t</section>\n    \t\t\t</section>\n    \t\t");
     });
     calendar.createEvents(calendarMatch);
     animation();
@@ -35997,7 +35997,7 @@ var animation = function animation() {
     transform: "translateX(" + oui + "px)"
   }], {
     // timing options
-    duration: 2900 * nbMatch,
+    duration: 3200 * nbMatch,
     iterations: iterations
   });
 };
@@ -85616,7 +85616,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62808" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62850" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

@@ -140,7 +140,7 @@ function searchMatchByTeam(queryResult, enteredValue) {
       						<p>VS</p>
       						<article class="secondEquipeInformation">
       							<h1>Equipe adverse</h1>
-      							<img src="img/${sortedMatch.againstTeam}.png" alt="photoEnemyTeam">
+      							<img src="img/rivals/${sortedMatch.againstTeam}.png" alt="photoEnemyTeam">
       							<h1>${sortedMatch.againstTeam}</h1>
       						</article>
       					</section>
@@ -171,7 +171,7 @@ export const animation = () => {
 		],
 		{
 			// timing options
-			duration: 2900*nbMatch,
+			duration: 3200*nbMatch,
 			iterations,
 		}
 	);
