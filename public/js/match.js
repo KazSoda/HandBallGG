@@ -3,6 +3,26 @@ import { showAlert } from "./alert";
 import Calendar from '@toast-ui/calendar';
 import '@toast-ui/calendar/dist/toastui-calendar.min.css';
 
+function formatTime(time) {
+	const hours = time.getHours();
+	const minutes = time.getMinutes();
+	return `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+}
+
+
+Date.prototype.addDays = function (days) {
+	var date = new Date(this.valueOf());
+	date.setDate(date.getDate() + days);
+	return date;
+}
+
+Date.prototype.addMinutes = function (m) {
+	this.setTime(this.getTime() + (m * 60 * 1000));
+	return this;
+}
+
+
+
 
 const calendar = new Calendar('#calendar', {
 	defaultView: 'week',
@@ -11,30 +31,32 @@ const calendar = new Calendar('#calendar', {
 	useDetailPopup: true,
 	isReadOnly: true,
 	usageStatistics: false,
-	allday: false,
 
 	theme: {
 		common: {
-			backgroundColor: 'var(--bg-color)',
+			backgroundColor: 'var(--nav-bg-color)',
 		},
 	},
 	week: {
 		startDayOfWeek: 1,
 		dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-		narrowWeekend: true,	
+		narrowWeekend: false,
 		taskView: false,  // e.g. true, false, or ['task', 'milestone']
+		hourStart: 6,
+		eventView: ['time'],
 	},
 	month: {
 		startDayOfWeek: 1,
 		dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
 		narrowWeekend: true,
 		taskView: false,  // e.g. true, false, or ['task', 'milestone']
+		hourStart: 6,
+		eventView: ['time'],
 	},
 	template: {
 		time(event) {
 			const { start, end, title } = event;
-
-			return `<span style="color: black;">${formatTime(start)}~${formatTime(end)} ${title}</span>`;
+			return `<span>${title}</span>`;
 		},
 		allday(event) {
 			return `<span style="color: gray;">${event.title}</span>`;
@@ -42,12 +64,6 @@ const calendar = new Calendar('#calendar', {
 	},
 });
 
-
-Date.prototype.addDays = function (days) {
-	var date = new Date(this.valueOf());
-	date.setDate(date.getDate() + days);
-	return date;
-}
 
 
 const matchInformation = async () => {
@@ -88,16 +104,27 @@ function searchMatchByTeam(queryResult, enteredValue) {
 		mainSection.innerHTML = `<h1>La recherche n'a pas donné de résultats</h1>`;
 	} else {
 
-
+		let calendarMatch = []
 
 		mainSection.innerHTML = ''
 		resSort.forEach(sortedMatch => {
+			let calendarMatchTemp = {}
+			calendarMatchTemp.id = sortedMatch._id;
+			calendarMatchTemp.title = sortedMatch.localTeam + " VS " + sortedMatch.againstTeam;
+			calendarMatchTemp.start = sortedMatch.date;
+			calendarMatchTemp.end = new Date(sortedMatch.date).addMinutes(90);
+			calendarMatchTemp.isAllDay = false;
+			calendarMatchTemp.category = 'time';
+			calendarMatchTemp.dueDateClass = '';
+			calendarMatchTemp.color = '#ffffff';
+			calendarMatchTemp.bgColor = 'linear-gradient(152deg, #9ebd13a8 0%, #008552b4 100%)';
+			calendarMatchTemp.dragBgColor = 'linear-gradient(152deg, #9ebd13a8 0%, #008552b4 100%)';
+			calendarMatchTemp.location = sortedMatch.gymnasium;
 
-			calendar.createEvents(sortedMatch);
+			calendarMatch.push(calendarMatchTemp);
 
 
-
-			let date = new Date(sortedMatch.date).toDateString()
+			let date = new Date(sortedMatch.date).toLocaleString()
 			mainSection.innerHTML += `
       			<section class="matchSection">
       				<section class="matchInformation">
@@ -106,11 +133,14 @@ function searchMatchByTeam(queryResult, enteredValue) {
       					</section>
       					<section class="bodyInformationMatch">
       						<article class="firstEquipeInformation">
-      							<h1>${sortedMatch.localTeam}</h1>
+      							<h1>Equipe locale</h1>
 								<img src="img/logo.png" alt="photo">
+								<h1>${sortedMatch.localTeam}</h1>
       						</article>
       						<p>VS</p>
       						<article class="secondEquipeInformation">
+      							<h1>Equipe adverse</h1>
+      							<img src="img/logo.png" alt="photoEnemyTeam">
       							<h1>${sortedMatch.againstTeam}</h1>
       						</article>
       					</section>
@@ -118,6 +148,8 @@ function searchMatchByTeam(queryResult, enteredValue) {
     			</section>
     		`;
 		});
+
+		calendar.createEvents(calendarMatch);
 	}
 }
 
@@ -134,26 +166,37 @@ export const init = async () => {
 	const urlParams = new URLSearchParams(window.location.search);
 
 	let name = urlParams.get('team');
+	let inputSearchBar = document.querySelector("#searchInformation").value;
+	
 	if (name !== null) {
 		name = name.replace(/['"]/g, ""); // remove all occurrences of ' and "
+		calendar.clear();
 		searchMatchByTeam(data, name);
 		// remove the url parameter without reloading the page
 		window.history.replaceState({}, document.title, "/" + "matchs");
-	}
-
+		displayCalendar();
+	} else if (inputSearchBar !== "") {
 	// Search a match based on the input value
-	let inputSearchBar = document.querySelector("#searchInformation").value;
-	if (inputSearchBar !== "") {
+		calendar.clear();
 		searchMatchByTeam(data, inputSearchBar);
-	}
+		displayCalendar();
+	} else {
+		calendar.clear();
+		searchMatchByTeam(data, "");
+		displayCalendar();
+	} 
+
 
 	// Search a match based on the select value
 	document.querySelector("#searchMatchBySelect").addEventListener("change", (e) => {
 		let select = document.getElementById("searchMatchBySelect").value;
 		if (select != "0") {
+			calendar.clear();
 			searchMatchByTeam(data, select);
+			displayCalendar();
 		}
 	});
+
 
 
 }
@@ -163,9 +206,10 @@ export const init = async () => {
 
 
 export const displayCalendar = () => {
-
 	calendar.render();
 }
+
+
 // execute a function on windows resize
 
 export const resizeCalendar = () => {
@@ -180,19 +224,27 @@ export const resizeCalendar = () => {
 };
 
 
+// add the calendar display dates range to the .navbar--range using the calendar.getDate() method and translate the dates to a readable format in french
+function displayCalendarRange() {
+	let dateRange = calendar.getDate().d.d.addDays(-1).toLocaleDateString('fr-FR') + ' - ' + calendar.getDate().d.d.addDays(5).toLocaleDateString('fr-FR');
+	document.querySelector('.navbar--range').innerHTML = dateRange;
+}
+
 export const changeWeek = (type) => {
 	if (type == 'next') {
 		calendar.move(1);
+		displayCalendarRange();
 	}
 	if (type == 'prev') {
 		calendar.move(-1);
+		displayCalendarRange();
+	}
+	if (type == 'today') {
+		calendar.today();
+		displayCalendarRange();
 	}
 }
 
 
-Date.prototype.addDays = function (days) {
-	var date = new Date(this.valueOf());
-	date.setDate(date.getDate() + days);
-	return date;
-}
+
 

@@ -783,26 +783,12 @@ i.bi {
     width: 100%;
 }
 
-/* left page part */
-.filterMatchPage {
-    display: flex;
-    width: 15%;
-    flex-direction: column;
-}
+
 
 form#searchFormMatch {
     display: flex;
     flex-direction: column;
-    width: 50%;
-}
-
-select#searchMatchBySelect {
-    width: 50%;
-}
-
-input#searchInformation {
-    width: 150%;
-    height: 30px;
+    align-items: center;
 }
 
 .searchInformation,
@@ -813,43 +799,47 @@ input#searchInformation {
 /* right page part */
 .mainSection {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
 }
 
 .matchSection {
     display: flex;
     justify-content: center;
+    min-width: 500px;
+    height: 300px;
 }
 
 .matchInformation {
     display: flex;
     flex-direction: column;
     background-color: gray;
-    width: 90%;
+    width: 120%;
     margin: 20px;
-    border-radius: 15px 15px 15px 15px;
+    border-radius: 15px;
 }
 
 .headerInformationMatch {
     background-color: rgb(66, 66, 66);
-    height: 60px;
     border-radius: 15px 15px 0px 0px;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .headerInformationMatch>h1 {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    margin: 0px;
-    padding: 0 20px;
-    font-size: 150%;
+    margin: 5px;
 }
+
 
 .bodyInformationMatch {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     background-color: #3b7b1a;
-    height: 450px;
+    height: 100%;
     border-radius: 0px 0px 15px 15px;
 }
 
@@ -867,17 +857,9 @@ input#searchInformation {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 35%;
-    height: 400px;
-    margin-top: 25px;
-}
-
-.firstEquipeInformation>h1,
-.secondEquipeInformation>h1 {
-    display: flex;
-    justify-content: center;
-    margin: 5px;
-    font-size: 125%;
+    margin: 15px;
+    border-radius: 15px;
+    height: 90%;
 }
 
 .firstEquipeInformation>img,
@@ -885,11 +867,86 @@ input#searchInformation {
     width: 60%;
 }
 
-.bodyInformationMatch>p {
-    display: flex;
-    align-items: center;
-    font-size: 200%;
+.firstEquipeInformation>h1,
+.secondEquipeInformation>h1 {
+    margin: 5px;
+    font-size: 1em;
+    text-align: center;
 }
+
+.matchInformation:first-child {
+    animation: tourner 60s infinite linear;
+}
+
+@keyframes tourner {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translate(-6000px);
+    }
+}
+
+
+.calendarDisplay {
+    display: flex;
+    margin: 15px;
+    width: 100%;
+}
+
+#calendar {
+    height: 800px;
+    overflow: auto;
+    width: 95%;
+}
+
+.navigate, .view, .filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color-darker);
+    border-radius: var(--radius-norm);
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+aside.options-team {
+    width: 245px;
+    padding-right: 15px;
+}
+
+button.btn.today {
+    width: 100%;
+}
+
+button.btn.prev {
+    width: 45%;
+}
+
+button.btn.next {
+    width: 45%;
+}
+
+.view button {
+    width: 100%;
+}
+
+
+aside.options-team button {
+    padding: 8px !important;
+}
+
+.today i.bi::before,
+.day  i.bi::before, 
+.week i.bi::before,
+.month i.bi::before {
+    margin-right: 10px;
+}
+
+
+
 
 
 /*--------------------------------------------------
@@ -947,25 +1004,28 @@ input#searchInformation {
     width: 50px;
 }
 
-.styleCreation{
+.styleCreation {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
-.choiceUser , .choiceAdmin{
+
+.choiceUser,
+.choiceAdmin {
     display: flex;
     flex-direction: row;
 }
 
-.formCreateUser>.choiceRole>*>input{
+.formCreateUser>.choiceRole>*>input {
     width: 100%;
 }
 
-.formCreateUser>.choiceRole>*>label{
+.formCreateUser>.choiceRole>*>label {
     padding-right: 10px;
 }
-.formCreateUser>label{
+
+.formCreateUser>label {
     padding-top: 0.7em;
 }
 
@@ -1051,6 +1111,7 @@ footer .content {
     width: 100%;
     flex-wrap: wrap;
 }
+
 footer a:hover {
     color: #2ecc40;
 }
@@ -1213,7 +1274,7 @@ footer>h3::after {
         justify-content: space-around;
     }
 
-    .modal-body{
+    .modal-body {
         min-width: auto;
         padding: 15px 30px;
     }
@@ -1245,13 +1306,13 @@ footer>h3::after {
                         Creation User
     --------------------------------------------------*/
 
-    .formCreateUser{
+    .formCreateUser {
         width: 90%;
         padding: 1em;
         padding-right: 0;
     }
 
-    .formCreateUser>input{
+    .formCreateUser>input {
         width: 90%;
     }
 }
