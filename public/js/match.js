@@ -2,6 +2,8 @@ import axios from "axios";
 import { showAlert } from "./alert";
 import Calendar from '@toast-ui/calendar';
 import '@toast-ui/calendar/dist/toastui-calendar.min.css';
+import 'tui-date-picker/dist/tui-date-picker.css';
+import 'tui-time-picker/dist/tui-time-picker.css';
 
 function formatTime(time) {
 	const hours = time.getHours();
@@ -26,15 +28,19 @@ Date.prototype.addMinutes = function (m) {
 
 const calendar = new Calendar('#calendar', {
 	defaultView: 'week',
-	useFormPopup: false,
-	useCreationPopup: false,
+	useCreationPopup: true,
+	useFormPopup: true,
+	isReadOnly: false,
+
 	useDetailPopup: true,
-	isReadOnly: true,
 	usageStatistics: false,
 
 	theme: {
 		common: {
 			backgroundColor: 'var(--nav-bg-color)',
+			border: '1px solid var(--border-norm)',
+			color: 'var(--nav-text-color)',
+
 		},
 	},
 	week: {
@@ -65,6 +71,16 @@ const calendar = new Calendar('#calendar', {
 });
 
 
+calendar.setTheme({
+	week: {
+		timeGridLeft: {
+			width: '50px',
+		},
+		timeGridHalfHourLine: {
+			borderBottom: '1px dotted #e5e5e550',
+		},
+	},
+});
 
 const matchInformation = async () => {
 	let currentDate = new Date();
@@ -116,10 +132,14 @@ function searchMatchByTeam(queryResult, enteredValue) {
 			calendarMatchTemp.isAllDay = false;
 			calendarMatchTemp.category = 'time';
 			calendarMatchTemp.dueDateClass = '';
-			calendarMatchTemp.color = '#ffffff';
-			calendarMatchTemp.bgColor = 'linear-gradient(152deg, #9ebd13a8 0%, #008552b4 100%)';
-			calendarMatchTemp.dragBgColor = 'linear-gradient(152deg, #9ebd13a8 0%, #008552b4 100%)';
 			calendarMatchTemp.location = sortedMatch.gymnasium;
+			calendarMatchTemp.attendees = [sortedMatch.localTeam, sortedMatch.againstTeam];
+			let saturation = Math.floor(Math.random() * 100);
+			let lightness = Math.floor(Math.random() * 20) + 10;
+			calendarMatchTemp.backgroundColor = `hsl(120, ${saturation}%, ${lightness}%)`;
+
+			// calendarMatchTemp.backgroundColor = '#' + (0x1000000 + Math.random() * 0xffffff).toString(16).substr(1, 6);
+			calendarMatchTemp.color = '#ffffff';
 
 			calendarMatch.push(calendarMatchTemp);
 
