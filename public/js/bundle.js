@@ -35841,7 +35841,7 @@ module.exports = reloadCSS;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.resizeCalendar = exports.init = exports.displayCalendar = exports.changeWeek = exports.animation = void 0;
+exports.resizeCalendar = exports.init = exports.displayCalendar = exports.changeWeek = exports.changeCalendarView = exports.animation = void 0;
 var _axios = _interopRequireDefault(require("axios"));
 var _alert = require("./alert");
 var _calendar = _interopRequireDefault(require("@toast-ui/calendar"));
@@ -35975,16 +35975,20 @@ function searchMatchByTeam(queryResult, enteredValue) {
       calendarMatchTemp.location = sortedMatch.gymnasium;
       calendarMatch.push(calendarMatchTemp);
       var date = new Date(sortedMatch.date).toLocaleString();
-      mainSection.innerHTML += "\n      \t\t\t<section class=\"matchSection\">\n      \t\t\t\t<section class=\"matchInformation\">\n      \t\t\t\t\t<section class=\"headerInformationMatch\">\n      \t\t\t\t\t\t<h1>".concat(sortedMatch.gymnasium, " : ").concat(date, "</h1>\n      \t\t\t\t\t</section>\n      \t\t\t\t\t<section class=\"bodyInformationMatch\">\n      \t\t\t\t\t\t<article class=\"firstEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>Equipe locale</h1>\n\t\t\t\t\t\t\t\t<img src=\"img/logo.png\" alt=\"photo\">\n\t\t\t\t\t\t\t\t<h1>").concat(sortedMatch.localTeam, "</h1>\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t\t<p>VS</p>\n      \t\t\t\t\t\t<article class=\"secondEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>Equipe adverse</h1>\n      \t\t\t\t\t\t\t<img src=\"img/").concat(sortedMatch.againstTeam, ".png\" alt=\"photoEnemyTeam\">\n      \t\t\t\t\t\t\t<h1>").concat(sortedMatch.againstTeam, "</h1>\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t</section>\n      \t\t\t\t</section>\n    \t\t\t</section>\n    \t\t");
+      mainSection.innerHTML += "\n      \t\t\t<section class=\"matchSection\">\n      \t\t\t\t<section class=\"matchInformation\">\n      \t\t\t\t\t<section class=\"headerInformationMatch\">\n      \t\t\t\t\t\t<h1>".concat(sortedMatch.gymnasium, " : ").concat(date, "</h1>\n      \t\t\t\t\t</section>\n      \t\t\t\t\t<section class=\"bodyInformationMatch\">\n      \t\t\t\t\t\t<article class=\"firstEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>Equipe locale</h1>\n\t\t\t\t\t\t\t\t<img src=\"img/logo.png\" alt=\"photo\">\n\t\t\t\t\t\t\t\t<h1>").concat(sortedMatch.localTeam, "</h1>\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t\t<p>VS</p>\n      \t\t\t\t\t\t<article class=\"secondEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>Equipe adverse</h1>\n      \t\t\t\t\t\t\t<img src=\"img/logo.png\" alt=\"photoEnemyTeam\">\n      \t\t\t\t\t\t\t<h1>").concat(sortedMatch.againstTeam, "</h1>\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t</section>\n      \t\t\t\t</section>\n    \t\t\t</section>\n    \t\t");
     });
     calendar.createEvents(calendarMatch);
+    animation();
   }
 }
 var animation = function animation() {
   var anim = document.querySelector('.mainSection');
   var nbMatch = anim.children.length;
   var oui = -500 * nbMatch + document.querySelector('.bandeauDefilant').offsetWidth;
-  console.log("coucou");
+  var iterations = 0;
+  if (nbMatch > 1) {
+    iterations = Infinity;
+  }
   anim.animate([
   // keyframes
   {
@@ -35994,7 +35998,7 @@ var animation = function animation() {
   }], {
     // timing options
     duration: 2900 * nbMatch,
-    iterations: Infinity
+    iterations: iterations
   });
 };
 exports.animation = animation;
@@ -36091,6 +36095,10 @@ var changeWeek = function changeWeek(type) {
   }
 };
 exports.changeWeek = changeWeek;
+var changeCalendarView = function changeCalendarView(type) {
+  calendar.changeView(type);
+};
+exports.changeCalendarView = changeCalendarView;
 },{"axios":"../../node_modules/axios/index.js","./alert":"alert.js","@toast-ui/calendar":"../../node_modules/@toast-ui/calendar/dist/toastui-calendar.mjs","@toast-ui/calendar/dist/toastui-calendar.min.css":"../../node_modules/@toast-ui/calendar/dist/toastui-calendar.min.css"}],"../../node_modules/safe-buffer/index.js":[function(require,module,exports) {
 
 /* eslint-disable node/no-deprecated-api */
@@ -85213,8 +85221,16 @@ if (searchFormMatch) {
   document.querySelector('.navbar-calendar .today').addEventListener('click', function () {
     (0, _match.changeWeek)('today');
   });
+  document.querySelector('.navbar-calendar .day').addEventListener('click', function () {
+    (0, _match.changeCalendarView)('day');
+  });
+  document.querySelector('.navbar-calendar .week').addEventListener('click', function () {
+    (0, _match.changeCalendarView)('week');
+  });
+  document.querySelector('.navbar-calendar .month').addEventListener('click', function () {
+    (0, _match.changeCalendarView)('month');
+  });
   window.addEventListener('load', function (event) {
-    console.log('La page est complètement chargée');
     (0, _match.animation)();
   });
 }
@@ -85600,7 +85616,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57174" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50606" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

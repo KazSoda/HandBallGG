@@ -1,6 +1,6 @@
 import '@babel/polyfill'
 import { login, logout } from './login.js';
-import { init, displayCalendar, resizeCalendar, changeWeek, animation} from './match.js';
+import { init, displayCalendar, resizeCalendar, changeWeek, changeCalendarView, animation } from './match.js';
 import { registerUser, deleteUser, updateUser } from './user';
 import { createEquipe, updateEquipe, deleteEquipe } from './equipe';
 import axios from 'axios';
@@ -44,8 +44,20 @@ if (searchFormMatch) {
         changeWeek('today')
     })
 
+    document.querySelector('.navbar-calendar .day').addEventListener('click', () => {
+        changeCalendarView('day');
+    })
+
+    document.querySelector('.navbar-calendar .week').addEventListener('click', () => {
+        changeCalendarView('week');
+    })
+
+    document.querySelector('.navbar-calendar .month').addEventListener('click', () => {
+        changeCalendarView('month');
+    })
+
+
     window.addEventListener('load', (event) => {
-        console.log('La page est complètement chargée');
         animation();
     })
 }
@@ -191,7 +203,7 @@ if (updateUserForm) {
                             e.preventDefault();
 
                             const selectRoleChanged = document.querySelector('.choiceRole input[name="role"]:checked');
-                            let roleChanged="";
+                            let roleChanged = "";
 
                             if (selectRoleChanged !== null) {
                                 roleChanged = selectRoleChanged.value;
@@ -203,7 +215,8 @@ if (updateUserForm) {
                             form.append('email', emailForm.value);
 
                             let dataUser = JSON.stringify({
-                                'firstName': firstNameForm.value, 'lastName': lastNameForm.value, 'email': emailForm.value});
+                                'firstName': firstNameForm.value, 'lastName': lastNameForm.value, 'email': emailForm.value
+                            });
 
                             let pwd = document.querySelector('.updateUserForm #password').value;
                             if (pwd === "") pwd = null;
