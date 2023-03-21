@@ -175,6 +175,49 @@ function searchMatchByTeam(queryResult, enteredValue) {
 	}
 }
 
+
+// creating an event
+calendar.on('beforeCreateEvent', (eventObj) => {
+	console.log(eventObj);
+	// calendar.createEvents([
+	// 	{
+	// 		...eventObj,
+	// 		id: uuid(),
+	// 	},
+	// ]);
+});
+
+
+// updating an event
+calendar.on('beforeUpdateEvent', ({ event, change }) => {
+	console.log(change);
+	// calendar.updateEvent(event.id, event.calendarId, change);
+});
+
+
+// deleting an event
+calendar.on('beforeDeleteEvent', async (eventObj) => {
+	console.log(eventObj.id, eventObj.calendarId);
+
+	try {
+		const res = await axios({
+			method: 'delete',
+			url: `/api/v1/match/${eventObj.id}`,
+		})
+
+		if (res.data === '') {
+			calendar.deleteEvent(eventObj.id, eventObj.calendarId);
+			showAlert("success", "Équipe supprimée avec succès");
+		}
+
+	} catch (err) {
+		showAlert("error", err.response.data.message);
+	}
+});
+
+
+
+
 export const animation = () => {
 	let anim = document.querySelector('.mainSection');
 	let nbMatch = anim.children.length;
@@ -191,7 +234,7 @@ export const animation = () => {
 		],
 		{
 			// timing options
-			duration: 4000*nbMatch,
+			duration: 4000 * nbMatch,
 			iterations,
 		}
 	);

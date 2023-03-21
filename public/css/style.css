@@ -847,11 +847,11 @@ form#searchFormMatch {
     border-radius: 0px 0px 15px 15px;
 }
 
-.bodyInformationMatch>*{
+.bodyInformationMatch>* {
     width: calc(100% / 3);
 }
 
-.bodyInformationMatch>p{
+.bodyInformationMatch>p {
     font-size: 2em;
     text-align: center;
 }
@@ -1040,7 +1040,7 @@ aside.options-team button {
                     Gestion Users
 --------------------------------------------------*/
 
-.mainSectionGestionUser{
+.mainSectionGestionUser {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1336,10 +1336,11 @@ footer>h3::after {
                     Gestion Users
 --------------------------------------------------*/
 @media only screen and (max-width: 900px) {
-    .gestionUser .btn{
+    .gestionUser .btn {
         width: 90%;
     }
-    .mainSectionGestionUser{
+
+    .mainSectionGestionUser {
         overflow: auto;
     }
 }

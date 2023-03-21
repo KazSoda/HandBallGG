@@ -97,7 +97,7 @@ exports.delEquipe = catchAsync(async (req, res, next) => {
 
     const delMatchs = await Match.deleteMany({ $or: [{ localTeam: equipeName.wording }, { againstTeam: equipeName.wording }] })
 
-    
+
     res.status(204).json({
         status: 'success',
         data: null

@@ -8,8 +8,8 @@ export const registerUser = async (fname, lname, role, email, password, password
             method: 'post',
             url: '/api/v1/users/signup',
             data: {
-                firstName:fname,
-                lastName:lname,
+                firstName: fname,
+                lastName: lname,
                 role,
                 email,
                 password,
@@ -30,7 +30,7 @@ export const registerUser = async (fname, lname, role, email, password, password
             email2.value = '';
             password2.value = '';
             passwordConfirm2.value = '';
-        
+
             showAlert('success', 'Inscription réussie !');
             // window.setTimeout(() => {
             //     location.assign('/connexion');
