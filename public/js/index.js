@@ -56,7 +56,6 @@ if (searchFormMatch) {
         changeCalendarView('month');
     })
 
-
     window.addEventListener('load', (event) => {
         animation();
     })
