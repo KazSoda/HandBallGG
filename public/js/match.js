@@ -63,12 +63,6 @@ const calendar = new Calendar('#calendar', {
 
 
 
-
-
-
-
-
-
 const matchInformation = async () => {
 	let currentDate = new Date();
 	let currentDate2 = new Date();
@@ -111,8 +105,6 @@ function searchMatchByTeam(queryResult, enteredValue) {
 
 		mainSection.innerHTML = ''
 		resSort.forEach(sortedMatch => {
-
-
 			let calendarMatchTemp = {}
 			calendarMatchTemp.id = sortedMatch._id;
 			calendarMatchTemp.title = sortedMatch.localTeam + " VS " + sortedMatch.againstTeam;
@@ -168,27 +160,34 @@ export const init = async () => {
 	const urlParams = new URLSearchParams(window.location.search);
 
 	let name = urlParams.get('team');
+	let inputSearchBar = document.querySelector("#searchInformation").value;
+	
 	if (name !== null) {
 		name = name.replace(/['"]/g, ""); // remove all occurrences of ' and "
+		calendar.clear();
 		searchMatchByTeam(data, name);
 		// remove the url parameter without reloading the page
 		window.history.replaceState({}, document.title, "/" + "matchs");
-	}
-
+		displayCalendar();
+	} else if (inputSearchBar !== "") {
 	// Search a match based on the input value
-	let inputSearchBar = document.querySelector("#searchInformation").value;
-	if (inputSearchBar !== "") {
+		calendar.clear();
 		searchMatchByTeam(data, inputSearchBar);
+		displayCalendar();
 	} else {
+		calendar.clear();
 		searchMatchByTeam(data, "");
 		displayCalendar();
-	}
+	} 
+
 
 	// Search a match based on the select value
 	document.querySelector("#searchMatchBySelect").addEventListener("change", (e) => {
 		let select = document.getElementById("searchMatchBySelect").value;
 		if (select != "0") {
+			calendar.clear();
 			searchMatchByTeam(data, select);
+			displayCalendar();
 		}
 	});
 
