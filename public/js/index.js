@@ -122,10 +122,11 @@ if (registerForm) {
                         ~ Delete Users ~
 ------------------------------------------------------------*/
 
+
 if (manageUser) {
     let deleteUserList = document.querySelectorAll('.deleteUser');
-
     let askDelete = document.querySelectorAll('.askDeleteUser');
+    
     for (let i = 0; i < askDelete.length; i++) {
         askDelete[i].addEventListener('click', e => {
             e.preventDefault();
