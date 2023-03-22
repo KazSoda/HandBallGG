@@ -18,7 +18,7 @@ exports.getUser = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.params.id);
 
     if (!user) {
-        return next(new AppError('Aucune opération avec cet ID', 404));
+        return next(new AppError('Aucun utilisateur n\'a été trouvé avec cet ID', 404));
     }
 
     res.status(200).json({
@@ -68,44 +68,3 @@ exports.createUser = (req, res) => {
         message: "Cette route n'est pas encore définie"
     })
 }
-
-//Si l'utilisateur veut supprimer ou modifier ses informations lui-même.
-//mais dans le sujet la modif/supp se fait par l'admin
-
-// const filterObj = (obj, ...allowedFields) => {
-// 	const newObj = {};
-// 	Object.keys(obj).forEach(el => {
-// 		if (allowedFields.includes(el)) {
-// 			newObj[el] = obj[el];
-// 		}
-// 	});
-// 	return newObj;
-// }
-
-// exports.updateMe = catchAsync(async (req, res, next) => {
-// 	if (req.body.password || req.body.passwordConfirm) {
-// 		return next(new AppError('Cette url n\'est pas pour la mise à jour du mot de passe. Veuillez utiliser /updateMyPassword', 400))
-// 	}
-
-//     const filteredBody = filterObj(req.body, 'firstName','lastName','email');
-//     const updatedUser = await User.findByIdAndUpdate(req.body, filteredBody,{
-//         new: true,
-//         runValidators: true
-//     })
-
-//     res.status('200').json({
-//         status: 'success',
-//         data: {
-//             user: updatedUser
-//         }
-//     })
-// })
-
-// exports.deleteMe = catchAsync(async (req, res, next) => {
-// 	await User.findByIdAndUpdate(req.user.id, { active: false })
-
-// 	res.status(204).json({
-// 		status: 'success',
-// 		data: null
-// 	})
-// });

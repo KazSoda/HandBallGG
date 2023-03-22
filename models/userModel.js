@@ -57,6 +57,7 @@ const userSchema = new mongoose.Schema({
 
 })
 
+// When saving the password, encrypt it
 userSchema.pre('save', async function (next) {
     if (!this.isModified("password")) return next();
 
@@ -66,10 +67,12 @@ userSchema.pre('save', async function (next) {
     next();
 })
 
+// Compare the password against the encrypted one
 userSchema.methods.correctPassword = function (candidatePassword, correctPassword) {
     return bcrypt.compare(candidatePassword, correctPassword);
 }
 
+// Check if the password has been changed after the token was issued
 userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
     if (this.passwordChangedAt) {
         const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
