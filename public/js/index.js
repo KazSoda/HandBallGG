@@ -158,7 +158,6 @@ if (manageUser) {
             e.preventDefault();
             userID = e.target.className.split(' ')[3];
             deleteUser(userID, e.target.parentElement.parentElement)
-
             // get the parent element of the button and remove it
         })
     }
@@ -174,13 +173,15 @@ if (updateUserForm) {
     const modalFooter = document.querySelector('.updateUserForm .modal-footer');
     const validateForm = document.querySelector('.updateUserForm .btn-success');
 
-
+    // Get the button that opens the modal
     updateUserForm.forEach(el => {
         el.addEventListener('click', e => {
             e.preventDefault();
 
+            //get the id of the user
             let id = e.target.parentElement.parentElement.parentElement.className.split(' ')[3];
 
+            //if the id is not found
             if (e.target.parentElement.parentElement.className.split(' ').length === 4) {
                 id = e.target.parentElement.parentElement.className.split(' ')[3];
             } else if (e.target.parentElement.className.split(' ').length === 4) {
@@ -189,42 +190,52 @@ if (updateUserForm) {
                 id = e.target.className.split(' ')[3];
             }
 
+            // Get user data with id
             async function findUser(id) {
                 try {
+                    // get user data
                     const res = await axios({
                         method: 'get',
                         url: `/api/v1/users/${id}`,
                     })
+                    // if the user is found return the data
                     if (res.data.status === 'success') {
                         let userData = res.data.data.user;
 
+                        // Select the input fields
                         const firstNameForm = document.querySelector('.updateUserForm #firstName');
                         const lastNameForm = document.querySelector('.updateUserForm #lastName');
                         const emailForm = document.querySelector('.updateUserForm #email');
 
+                        // and set the value of the input fields with the user data
                         if (firstName !== null) firstNameForm.value = userData.firstName;
                         if (lastName !== null) lastNameForm.value = userData.lastName;
                         if (email !== null) emailForm.value = userData.email;
 
+                        // remove hidden class for modal
                         modal.classList.remove('hidden');
                         modalContent.classList.remove('hidden');
 
+                        // when the user click outside the modal, the modal is hidden
                         modal.addEventListener('click', e => {
                             modal.classList.add('hidden');
                             modalContent.classList.add('hidden');
                         })
 
+                        // when the user click on the close button, the modal is hidden
                         modalFooter.addEventListener('click', e => {
                             modal.classList.add('hidden');
                             modalContent.classList.add('hidden');
                         })
 
+                        // when the user click on the validate button (update button)
                         validateForm.addEventListener('click', e => {
                             e.preventDefault();
 
                             const selectRoleChanged = document.querySelector('.choiceRole input[name="role"]:checked');
                             let roleChanged = "";
 
+                            // if the role is changed by the admin then the roleChanged variable is set to the new role
                             if (selectRoleChanged !== null) {
                                 roleChanged = selectRoleChanged.value;
                             }
@@ -238,13 +249,19 @@ if (updateUserForm) {
                                 'firstName': firstNameForm.value, 'lastName': lastNameForm.value, 'email': emailForm.value
                             });
 
+                            // if the password is not empty then the password is set to the new password
                             let pwd = document.querySelector('.updateUserForm #password').value;
                             if (pwd === "") pwd = null;
+
+                            // launch the updateUser function
+                            // parameters: dataUser:objet, id: idUser, pwd:password, roleChanged
                             updateUser(dataUser, id, pwd, roleChanged);
 
+                            // hide the modal
                             modal.classList.add('hidden');
                             modalContent.classList.add('hidden');
 
+                            // reset the input fields
                             firstNameForm.textContent = "";
                             lastNameForm.textContent = "";
                             emailForm.textContent = "";
@@ -255,6 +272,7 @@ if (updateUserForm) {
                     showAlert('error', err.response.data.message);
                 }
             }
+            //launch the findUser function with id as parameter id = idUser
             findUser(id);
         })
     })
