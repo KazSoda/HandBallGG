@@ -1044,6 +1044,10 @@ aside.options-team button {
     display: none;
 }
 
+.toastui-calendar-day-view-day-names, .toastui-calendar-week-view-day-names{
+    border: 0 !important;
+}
+
 
 /*--------------------------------------------------
                     Creation User

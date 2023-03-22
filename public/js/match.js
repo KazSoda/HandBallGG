@@ -198,9 +198,44 @@ function searchMatchByTeam(queryResult, enteredValue) {
 
 
 // creating an event
-calendar.on('beforeCreateEvent', (eventObj) => {
+calendar.on('beforeCreateEvent', async (eventObj) => {
 	console.log(eventObj);
 
+	let newEvent = {};
+	if (eventObj.title.includes(" VS ")){
+		let title = eventObj.title.split(" VS ");
+		newEvent.date = eventObj.start.d.d;
+		newEvent.dateEnd = eventObj.end.d.d;
+		newEvent.localTeam = title[0];
+		newEvent.againstTeam = title[1];
+		newEvent.gymnasium = eventObj.location;
+		
+		try{
+			const res = await axios({
+				method: "post",
+				url: `/api/v1/match`,
+				data: newEvent
+			});
+	
+	
+			if (res.data.status === "success") {
+				newEvent.id = res.data.data.match._id;
+				newEvent.start = eventObj.start;
+				newEvent.end = eventObj.end;
+				newEvent.title = eventObj.title;
+				newEvent.location = eventObj.location;
+				newEvent.attendee = [newEvent.localTeam, newEvent.againstTeam]
+	
+				showAlert("success", "Match ajouté avec succès");
+				calendar.createEvents([newEvent]);
+			}
+		} catch (err){
+			showAlert("error", err.response.data.message);
+		}
+	} else{
+		showAlert("error", "Le titre doit contenir ' VS ' pour séparer les deux équipes");
+	}
+	
 });
 
 
@@ -226,7 +261,6 @@ calendar.on({
 			updatedFields.localTeam = e.changes.attendees[0];
 			updatedFields.againstTeam = e.changes.attendees[1];
 		}
-		console.log(updatedFields);
 		console.log('beforeUpdateSchedule', e);
 
 		try {
@@ -237,7 +271,7 @@ calendar.on({
 			})
 
 			if (res.data === '') {
-				calendar.updateEvent(e.event.id, '#calendar', e.changes);
+				calendar.updateEvent(e.event.id, undefined, e.changes);
 				showAlert("success", "Équipe modifiée avec succès");
 			}
 		} catch (err) {

@@ -36032,9 +36032,64 @@ function searchMatchByTeam(queryResult, enteredValue) {
 }
 
 // creating an event
-calendar.on('beforeCreateEvent', function (eventObj) {
-  console.log(eventObj);
-});
+calendar.on('beforeCreateEvent', /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(eventObj) {
+    var newEvent, title, res;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          console.log(eventObj);
+          newEvent = {};
+          if (!eventObj.title.includes(" VS ")) {
+            _context2.next = 21;
+            break;
+          }
+          title = eventObj.title.split(" VS ");
+          newEvent.date = eventObj.start.d.d;
+          newEvent.dateEnd = eventObj.end.d.d;
+          newEvent.localTeam = title[0];
+          newEvent.againstTeam = title[1];
+          newEvent.gymnasium = eventObj.location;
+          _context2.prev = 9;
+          _context2.next = 12;
+          return (0, _axios.default)({
+            method: "post",
+            url: "/api/v1/match",
+            data: newEvent
+          });
+        case 12:
+          res = _context2.sent;
+          if (res.data.status === "success") {
+            newEvent.id = res.data.data.match._id;
+            newEvent.start = eventObj.start;
+            newEvent.end = eventObj.end;
+            newEvent.title = eventObj.title;
+            newEvent.location = eventObj.location;
+            newEvent.attendee = [newEvent.localTeam, newEvent.againstTeam];
+            (0, _alert.showAlert)("success", "Match ajouté avec succès");
+            calendar.createEvents([newEvent]);
+          }
+          _context2.next = 19;
+          break;
+        case 16:
+          _context2.prev = 16;
+          _context2.t0 = _context2["catch"](9);
+          (0, _alert.showAlert)("error", _context2.t0.response.data.message);
+        case 19:
+          _context2.next = 22;
+          break;
+        case 21:
+          (0, _alert.showAlert)("error", "Le titre doit contenir ' VS ' pour séparer les deux équipes");
+        case 22:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2, null, [[9, 16]]);
+  }));
+  return function (_x) {
+    return _ref2.apply(this, arguments);
+  };
+}());
 calendar.on({
   'beforeUpdateEvent': function beforeUpdateEvent(e) {
     var updatedFields = {};
@@ -36056,7 +36111,6 @@ calendar.on({
       updatedFields.localTeam = e.changes.attendees[0];
       updatedFields.againstTeam = e.changes.attendees[1];
     }
-    console.log(updatedFields);
     console.log('beforeUpdateSchedule', e);
     try {
       var res = (0, _axios.default)({
@@ -36065,7 +36119,7 @@ calendar.on({
         data: updatedFields
       });
       if (res.data === '') {
-        calendar.updateEvent(e.event.id, '#calendar', e.changes);
+        calendar.updateEvent(e.event.id, undefined, e.changes);
         (0, _alert.showAlert)("success", "Équipe modifiée avec succès");
       }
     } catch (err) {
@@ -36076,38 +36130,38 @@ calendar.on({
 
 // deleting an event
 calendar.on('beforeDeleteEvent', /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(eventObj) {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(eventObj) {
     var res;
-    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-      while (1) switch (_context2.prev = _context2.next) {
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
         case 0:
           console.log(eventObj.id, eventObj.calendarId);
-          _context2.prev = 1;
-          _context2.next = 4;
+          _context3.prev = 1;
+          _context3.next = 4;
           return (0, _axios.default)({
             method: 'delete',
             url: "/api/v1/match/".concat(eventObj.id)
           });
         case 4:
-          res = _context2.sent;
+          res = _context3.sent;
           if (res.data === '') {
             calendar.deleteEvent(eventObj.id, eventObj.calendarId);
             (0, _alert.showAlert)("success", "Équipe supprimée avec succès");
           }
-          _context2.next = 11;
+          _context3.next = 11;
           break;
         case 8:
-          _context2.prev = 8;
-          _context2.t0 = _context2["catch"](1);
-          (0, _alert.showAlert)("error", _context2.t0.response.data.message);
+          _context3.prev = 8;
+          _context3.t0 = _context3["catch"](1);
+          (0, _alert.showAlert)("error", _context3.t0.response.data.message);
         case 11:
         case "end":
-          return _context2.stop();
+          return _context3.stop();
       }
-    }, _callee2, null, [[1, 8]]);
+    }, _callee3, null, [[1, 8]]);
   }));
-  return function (_x) {
-    return _ref2.apply(this, arguments);
+  return function (_x2) {
+    return _ref3.apply(this, arguments);
   };
 }());
 var animation = function animation() {
@@ -36132,17 +36186,17 @@ var animation = function animation() {
 };
 exports.animation = animation;
 var init = /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
     var data, urlParams, name, inputSearchBar;
-    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-      while (1) switch (_context3.prev = _context3.next) {
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
         case 0:
-          _context3.next = 2;
+          _context4.next = 2;
           return matchInformation().then(function (result) {
             return result;
           });
         case 2:
-          data = _context3.sent;
+          data = _context4.sent;
           // Search a match based on the url parameter
           urlParams = new URLSearchParams(window.location.search);
           name = urlParams.get('team');
@@ -36177,12 +36231,12 @@ var init = /*#__PURE__*/function () {
           animation();
         case 9:
         case "end":
-          return _context3.stop();
+          return _context4.stop();
       }
-    }, _callee3);
+    }, _callee4);
   }));
   return function init() {
-    return _ref3.apply(this, arguments);
+    return _ref4.apply(this, arguments);
   };
 }();
 exports.init = init;
