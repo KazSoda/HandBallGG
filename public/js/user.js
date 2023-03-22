@@ -2,8 +2,10 @@ import axios from "axios";
 import { showAlert } from "./alert";
 const bcrypt = require("bcryptjs");
 
+//register new user function
 export const registerUser = async (fname, lname, role, email, password, passwordConfirm) => {
     try {
+        //post request for creating new user
         const res = await axios({
             method: 'post',
             url: '/api/v1/users/signup',
@@ -16,7 +18,7 @@ export const registerUser = async (fname, lname, role, email, password, password
                 passwordConfirm
             }
         })
-
+        //if request is success, show message and clear form
         if (res.data.status === 'success') {
             const fname2 = document.querySelector('.fname');
             const lname2 = document.querySelector('.lname');
@@ -32,9 +34,6 @@ export const registerUser = async (fname, lname, role, email, password, password
             passwordConfirm2.value = '';
 
             showAlert('success', 'Inscription réussie !');
-            // window.setTimeout(() => {
-            //     location.assign('/connexion');
-            // }, 1500);
         }
     }
     catch (err) {
@@ -42,6 +41,7 @@ export const registerUser = async (fname, lname, role, email, password, password
     }
 }
 
+//update user function
 export const updateUser = async (result, id, pwd, roleChanged) => {
     let data = JSON.parse(result);
 
@@ -55,12 +55,13 @@ export const updateUser = async (result, id, pwd, roleChanged) => {
         data.password = pwd;
     }
     try {
+        //patch request for updating user
         const res = await axios({
             method: "PATCH",
             url: `/api/v1/users/${id}`,
             data,
         });
-
+        //if request is success, show message and reload page
         if (res.data.status === "success") {
             showAlert("success", "Utilisateur modifié avec succès");
             window.setTimeout(() => {
@@ -77,16 +78,16 @@ export const updateUser = async (result, id, pwd, roleChanged) => {
     }
 }
 
-
+//delete user function
 export const deleteUser = async (id, elToRemove) => {
     try {
+        //delete request for deleting user
         const res = await axios({
             method: "DELETE",
             url: `/api/v1/users/${id}`
         });
 
-        console.log(res.data);
-
+        //if request is success, show message and remove user from DOM
         if (res.data === "") {
             elToRemove.parentElement.parentElement.remove();
             showAlert("success", "Utilisateur supprimé avec succès");

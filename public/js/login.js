@@ -2,12 +2,14 @@ import axios from 'axios';
 import { showAlert } from './alert';
 
 
+//login function
 export const login = async (email, password) => {
 
     let logo = document.querySelector('#logo');
     let info = document.querySelector('#logo section');
     info.innerHTML = '<div class="spinner"></div>'
     try {
+        //post request for login
         const res = await axios({
             method: 'post',
             url: '/api/v1/users/login',
@@ -17,6 +19,7 @@ export const login = async (email, password) => {
             }
         })
 
+        //if request is success, change backgroundColor (green: success or red: error) and redirect to home page
         if (res.data.status === 'success') {
 
             logo.style.backgroundColor = 'green';
@@ -35,16 +38,17 @@ export const login = async (email, password) => {
 }
 
 
-
+//logout function
 export const logout = async () => {
     try {
+        //get request for logout
         const res = await axios({
             method: 'get',
             url: '/api/v1/users/deconnexion',
         })
 
+        //if request is success, redirect to home page
         if (res.data.status === 'success') {
-            // redirect to the login page
             location.assign('/');
         }
 

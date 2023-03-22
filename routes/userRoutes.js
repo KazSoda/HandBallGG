@@ -15,14 +15,14 @@ router.get('/deconnexion', authController.logout);
 
 router
 	.route('/')
-	.get(userController.getAllUsers)
-	.post(userController.createUser);
+	.get(authController.protect, authController.restrictTo('Admin'), userController.getAllUsers)
+	.post(authController.protect, authController.restrictTo('Admin'), userController.createUser);
 
 router
 	.route('/:id')
-	.get(userController.getUser)
-	.patch(userController.updateUser)
-	.delete(userController.deleteUser);
+	.get(authController.protect, authController.restrictTo('Admin'), userController.getUser)
+	.patch(authController.protect, authController.restrictTo('Admin'), userController.updateUser)
+	.delete(authController.protect, authController.restrictTo('Admin'), userController.deleteUser);
 
 
 module.exports = router;

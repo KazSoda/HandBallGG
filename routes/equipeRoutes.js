@@ -1,6 +1,6 @@
 const express = require('express');
 const equipeController = require('../controllers/equipeController');
-
+const authController = require('../controllers/authController');
 
 const router = express.Router();
 
@@ -8,13 +8,13 @@ const router = express.Router();
 router
     .route('/')
     .get(equipeController.getAllEquipes)
-    .post(equipeController.createEquipe);
+    .post(authController.protect, equipeController.createEquipe);
 
 router
     .route('/:id')
     .get(equipeController.getOneEquipe)
-    .patch(equipeController.uploadEquipePhoto, equipeController.resizeEquipePhoto, equipeController.updateEquipe)
-    .delete(equipeController.delEquipe)
+    .patch(authController.protect, equipeController.uploadEquipePhoto, equipeController.resizeEquipePhoto, equipeController.updateEquipe)
+    .delete(authController.protect, equipeController.delEquipe)
 
 
 module.exports = router;
