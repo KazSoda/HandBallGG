@@ -6,18 +6,30 @@ import { createEquipe, updateEquipe, deleteEquipe } from './equipe';
 import axios from 'axios';
 import { showAlert } from "./alert";
 
-// Select elements
+// Select elements from connexion pug page 
 const loginForm = document.querySelector('.loginForm');
+
+// Select elements from _navbarAdmin and _navbarUser pug pages
 const logOutBtn = document.querySelector('.deconnexion');
 
 const searchFormMatch = document.querySelector('#searchFormMatch');
+
+// Select elements from equipe pug page
 const manageEquipe = document.querySelector('.adminEquipeUD');
-const manageUser = document.querySelector('.adminUserUD');
 const createEquipeForm = document.querySelector('.adminEquipeC');
 const updateEquipeForm = document.querySelectorAll('.adminEquipeUD .updateEquipe');
+
+// Select elements from users pug page 
+const manageUser = document.querySelector('.adminUserUD');
 const updateUserForm = document.querySelectorAll('.adminUserUD .updateUser');
+
+// Select elements from create user pug page
 const registerForm = document.querySelector('.formCreateUser');
 
+
+/*------------------------------------------------------------
+                        ~ Matchs ~
+------------------------------------------------------------*/
 if (searchFormMatch) {
     init()
     searchFormMatch.addEventListener('submit', e => {
@@ -62,7 +74,11 @@ if (searchFormMatch) {
     })
 }
 
-// Delegation
+
+/*------------------------------------------------------------
+                        ~ login/logout ~
+------------------------------------------------------------*/
+
 if (loginForm) {
     loginForm.addEventListener('submit', e => {
         e.preventDefault();
@@ -71,7 +87,6 @@ if (loginForm) {
         login(email, password);
     })
 }
-
 
 if (logOutBtn) {
     logOutBtn.addEventListener('click', logout);
@@ -113,7 +128,7 @@ if (manageUser) {
 
             let confirmDelete = document.querySelectorAll('.confirmDelete')[i];
 
-            //enlever classe hidden a confirmDelete
+            // remove hidden class for confirmDelete
             confirmDelete.classList.remove('hidden');
 
             confirmDelete.style.display = "flex";
