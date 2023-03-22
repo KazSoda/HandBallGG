@@ -6,7 +6,7 @@ block content
 			//- article.team(style='background-image: url(img/'+equipe.photo+')')
 			//- article.team(style='background-image: url(img/logo.png)')
 			article.team
-				if user && user.role == 'Admin'	
+				if user && user.role == 'Admin' || user && user.role == 'User'	
 					div(class="confirmDelete")
 						h3 Êtes vous sur de vouloir supprimer l'équipe ?
 						div 
@@ -44,10 +44,10 @@ block content
 						a.btn(href="/matchs?team='"+equipe.wording+"'")
 							i(class="bi bi-calendar-event")
 								p Voir les matchs
-				if user && user.role == 'Admin'	
+				if user && user.role == 'Admin'	|| user && user.role == 'User'	
 					div(class="adminEquipeUD")
 						//- add a button to update the team with the id of the team as a class with the classes : btn and btn-warning
-						button(class="btn btn-edit updateEquipe "+equipe.id) 
+						button(class="btn btn-edit updateEquipe " + equipe.id) 
 							i(class="bi bi-pencil-square")
 								p Modifier
 						button(class="btn btn-danger askDeleteEquipe") 

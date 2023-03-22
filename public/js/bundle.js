@@ -35919,7 +35919,9 @@ var calendar = new _calendar.default('#calendar', (_Calendar = {
   narrowWeekend: false,
   taskView: false,
   // e.g. true, false, or ['task', 'milestone']
-  eventView: ['time']
+  eventView: ['time'],
+  hourStart: 6,
+  hourEnd: 23
 }), _defineProperty(_Calendar, "month", {
   startDayOfWeek: 1,
   dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],

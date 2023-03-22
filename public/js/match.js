@@ -68,6 +68,8 @@ const calendar = new Calendar('#calendar', {
 		narrowWeekend: false,
 		taskView: false,  // e.g. true, false, or ['task', 'milestone']
 		eventView: ['time'],
+		hourStart: 6,
+		hourEnd: 23,
 	},
 	month: {
 		startDayOfWeek: 1,

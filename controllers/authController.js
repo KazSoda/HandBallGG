@@ -137,6 +137,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
 
 // Only for rendered pages, no errors!
+// It passes the user to the session 
 exports.isLoggedIn = async (req, res, next) => {
     if (req.cookies.jwt) {
         try {
