@@ -1,6 +1,6 @@
 import '@babel/polyfill'
 import { login, logout } from './login.js';
-import { init, displayCalendar, resizeCalendar, changeWeek, changeCalendarView, animation } from './match.js';
+import { init, displayCalendar, resizeCalendar, changeWeek, changeCalendarView, animation, BannerHoverAdd, BannerHoverRemove } from './match.js';
 import { registerUser, deleteUser, updateUser } from './user';
 import { createEquipe, updateEquipe, deleteEquipe } from './equipe';
 import axios from 'axios';
@@ -55,6 +55,10 @@ if (searchFormMatch) {
     document.querySelector('.navbar-calendar .month').addEventListener('click', () => {
         changeCalendarView('month');
     })
+
+    let banner = document.querySelector(".mainSection");
+    banner.addEventListener("mouseover", BannerHoverAdd);
+    banner.addEventListener("mouseout", BannerHoverRemove);
 
     window.addEventListener('load', (event) => {
         animation();

@@ -15,6 +15,10 @@
 
     --border-norm: #6b6b6b;
 
+    /*animation*/
+    --animation-end: -1500;
+    --animation-iteration: infinite;
+    --animation-temps:90s;
 
     /* Other */
     --radius-norm: 8px;
@@ -806,6 +810,18 @@ form#searchFormMatch {
     width: 100%;
     display: flex;
     flex-direction: row;
+    animation-name: bannermove;
+    animation-duration: var(--animation-temps) ;
+    animation-iteration-count: var(--animation-iteration);
+}
+
+@keyframes bannermove {
+    0% { transform: translateX(0);}
+    100% { transform: translateX(calc(var(--animation-end)*1px));}
+}
+
+.mainSection:hover{
+    animation-play-state: paused;
 }
 
 .matchSection {

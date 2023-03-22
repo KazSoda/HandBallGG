@@ -267,29 +267,27 @@ calendar.on('beforeDeleteEvent', async (eventObj) => {
 	}
 });
 
+export const BannerHoverAdd = (element) => {
+	element.style.animationPlayState = "paused";
+}
 
-
+export const BannerHoverRemove = (element) => {
+	element.style.animationPlayState = "running";
+}
 
 export const animation = () => {
-	let anim = document.querySelector('.mainSection');
-	let nbMatch = anim.children.length;
-	let oui = -500 * nbMatch + document.querySelector('.bandeauDefilant').offsetWidth;
+	let mainSection = document.querySelector('.mainSection');
+	let nbMatch = mainSection.children.length;
+	let tempsTravel = 7*nbMatch;
+	let Distfin = -500 * nbMatch + document.querySelector('.bandeauDefilant').offsetWidth;
 	let iterations = 0
 	if (nbMatch > 1) {
 		iterations = Infinity
 	}
-	anim.animate(
-		[
-			// keyframes
-			{ transform: "translateX(0%)" },
-			{ transform: "translateX(" + oui + "px)" },
-		],
-		{
-			// timing options
-			duration: 4000 * nbMatch,
-			iterations,
-		}
-	);
+	mainSection.style.animationDuration = tempsTravel;
+	document.documentElement.style.setProperty('--animation-end',Distfin);
+	document.documentElement.style.setProperty('--animation-iteration',iterations);
+	document.documentElement.style.setProperty('--animation-temps',tempsTravel+'s');
 }
 
 export const init = async () => {
