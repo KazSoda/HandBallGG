@@ -141,6 +141,16 @@ function searchMatchByTeam(queryResult, enteredValue) {
 
 			// insert the new match into the carousel
 			let date = new Date(sortedMatch.date).toLocaleString()
+
+			// check if the image of the team exists
+			let imgTest = new Image();
+			imgTest.src = `img/rivals/${sortedMatch.againstTeam}.png`;
+			imgTest.onerror = function () {
+				imgTest.src = 'img/rivals/againstTeam.png';
+				console.log(imgTest.src);
+			};
+
+
 			mainSection.innerHTML += `
       			<section class="matchSection">
       				<section class="matchInformation">
@@ -156,7 +166,7 @@ function searchMatchByTeam(queryResult, enteredValue) {
       						<p>VS</p>
       						<article class="secondEquipeInformation">
       							<h1>Equipe adverse</h1>
-      							<img src="img/rivals/${sortedMatch.againstTeam}.png" alt="photoEnemyTeam">
+      							<img src="${imgTest.src}" alt="photoEnemyTeam">
       							<h1>${sortedMatch.againstTeam}</h1>
       						</article>
       					</section>
@@ -292,16 +302,16 @@ export const BannerHoverRemove = (element) => {
 export const animation = () => {
 	let mainSection = document.querySelector('.mainSection');
 	let nbMatch = mainSection.children.length;
-	let tempsTravel = 7*nbMatch;
+	let tempsTravel = 7 * nbMatch;
 	let Distfin = -500 * nbMatch + document.querySelector('.bandeauDefilant').offsetWidth;
 	let iterations = 0
 	if (nbMatch > 1) {
 		iterations = 'infinite'
 	}
 	mainSection.style.animationDuration = tempsTravel;
-	document.documentElement.style.setProperty('--animation-end',Distfin);
-	document.documentElement.style.setProperty('--animation-iteration',iterations);
-	document.documentElement.style.setProperty('--animation-temps',tempsTravel+'s');
+	document.documentElement.style.setProperty('--animation-end', Distfin);
+	document.documentElement.style.setProperty('--animation-iteration', iterations);
+	document.documentElement.style.setProperty('--animation-temps', tempsTravel + 's');
 }
 
 
