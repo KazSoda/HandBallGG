@@ -30,7 +30,7 @@ router.get('/planningBenevoles', authController.isLoggedIn, viewController.getPl
 router.get('/contact', authController.isLoggedIn, viewController.getContactPage);
 
 /*Utilisateurs*/
-router.get('/utilisateurs', authController.isLoggedIn, viewController.getUsersPage);
+router.get('/utilisateurs', authController.isLoggedIn, authController.protect, authController.restrictTo('Admin'), viewController.getUsersPage);
 router.get('/creationUtilisateur', authController.isLoggedIn, viewController.getCreationUser);
 
 router.get('/connexion', authController.isLoggedIn, viewController.getConnexionPage);
