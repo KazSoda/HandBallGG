@@ -309,9 +309,10 @@ export const animation = () => {
 		iterations = 'infinite'
 	}
 	mainSection.style.animationDuration = tempsTravel;
-	document.documentElement.style.setProperty('--animation-end', Distfin);
-	document.documentElement.style.setProperty('--animation-iteration', iterations);
-	document.documentElement.style.setProperty('--animation-temps', tempsTravel + 's');
+	// changing variables
+	document.documentElement.style.setProperty('--animation-end',Distfin);
+	document.documentElement.style.setProperty('--animation-iteration',iterations);
+	document.documentElement.style.setProperty('--animation-temps',tempsTravel+'s');
 }
 
 
