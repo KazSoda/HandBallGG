@@ -1044,7 +1044,8 @@ aside.options-team button {
     display: none;
 }
 
-.toastui-calendar-day-view-day-names, .toastui-calendar-week-view-day-names{
+.toastui-calendar-day-view-day-names,
+.toastui-calendar-week-view-day-names {
     border: 0 !important;
 }
 
@@ -1477,6 +1478,42 @@ footer>h3::after {
     nav img {
         padding: 0;
     }
+
+
+
+    /*--------------------------------------------------
+                            Matchs
+    --------------------------------------------------*/
+    aside.options-team {
+        width: 100%;
+    }
+
+    .calendarDisplay {
+        flex-direction: column;
+    }
+
+    .navbar-calendar {
+        flex-direction: row;
+        display: flex;
+        overflow: auto;
+    }
+
+    .navigate,
+    .view,
+    .filter {
+        min-width: 150px;
+        margin-right: 20px;
+    }
+
+    button.btn.next,
+    button.btn.prev {
+        width: 40%;
+    }
+
+    .filter {
+        min-width: 250px;
+    }
+
 }
 
 @media only screen and (min-width: 980px) {

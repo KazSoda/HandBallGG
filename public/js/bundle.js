@@ -36258,23 +36258,25 @@ var resizeCalendar = function resizeCalendar() {
 };
 
 // add the calendar display dates range to the .navbar--range using the calendar.getDate() method and translate the dates to a readable format in french
+// function displayCalendarRange() {
+// 	let dateRange = calendar.getDate().d.d.addDays(-1).toLocaleDateString('fr-FR') + ' - ' + calendar.getDate().d.d.addDays(5).toLocaleDateString('fr-FR');
+// 	document.querySelector('.navbar--range').innerHTML = dateRange;
+// }
 exports.resizeCalendar = resizeCalendar;
-function displayCalendarRange() {
-  var dateRange = calendar.getDate().d.d.addDays(-1).toLocaleDateString('fr-FR') + ' - ' + calendar.getDate().d.d.addDays(5).toLocaleDateString('fr-FR');
-  document.querySelector('.navbar--range').innerHTML = dateRange;
-}
 var changeWeek = function changeWeek(type) {
   if (type == 'next') {
     calendar.move(1);
-    displayCalendarRange();
+    // displayCalendarRange();
   }
+
   if (type == 'prev') {
     calendar.move(-1);
-    displayCalendarRange();
+    // displayCalendarRange();
   }
+
   if (type == 'today') {
     calendar.today();
-    displayCalendarRange();
+    // displayCalendarRange();
   }
 };
 exports.changeWeek = changeWeek;
@@ -85392,6 +85394,7 @@ if (searchFormMatch) {
     (0, _match.init)();
   });
   (0, _match.displayCalendar)();
+  (0, _match.resizeCalendar)();
   window.addEventListener('resize', function () {
     (0, _match.resizeCalendar)();
   });

@@ -26,6 +26,7 @@ if (searchFormMatch) {
     })
 
     displayCalendar();
+    resizeCalendar();
 
     window.addEventListener('resize', () => {
         resizeCalendar();
