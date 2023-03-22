@@ -5,13 +5,11 @@ import '@toast-ui/calendar/dist/toastui-calendar.min.css';
 import 'tui-date-picker/dist/tui-date-picker.css';
 import 'tui-time-picker/dist/tui-time-picker.css';
 
-function formatTime(time) {
-	const hours = time.getHours();
-	const minutes = time.getMinutes();
-	return `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
-}
 
-
+/**
+ * Small functions to add some new properties to the Date object
+ * These functions are used to add days and minutes to a date
+ */
 Date.prototype.addDays = function (days) {
 	var date = new Date(this.valueOf());
 	date.setDate(date.getDate() + days);
@@ -25,48 +23,29 @@ Date.prototype.addMinutes = function (m) {
 
 
 
-
+/**
+ * Create a new calendar instance based on the following library: 
+ * https://github.com/nhn/tui.calendar
+ */
 const calendar = new Calendar('#calendar', {
 	defaultView: 'week',
 	useCreationPopup: false,
-	useFormPopup: true,
-	isReadOnly: false,
+	useFormPopup: true, // Can be always set to true because the routes to create and update or delete a match are protected
+	isReadOnly: false, // Same here
 	useDetailPopup: true,
 	usageStatistics: false,
-	useCreationPopup: {
-		template: {
-			title() {
-				return 'Create Schedule';
-			},
-			attendees(schedule) {
-				const attendees = schedule.attendees || [];
-				return `
-                    <div class="tui-full-calendar-form-section">
-                        <label class="tui-full-calendar-label">Attendees</label>
-                        <input type="text" class="tui-full-calendar-input tui-full-calendar-attendees" value="${attendees.join(', ')}">
-                    </div>
-                `;
-			},
-		},
-		beforeCreateSchedule(scheduleData) {
-			const attendees = scheduleData.attendees.split(',').map(attendee => attendee.trim());
-			scheduleData.attendees = attendees;
-			return scheduleData;
-		},
-	},
 	theme: {
 		common: {
 			backgroundColor: 'var(--nav-bg-color)',
 			border: '1px solid var(--border-norm)',
 			color: 'var(--nav-text-color)',
-
 		},
 	},
 	week: {
 		startDayOfWeek: 1,
 		dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-		narrowWeekend: false,
-		taskView: false,  // e.g. true, false, or ['task', 'milestone']
+		narrowWeekend: false, // Else the weekends are smaller
+		taskView: false,
 		eventView: ['time'],
 		hourStart: 6,
 		hourEnd: 23,
@@ -75,7 +54,7 @@ const calendar = new Calendar('#calendar', {
 		startDayOfWeek: 1,
 		dayNames: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
 		narrowWeekend: true,
-		taskView: false,  // e.g. true, false, or ['task', 'milestone']
+		taskView: false,
 		eventView: ['time'],
 	},
 	template: {
@@ -90,17 +69,7 @@ const calendar = new Calendar('#calendar', {
 });
 
 
-calendar.setTheme({
-	week: {
-		timeGridLeft: {
-			width: '50px',
-		},
-		timeGridHalfHourLine: {
-			borderBottom: '1px dotted #e5e5e550',
-		},
-	},
-});
-
+// Get all the matches for the next 3 weeks and the 2 months after
 const matchInformation = async () => {
 	let currentDate = new Date();
 	let currentDate2 = new Date();
@@ -119,10 +88,12 @@ const matchInformation = async () => {
 	}
 };
 
+// Filter matches from a specific team
 function searchMatchByTeam(queryResult, enteredValue) {
 	let mainSection = document.querySelector(".mainSection");
 	let resSort = [];
-	queryResult.forEach((matchInfo, index, matchInfoFull) => {
+	queryResult.forEach(matchInfo => {
+		// Set all matches names to UPPERCASE to better check if the entered value is in the match name
 		if (
 			matchInfo.againstTeam
 				.toUpperCase()
@@ -141,8 +112,10 @@ function searchMatchByTeam(queryResult, enteredValue) {
 
 		let calendarMatch = []
 
+		// empty the calendar
 		mainSection.innerHTML = ''
 		resSort.forEach(sortedMatch => {
+			// Create a new match event based on the current envent to match the required format for the calendar
 			let calendarMatchTemp = {}
 			calendarMatchTemp.id = sortedMatch._id;
 			calendarMatchTemp.title = sortedMatch.localTeam + " VS " + sortedMatch.againstTeam;
@@ -157,16 +130,16 @@ function searchMatchByTeam(queryResult, enteredValue) {
 			calendarMatchTemp.dueDateClass = '';
 			calendarMatchTemp.location = sortedMatch.gymnasium;
 			calendarMatchTemp.attendees = [sortedMatch.localTeam, sortedMatch.againstTeam];
+
+			// Random green dark color for the calendar events
 			let saturation = Math.floor(Math.random() * 100);
 			let lightness = Math.floor(Math.random() * 20) + 10;
 			calendarMatchTemp.backgroundColor = `hsl(120, ${saturation}%, ${lightness}%)`;
-
-			// calendarMatchTemp.backgroundColor = '#' + (0x1000000 + Math.random() * 0xffffff).toString(16).substr(1, 6);
 			calendarMatchTemp.color = '#ffffff';
 
 			calendarMatch.push(calendarMatchTemp);
 
-
+			// insert the new match into the carousel
 			let date = new Date(sortedMatch.date).toLocaleString()
 			mainSection.innerHTML += `
       			<section class="matchSection">
@@ -193,7 +166,7 @@ function searchMatchByTeam(queryResult, enteredValue) {
 		});
 
 		calendar.createEvents(calendarMatch);
-
+		// launch the caroussel animation
 		animation();
 	}
 }
@@ -204,22 +177,22 @@ calendar.on('beforeCreateEvent', async (eventObj) => {
 	console.log(eventObj);
 
 	let newEvent = {};
-	if (eventObj.title.includes(" VS ")){
+	if (eventObj.title.includes(" VS ")) {
 		let title = eventObj.title.split(" VS ");
 		newEvent.date = eventObj.start.d.d;
 		newEvent.dateEnd = eventObj.end.d.d;
 		newEvent.localTeam = title[0];
 		newEvent.againstTeam = title[1];
 		newEvent.gymnasium = eventObj.location;
-		
-		try{
+
+		try {
 			const res = await axios({
 				method: "post",
 				url: `/api/v1/match`,
 				data: newEvent
 			});
-	
-	
+
+
 			if (res.data.status === "success") {
 				newEvent.id = res.data.data.match._id;
 				newEvent.start = eventObj.start;
@@ -227,21 +200,21 @@ calendar.on('beforeCreateEvent', async (eventObj) => {
 				newEvent.title = eventObj.title;
 				newEvent.location = eventObj.location;
 				newEvent.attendee = [newEvent.localTeam, newEvent.againstTeam]
-	
+
 				showAlert("success", "Match ajouté avec succès");
 				calendar.createEvents([newEvent]);
 			}
-		} catch (err){
+		} catch (err) {
 			showAlert("error", err.response.data.message);
 		}
-	} else{
+	} else {
 		showAlert("error", "Le titre doit contenir ' VS ' pour séparer les deux équipes");
 	}
-	
+
 });
 
 
-
+// Update an event
 calendar.on({
 	'beforeUpdateEvent': function (e) {
 		let updatedFields = {};
@@ -283,6 +256,7 @@ calendar.on({
 	},
 });
 
+
 // deleting an event
 calendar.on('beforeDeleteEvent', async (eventObj) => {
 	console.log(eventObj.id, eventObj.calendarId);
@@ -305,7 +279,7 @@ calendar.on('beforeDeleteEvent', async (eventObj) => {
 
 
 
-
+// Caroussel animation to display all the matches
 export const animation = () => {
 	let anim = document.querySelector('.mainSection');
 	let nbMatch = anim.children.length;
@@ -328,6 +302,8 @@ export const animation = () => {
 	);
 }
 
+
+// Init fuction that will be used to search some events
 export const init = async () => {
 
 	// let data = await matchInformation().then(result => result.data);
@@ -377,14 +353,13 @@ export const init = async () => {
 
 
 
-
+// render calendar
 export const displayCalendar = () => {
 	calendar.render();
 }
 
 
 // execute a function on windows resize
-
 export const resizeCalendar = () => {
 	let width = window.innerWidth;
 	if (width < 800) {
@@ -397,28 +372,21 @@ export const resizeCalendar = () => {
 };
 
 
-// add the calendar display dates range to the .navbar--range using the calendar.getDate() method and translate the dates to a readable format in french
-// function displayCalendarRange() {
-// 	let dateRange = calendar.getDate().d.d.addDays(-1).toLocaleDateString('fr-FR') + ' - ' + calendar.getDate().d.d.addDays(5).toLocaleDateString('fr-FR');
-// 	document.querySelector('.navbar--range').innerHTML = dateRange;
-// }
-
+// switch between the weeks/days/months
 export const changeWeek = (type) => {
 	if (type == 'next') {
 		calendar.move(1);
-		// displayCalendarRange();
 	}
 	if (type == 'prev') {
 		calendar.move(-1);
-		// displayCalendarRange();
 	}
 	if (type == 'today') {
 		calendar.today();
-		// displayCalendarRange();
 	}
 }
 
 
+// Change the calendar view
 export const changeCalendarView = (type) => {
 	calendar.changeView(type);
 }
