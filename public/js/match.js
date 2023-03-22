@@ -277,12 +277,12 @@ calendar.on('beforeDeleteEvent', async (eventObj) => {
 	}
 });
 
-//BannerHoverAdd de d'arreter l'animation de bannière
+//BannerHoverAdd stop animation of the banner
 export const BannerHoverAdd = (element) => {
 	element.style.animationPlayState = "paused";
 }
 
-//BannerHoverRemove de relancer l'animation de bannière
+//BannerHoverRemove restart animation of the banner
 export const BannerHoverRemove = (element) => {
 	element.style.animationPlayState = "running";
 }
@@ -299,7 +299,7 @@ export const animation = () => {
 		iterations = 'infinite'
 	}
 	mainSection.style.animationDuration = tempsTravel;
-	// change les variable
+	// change variables
 	document.documentElement.style.setProperty('--animation-end',Distfin);
 	document.documentElement.style.setProperty('--animation-iteration',iterations);
 	document.documentElement.style.setProperty('--animation-temps',tempsTravel+'s');
