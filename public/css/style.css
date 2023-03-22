@@ -812,9 +812,7 @@ form#searchFormMatch {
     width: 100%;
     display: flex;
     flex-direction: row;
-    animation-name: bannermove;
-    animation-duration: var(--animation-temps) ;
-    animation-iteration-count: var(--animation-iteration);
+    animation: bannermove var(--animation-temps) linear var(--animation-iteration);
 }
 
 @keyframes bannermove {
