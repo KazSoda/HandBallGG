@@ -2,27 +2,15 @@ nav
 	a(href='/') 
 		img(src='img/logo.png', alt='logo')
 	section
-		//- div 
-		//- 	a(href='actualites') Actualités
-		//- div 
-		//- 	a(href='#') Le club
-		//- 	div.nav-dropdown
-		//- 		a(href='presentation') Présentation
-		//- 		a(href='historique') Historique
-		//- 		a(href='partenaires') Partenaires
+		a(href='actualites') Actualités
+		
 		a(href='equipes') Équipes
-		a(href='matchs') Matchs
-		//- div 
-		//- 	a(href='boutique') Boutique
-		//- a(href='entrainements') Entrainements
+		div 
+			a(href='#') Matchs
+			div.nav-dropdown
+				a(href='matchs') Liste
+				a(href='matchsCalendrier') Calendrier
+		
 		a(href='connexion') Connexion
 
-		//- div 
-		//- 	a(href='pratique') Pratique
-		//- 	div.nav-dropdown
-		//- 		a(href='inscriptions') Inscriptions
-		//- 		a(href='entrainements') Entrainements
-		//- 		a(href='planningBenevoles') Planning bénévoles
-		//- 		a(href='connexion') Connexion
-		//- 		a(href='contact') Contact
 	button(class="btn hambuger" onclick="hamburgerMenu();") ≡

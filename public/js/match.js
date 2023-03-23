@@ -91,6 +91,8 @@ const matchInformation = async () => {
 // Filter matches from a specific team
 function searchMatchByTeam(queryResult, enteredValue) {
 	let mainSection = document.querySelector(".mainSection");
+	let matchList = document.querySelector(".matchList");
+
 	let resSort = [];
 	queryResult.forEach(matchInfo => {
 		// Set all matches names to UPPERCASE to better check if the entered value is in the match name
@@ -106,14 +108,23 @@ function searchMatchByTeam(queryResult, enteredValue) {
 		}
 	});
 
-	if (resSort.length == 0) {
+	if (mainSection && resSort.length == 0) {
 		mainSection.innerHTML = `<h1>La recherche n'a pas donné de résultats</h1>`;
-	} else {
+	} else if (matchList && resSort.length == 0) {
+		matchList.innerHTML = `<h1>La recherche n'a pas donné de résultats</h1>`;
+	}
+	else {
 
 		let calendarMatch = []
 
 		// empty the calendar
-		mainSection.innerHTML = ''
+		if (mainSection) {
+			mainSection.innerHTML = ''
+		}
+		if (matchList) {
+			matchList.innerHTML = ''
+		}
+
 		resSort.forEach(sortedMatch => {
 			// Create a new match event based on the current envent to match the required format for the calendar
 			let calendarMatchTemp = {}
@@ -151,7 +162,8 @@ function searchMatchByTeam(queryResult, enteredValue) {
 			};
 
 
-			mainSection.innerHTML += `
+			if (mainSection) {
+				mainSection.innerHTML += `
       			<section class="matchSection">
       				<section class="matchInformation">
       					<section class="headerInformationMatch">
@@ -172,7 +184,141 @@ function searchMatchByTeam(queryResult, enteredValue) {
       					</section>
       				</section>
     			</section>
-    		`;
+    			`;
+			}
+			if (matchList && document.querySelector('.matchList.admin')) {
+				matchList.innerHTML += `
+	  				<section class="matchInformation ${sortedMatch._id}">
+	  					<section class="headerInformationMatch">
+	  						<h1>${sortedMatch.gymnasium} : ${date}</h1>
+	  					</section>
+	  					<section class="bodyInformationMatch">
+	  						<article class="firstEquipeInformation">
+	  							<h1>Equipe locale</h1>
+								<img src="img/logo.png" alt="photo">
+								<h1>${sortedMatch.localTeam}</h1>
+	  						</article>
+	  						<p>VS</p>
+	  						<article class="secondEquipeInformation">
+	  							<h1>Equipe adverse</h1>
+	  							<img src="${imgTest.src}" alt="photoEnemyTeam">
+	  							<h1>${sortedMatch.againstTeam}</h1>
+	  						</article>
+	  					</section>
+						<div class="matchUD">
+							<button class="btn btn-edit updateMatch ${sortedMatch._id}"><i class="bi bi-pencil-square"><p>Modifier</p></i></button>
+							<button class="btn btn-danger deleteMatch ${sortedMatch._id}"><i class="bi bi-trash3"><p>Supprimer</p></i></button>
+	  				</section>
+				`;
+
+
+				document.querySelectorAll('.deleteMatch').forEach(el => {
+					el.addEventListener('click', e => {
+						e.preventDefault();
+						if(e.target.className.split(' ')[3]){
+							deleteMatch(e.target.className.split(' ')[3], e.target.parentElement.parentElement)
+						} if(e.target.className.includes('bi-trash3')){
+							deleteMatch(e.target.parentElement.className.split(' ')[3], e.target.parentElement.parentElement.parentElement)
+						} else{
+							deleteMatch(e.target.parentElement.parentElement.className.split(' ')[3], e.target.parentElement.parentElement.parentElement.parentElement)
+						}
+					})
+				})
+
+				document.querySelectorAll('.updateMatch').forEach(el => {
+					el.addEventListener('click', e => {
+						e.preventDefault();
+						if(e.target.className.split(' ')[3]){
+							console.log(e.target.parentElement.parentElement.children[1].children[0].children[2])
+
+							let id = e.target.className.split(' ')[3]
+							let localTeam = e.target.parentElement.parentElement.children[1].children[0].children[2].textContent
+							let againstTeam = e.target.parentElement.parentElement.children[1].children[2].children[2].textContent
+							let gymnasium = e.target.parentElement.parentElement.children[0].children[0].textContent.split(' : ')[0]
+							let date = e.target.parentElement.parentElement.children[0].children[0].textContent.split(' : ')[1]
+
+
+							document.querySelector('.updateMatchForm #visitorTeam').value = againstTeam
+							document.querySelector('.updateMatchForm #localTeam').value = localTeam
+							document.querySelector('.updateMatchForm #location').value = gymnasium
+							document.querySelector('.updateMatchForm #date').value = date
+
+							document.querySelector('.modal').classList.remove('hidden')
+							document.querySelector('.updateMatchForm').classList.remove('hidden')
+
+							console.log(id, localTeam, againstTeam, gymnasium, date)
+						}
+						if(e.target.className.includes('bi-pencil-square')){
+							console.log(e.target.parentElement.parentElement.parentElement.children[1].children[0].children[2])
+
+							let id = e.target.parentElement.className.split(' ')[3]
+							let localTeam = e.target.parentElement.parentElement.parentElement.children[1].children[0].children[2].textContent
+							let againstTeam = e.target.parentElement.parentElement.parentElement.children[1].children[2].children[2].textContent
+							let gymnasium = e.target.parentElement.parentElement.parentElement.children[0].children[0].textContent.split(' : ')[0]
+							let date = e.target.parentElement.parentElement.parentElement.children[0].children[0].textContent.split(' : ')[1]
+
+
+							document.querySelector('.updateMatchForm #visitorTeam').value = againstTeam
+							document.querySelector('.updateMatchForm #localTeam').value = localTeam
+							document.querySelector('.updateMatchForm #location').value = gymnasium
+							document.querySelector('.updateMatchForm #date').value = date
+
+							document.querySelector('.modal').classList.remove('hidden')
+							document.querySelector('.updateMatchForm').classList.remove('hidden')
+
+							console.log(id, localTeam, againstTeam, gymnasium, date)
+
+						}
+						else{
+
+							console.log(e.target.parentElement.parentElement.parentElement.parentElement.children[1].children[0].children[2])
+
+							let id = e.target.parentElement.parentElement.className.split(' ')[3]
+							let localTeam = e.target.parentElement.parentElement.parentElement.parentElement.children[1].children[0].children[2].textContent
+							let againstTeam = e.target.parentElement.parentElement.parentElement.parentElement.children[1].children[2].children[2].textContent
+							let gymnasium = e.target.parentElement.parentElement.parentElement.parentElement.children[0].children[0].textContent.split(' : ')[0]
+							let date = e.target.parentElement.parentElement.parentElement.parentElement.children[0].children[0].textContent.split(' : ')[1]
+
+
+							document.querySelector('.updateMatchForm #visitorTeam').value = againstTeam
+							document.querySelector('.updateMatchForm #localTeam').value = localTeam
+							document.querySelector('.updateMatchForm #location').value = gymnasium
+							document.querySelector('.updateMatchForm #date').value = date
+
+							document.querySelector('.modal').classList.remove('hidden')
+							document.querySelector('.updateMatchForm').classList.remove('hidden')
+
+
+							console.log(id, localTeam, againstTeam, gymnasium, date)
+							
+						}
+					})
+				})
+
+			} else {
+				if (matchList) {
+					matchList.innerHTML += `
+						  <section class="matchInformation ${sortedMatch._id}">
+							  <section class="headerInformationMatch">
+								  <h1>${sortedMatch.gymnasium} : ${date}</h1>
+							  </section>
+							  <section class="bodyInformationMatch">
+								  <article class="firstEquipeInformation">
+									  <h1>Equipe locale</h1>
+									<img src="img/logo.png" alt="photo">
+									<h1>${sortedMatch.localTeam}</h1>
+								  </article>
+								  <p>VS</p>
+								  <article class="secondEquipeInformation">
+									  <h1>Equipe adverse</h1>
+									  <img src="${imgTest.src}" alt="photoEnemyTeam">
+									  <h1>${sortedMatch.againstTeam}</h1>
+								  </article>
+							  </section>
+						  </section>
+					`;
+				}
+			}
 		});
 
 		calendar.createEvents(calendarMatch);
@@ -287,20 +433,13 @@ calendar.on('beforeDeleteEvent', async (eventObj) => {
 	}
 });
 
-//BannerHoverAdd stop animation of the banner
-export const BannerHoverAdd = (element) => {
-	element.style.animationPlayState = "paused";
-}
 
-//BannerHoverRemove restart animation of the banner
-export const BannerHoverRemove = (element) => {
-	element.style.animationPlayState = "running";
-}
 
 
 // Caroussel animation to display all the matches
 export const animation = () => {
 	let mainSection = document.querySelector('.mainSection');
+	if (!mainSection) return;
 	let nbMatch = mainSection.children.length;
 	let tempsTravel = 7 * nbMatch;
 	let Distfin = -500 * nbMatch + document.querySelector('.bandeauDefilant').offsetWidth;
@@ -310,9 +449,9 @@ export const animation = () => {
 	}
 	mainSection.style.animationDuration = tempsTravel;
 	// changing variables
-	document.documentElement.style.setProperty('--animation-end',Distfin);
-	document.documentElement.style.setProperty('--animation-iteration',iterations);
-	document.documentElement.style.setProperty('--animation-temps',tempsTravel+'s');
+	document.documentElement.style.setProperty('--animation-end', Distfin);
+	document.documentElement.style.setProperty('--animation-iteration', iterations);
+	document.documentElement.style.setProperty('--animation-temps', tempsTravel + 's');
 }
 
 
@@ -368,7 +507,7 @@ export const init = async () => {
 
 // render calendar
 export const displayCalendar = () => {
-	calendar.render();
+	if (document.getElementById("calendar")) calendar.render();
 }
 
 
@@ -404,3 +543,77 @@ export const changeCalendarView = (type) => {
 	calendar.changeView(type);
 }
 
+
+
+export const createMatch = async (localTeam, visitorTeam, date, location) => {
+	try {
+		const res = await axios({
+			method: 'POST',
+			url: '/api/v1/match',
+			data: {
+				localTeam: localTeam,
+				againstTeam: visitorTeam,
+				date: date,
+				gymnasium: location
+			}
+		})
+
+		console.log(res)
+
+		if (res.data.status === "success") {
+			showAlert("success", "Match ajouté avec succès");
+			const modal = document.querySelector('.modal');
+			const modalContent = document.querySelector('.modal-content');
+
+			modal.classList.add('hidden');
+			modalContent.classList.add('hidden');
+		}
+	} catch (err) {
+		showAlert("error", err.response);
+	}
+}
+
+
+export const updateMatch = async (id, localTeam, visitorTeam, date, location) => {
+	try {
+		const res = await axios({
+			method: 'patch',
+			url: `/api/v1/match/${id}`,
+			data: {
+				localTeam: localTeam,
+				againstTeam: visitorTeam,
+				date: date,
+				gymnasium: location
+			}
+		})
+
+		if (res.data.status === "success") {
+			showAlert("success", "Match modifié avec succès");
+			const modal = document.querySelector('.modal');
+			const modalContent = document.querySelector('.modal-content');
+
+			modal.classList.add('hidden');
+			modalContent.classList.add('hidden');
+		}
+	} catch (err) {
+		showAlert("error", err.response.data.message);
+	}
+}
+
+
+export const deleteMatch = async (id, event) => {
+	console.log(id, event);
+	try {
+		const res = await axios({
+			method: 'delete',
+			url: `/api/v1/match/${id}`,
+		})
+		if (res.data === '') {
+			showAlert("success", "Match supprimé avec succès");
+			event.remove();
+
+		}
+	} catch (err) {
+		showAlert("error", err.response.data.message);
+	}
+}

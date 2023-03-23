@@ -1,6 +1,6 @@
 import '@babel/polyfill'
 import { login, logout } from './login.js';
-import { init, displayCalendar, resizeCalendar, changeWeek, changeCalendarView, animation, BannerHoverAdd, BannerHoverRemove } from './match.js';
+import { init, displayCalendar, resizeCalendar, changeWeek, changeCalendarView, animation, BannerHoverAdd, BannerHoverRemove, createMatch, deleteMatch, updateMatch } from './match.js';
 import { registerUser, deleteUser, updateUser } from './user';
 import { createEquipe, updateEquipe, deleteEquipe } from './equipe';
 import axios from 'axios';
@@ -13,6 +13,7 @@ const loginForm = document.querySelector('.loginForm');
 const logOutBtn = document.querySelector('.deconnexion');
 
 const searchFormMatch = document.querySelector('#searchFormMatch');
+const matchList = document.querySelector('.matchList');
 
 // Select elements from equipe pug page
 const manageEquipe = document.querySelector('.adminEquipeUD');
@@ -45,39 +46,86 @@ if (searchFormMatch) {
     })
 
 
-    document.querySelector('.navbar-calendar .prev').addEventListener('click', () => {
-        changeWeek('prev')
-    })
+    if (document.querySelector('.navbar-calendar .view')) {
 
-    document.querySelector('.navbar-calendar .next').addEventListener('click', () => {
-        changeWeek('next')
-    })
+        document.querySelector('.navbar-calendar .prev').addEventListener('click', () => {
+            changeWeek('prev')
+        })
 
-    document.querySelector('.navbar-calendar .today').addEventListener('click', () => {
-        changeWeek('today')
-    })
+        document.querySelector('.navbar-calendar .next').addEventListener('click', () => {
+            changeWeek('next')
+        })
 
-    document.querySelector('.navbar-calendar .day').addEventListener('click', () => {
-        changeCalendarView('day');
-    })
+        document.querySelector('.navbar-calendar .today').addEventListener('click', () => {
+            changeWeek('today')
+        })
 
-    document.querySelector('.navbar-calendar .week').addEventListener('click', () => {
-        changeCalendarView('week');
-    })
+        document.querySelector('.navbar-calendar .day').addEventListener('click', () => {
+            changeCalendarView('day');
+        })
 
-    document.querySelector('.navbar-calendar .month').addEventListener('click', () => {
-        changeCalendarView('month');
-    })
+        document.querySelector('.navbar-calendar .week').addEventListener('click', () => {
+            changeCalendarView('week');
+        })
+
+        document.querySelector('.navbar-calendar .month').addEventListener('click', () => {
+            changeCalendarView('month');
+        })
+    }
+
 
     let banner = document.querySelector(".mainSection");
-    banner.addEventListener("mouseover", BannerHoverAdd);
-    banner.addEventListener("mouseout", BannerHoverRemove);
+    if (banner) {
+        banner.addEventListener("mouseover", BannerHoverAdd);
+        banner.addEventListener("mouseout", BannerHoverRemove);
+    }
 
     window.addEventListener('load', (event) => {
         animation();
     })
 }
 
+
+
+if (matchList) {
+
+    document.querySelector('.createMatch form').addEventListener('submit', e => {
+        e.preventDefault();
+
+
+        const localTeam = document.querySelector('#localTeam').value;
+        const visitorTeam = document.querySelector('#visitorTeam').value;
+        const date = document.querySelector('#date').value;
+        const location = document.querySelector('#location').value;
+        createMatch(localTeam, visitorTeam, date, location);
+    })
+
+    console.log(document.querySelectorAll('.deleteMatch'));
+
+    document.querySelectorAll('.deleteMatch').forEach(el => {
+        el.addEventListener('click', e => {
+            e.preventDefault();
+            deleteMatch(e.target.className.split(' ')[3], e.target.parentElement.parentElement)
+        })
+    })
+
+
+    document.querySelector('.adminMatchC').addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector('.modal').classList.remove('hidden');
+        document.querySelector('.createMatch').classList.remove('hidden');
+    })
+
+    document.querySelectorAll('.close').forEach(el => {
+        el.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelector('.modal').classList.add('hidden');
+            document.querySelector('.createMatch').classList.add('hidden');
+            document.querySelector('.updateMatchForm').classList.add('hidden');
+        })
+    })
+
+}
 
 /*------------------------------------------------------------
                         ~ login/logout ~
@@ -126,7 +174,7 @@ if (registerForm) {
 if (manageUser) {
     let deleteUserList = document.querySelectorAll('.deleteUser');
     let askDelete = document.querySelectorAll('.askDeleteUser');
-    
+
     for (let i = 0; i < askDelete.length; i++) {
         askDelete[i].addEventListener('click', e => {
             e.preventDefault();

@@ -1,0 +1,38 @@
+extends base
+
+
+block content
+
+	.calendarDisplay
+		aside.options-team
+			.navbar-calendar 
+				.navigate
+					p Navigation
+					button(class="btn today")
+						i(class="bi bi-calendar3-event") Aujourd'hui
+					button(class="btn prev" )
+						i(class="bi bi-caret-left")
+					button(class="btn next")
+						i(class="bi bi-caret-right")
+				.view
+					p Affichage
+					button(class="btn day")
+						i(class="bi bi-calendar3-event") Jour
+					button(class="btn week")
+						i(class="bi bi-calendar3-week") Semaine
+					button(class="btn month")
+						i(class="bi bi-calendar3") Mois
+				
+
+				.filter
+					form(id="searchFormMatch" method="POST")
+						p Recherche
+						input(type="text" name="search" id="searchInformation" placeholder="Entrez le nom de l'équipe")
+						input.btn(type="submit" id='searchBtn')
+
+					select(id="searchMatchBySelect" for="change")
+						option(value='0') -- Select --
+						each equipe in equipes
+							option(value=equipe.wording) #{equipe.wording}
+
+		div(id="calendar")

@@ -18,7 +18,7 @@ router.get('/equipes', authController.isLoggedIn, viewController.getEquipesPage)
 
 
 router.get('/matchs', authController.isLoggedIn, viewController.getMatchsPage);
-
+router.get('/matchsCalendrier', authController.isLoggedIn, viewController.getMatchsCalendarPage);
 
 
 

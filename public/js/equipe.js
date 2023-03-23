@@ -81,6 +81,7 @@ export const updateEquipe = async (data, id, team) => {
 
 //delete equipe function
 export const deleteEquipe = async (id, elToRemove) => {
+    console.log(id, elToRemove);
     try {
         //delete request for delete equipe
         const res = await axios({

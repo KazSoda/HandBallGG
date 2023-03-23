@@ -54,7 +54,16 @@ exports.getMatchsPage = catchAsync(async (req, res) => {
 
     res.status(200).render('matchs', {
         title: 'Matchs',
-        equipes
+        equipes,
+    })
+})
+
+exports.getMatchsCalendarPage = catchAsync(async (req, res) => {
+    const equipes = await Equipe.find();
+
+    res.status(200).render('matchsCalendar', {
+        title: 'Matchs',
+        equipes,
     })
 })
 

@@ -35857,7 +35857,7 @@ module.exports = reloadCSS;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.resizeCalendar = exports.init = exports.displayCalendar = exports.changeWeek = exports.changeCalendarView = exports.animation = exports.BannerHoverRemove = exports.BannerHoverAdd = void 0;
+exports.updateMatch = exports.resizeCalendar = exports.init = exports.displayCalendar = exports.deleteMatch = exports.createMatch = exports.changeWeek = exports.changeCalendarView = exports.animation = void 0;
 var _axios = _interopRequireDefault(require("axios"));
 var _alert = require("./alert");
 var _calendar = _interopRequireDefault(require("@toast-ui/calendar"));
@@ -35978,6 +35978,7 @@ var matchInformation = /*#__PURE__*/function () {
 // Filter matches from a specific team
 function searchMatchByTeam(queryResult, enteredValue) {
   var mainSection = document.querySelector(".mainSection");
+  var matchList = document.querySelector(".matchList");
   var resSort = [];
   queryResult.forEach(function (matchInfo) {
     // Set all matches names to UPPERCASE to better check if the entered value is in the match name
@@ -35985,13 +35986,20 @@ function searchMatchByTeam(queryResult, enteredValue) {
       resSort.push(matchInfo);
     }
   });
-  if (resSort.length == 0) {
+  if (mainSection && resSort.length == 0) {
     mainSection.innerHTML = "<h1>La recherche n'a pas donn\xE9 de r\xE9sultats</h1>";
+  } else if (matchList && resSort.length == 0) {
+    matchList.innerHTML = "<h1>La recherche n'a pas donn\xE9 de r\xE9sultats</h1>";
   } else {
     var calendarMatch = [];
 
     // empty the calendar
-    mainSection.innerHTML = '';
+    if (mainSection) {
+      mainSection.innerHTML = '';
+    }
+    if (matchList) {
+      matchList.innerHTML = '';
+    }
     resSort.forEach(function (sortedMatch) {
       // Create a new match event based on the current envent to match the required format for the calendar
       var calendarMatchTemp = {};
@@ -36026,7 +36034,78 @@ function searchMatchByTeam(queryResult, enteredValue) {
         imgTest.src = 'img/rivals/againstTeam.png';
         console.log(imgTest.src);
       };
-      mainSection.innerHTML += "\n      \t\t\t<section class=\"matchSection\">\n      \t\t\t\t<section class=\"matchInformation\">\n      \t\t\t\t\t<section class=\"headerInformationMatch\">\n      \t\t\t\t\t\t<h1>".concat(sortedMatch.gymnasium, " : ").concat(date, "</h1>\n      \t\t\t\t\t</section>\n      \t\t\t\t\t<section class=\"bodyInformationMatch\">\n      \t\t\t\t\t\t<article class=\"firstEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>Equipe locale</h1>\n\t\t\t\t\t\t\t\t<img src=\"img/logo.png\" alt=\"photo\">\n\t\t\t\t\t\t\t\t<h1>").concat(sortedMatch.localTeam, "</h1>\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t\t<p>VS</p>\n      \t\t\t\t\t\t<article class=\"secondEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>Equipe adverse</h1>\n      \t\t\t\t\t\t\t<img src=\"").concat(imgTest.src, "\" alt=\"photoEnemyTeam\">\n      \t\t\t\t\t\t\t<h1>").concat(sortedMatch.againstTeam, "</h1>\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t</section>\n      \t\t\t\t</section>\n    \t\t\t</section>\n    \t\t");
+      if (mainSection) {
+        mainSection.innerHTML += "\n      \t\t\t<section class=\"matchSection\">\n      \t\t\t\t<section class=\"matchInformation\">\n      \t\t\t\t\t<section class=\"headerInformationMatch\">\n      \t\t\t\t\t\t<h1>".concat(sortedMatch.gymnasium, " : ").concat(date, "</h1>\n      \t\t\t\t\t</section>\n      \t\t\t\t\t<section class=\"bodyInformationMatch\">\n      \t\t\t\t\t\t<article class=\"firstEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>Equipe locale</h1>\n\t\t\t\t\t\t\t\t<img src=\"img/logo.png\" alt=\"photo\">\n\t\t\t\t\t\t\t\t<h1>").concat(sortedMatch.localTeam, "</h1>\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t\t<p>VS</p>\n      \t\t\t\t\t\t<article class=\"secondEquipeInformation\">\n      \t\t\t\t\t\t\t<h1>Equipe adverse</h1>\n      \t\t\t\t\t\t\t<img src=\"").concat(imgTest.src, "\" alt=\"photoEnemyTeam\">\n      \t\t\t\t\t\t\t<h1>").concat(sortedMatch.againstTeam, "</h1>\n      \t\t\t\t\t\t</article>\n      \t\t\t\t\t</section>\n      \t\t\t\t</section>\n    \t\t\t</section>\n    \t\t\t");
+      }
+      if (matchList && document.querySelector('.matchList.admin')) {
+        matchList.innerHTML += "\n\t  \t\t\t\t<section class=\"matchInformation ".concat(sortedMatch._id, "\">\n\t  \t\t\t\t\t<section class=\"headerInformationMatch\">\n\t  \t\t\t\t\t\t<h1>").concat(sortedMatch.gymnasium, " : ").concat(date, "</h1>\n\t  \t\t\t\t\t</section>\n\t  \t\t\t\t\t<section class=\"bodyInformationMatch\">\n\t  \t\t\t\t\t\t<article class=\"firstEquipeInformation\">\n\t  \t\t\t\t\t\t\t<h1>Equipe locale</h1>\n\t\t\t\t\t\t\t\t<img src=\"img/logo.png\" alt=\"photo\">\n\t\t\t\t\t\t\t\t<h1>").concat(sortedMatch.localTeam, "</h1>\n\t  \t\t\t\t\t\t</article>\n\t  \t\t\t\t\t\t<p>VS</p>\n\t  \t\t\t\t\t\t<article class=\"secondEquipeInformation\">\n\t  \t\t\t\t\t\t\t<h1>Equipe adverse</h1>\n\t  \t\t\t\t\t\t\t<img src=\"").concat(imgTest.src, "\" alt=\"photoEnemyTeam\">\n\t  \t\t\t\t\t\t\t<h1>").concat(sortedMatch.againstTeam, "</h1>\n\t  \t\t\t\t\t\t</article>\n\t  \t\t\t\t\t</section>\n\t\t\t\t\t\t<div class=\"matchUD\">\n\t\t\t\t\t\t\t<button class=\"btn btn-edit updateMatch ").concat(sortedMatch._id, "\"><i class=\"bi bi-pencil-square\"><p>Modifier</p></i></button>\n\t\t\t\t\t\t\t<button class=\"btn btn-danger deleteMatch ").concat(sortedMatch._id, "\"><i class=\"bi bi-trash3\"><p>Supprimer</p></i></button>\n\t  \t\t\t\t</section>\n\t\t\t\t");
+        document.querySelectorAll('.deleteMatch').forEach(function (el) {
+          el.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (e.target.className.split(' ')[3]) {
+              deleteMatch(e.target.className.split(' ')[3], e.target.parentElement.parentElement);
+            }
+            if (e.target.className.includes('bi-trash3')) {
+              deleteMatch(e.target.parentElement.className.split(' ')[3], e.target.parentElement.parentElement.parentElement);
+            } else {
+              deleteMatch(e.target.parentElement.parentElement.className.split(' ')[3], e.target.parentElement.parentElement.parentElement.parentElement);
+            }
+          });
+        });
+        document.querySelectorAll('.updateMatch').forEach(function (el) {
+          el.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (e.target.className.split(' ')[3]) {
+              console.log(e.target.parentElement.parentElement.children[1].children[0].children[2]);
+              var id = e.target.className.split(' ')[3];
+              var localTeam = e.target.parentElement.parentElement.children[1].children[0].children[2].textContent;
+              var againstTeam = e.target.parentElement.parentElement.children[1].children[2].children[2].textContent;
+              var gymnasium = e.target.parentElement.parentElement.children[0].children[0].textContent.split(' : ')[0];
+              var _date = e.target.parentElement.parentElement.children[0].children[0].textContent.split(' : ')[1];
+              document.querySelector('.updateMatchForm #visitorTeam').value = againstTeam;
+              document.querySelector('.updateMatchForm #localTeam').value = localTeam;
+              document.querySelector('.updateMatchForm #location').value = gymnasium;
+              document.querySelector('.updateMatchForm #date').value = _date;
+              document.querySelector('.modal').classList.remove('hidden');
+              document.querySelector('.updateMatchForm').classList.remove('hidden');
+              console.log(id, localTeam, againstTeam, gymnasium, _date);
+            }
+            if (e.target.className.includes('bi-pencil-square')) {
+              console.log(e.target.parentElement.parentElement.parentElement.children[1].children[0].children[2]);
+              var _id = e.target.parentElement.className.split(' ')[3];
+              var _localTeam = e.target.parentElement.parentElement.parentElement.children[1].children[0].children[2].textContent;
+              var _againstTeam = e.target.parentElement.parentElement.parentElement.children[1].children[2].children[2].textContent;
+              var _gymnasium = e.target.parentElement.parentElement.parentElement.children[0].children[0].textContent.split(' : ')[0];
+              var _date2 = e.target.parentElement.parentElement.parentElement.children[0].children[0].textContent.split(' : ')[1];
+              document.querySelector('.updateMatchForm #visitorTeam').value = _againstTeam;
+              document.querySelector('.updateMatchForm #localTeam').value = _localTeam;
+              document.querySelector('.updateMatchForm #location').value = _gymnasium;
+              document.querySelector('.updateMatchForm #date').value = _date2;
+              document.querySelector('.modal').classList.remove('hidden');
+              document.querySelector('.updateMatchForm').classList.remove('hidden');
+              console.log(_id, _localTeam, _againstTeam, _gymnasium, _date2);
+            } else {
+              console.log(e.target.parentElement.parentElement.parentElement.parentElement.children[1].children[0].children[2]);
+              var _id2 = e.target.parentElement.parentElement.className.split(' ')[3];
+              var _localTeam2 = e.target.parentElement.parentElement.parentElement.parentElement.children[1].children[0].children[2].textContent;
+              var _againstTeam2 = e.target.parentElement.parentElement.parentElement.parentElement.children[1].children[2].children[2].textContent;
+              var _gymnasium2 = e.target.parentElement.parentElement.parentElement.parentElement.children[0].children[0].textContent.split(' : ')[0];
+              var _date3 = e.target.parentElement.parentElement.parentElement.parentElement.children[0].children[0].textContent.split(' : ')[1];
+              document.querySelector('.updateMatchForm #visitorTeam').value = _againstTeam2;
+              document.querySelector('.updateMatchForm #localTeam').value = _localTeam2;
+              document.querySelector('.updateMatchForm #location').value = _gymnasium2;
+              document.querySelector('.updateMatchForm #date').value = _date3;
+              document.querySelector('.modal').classList.remove('hidden');
+              document.querySelector('.updateMatchForm').classList.remove('hidden');
+              console.log(_id2, _localTeam2, _againstTeam2, _gymnasium2, _date3);
+            }
+          });
+        });
+      } else {
+        if (matchList) {
+          matchList.innerHTML += "\n\t\t\t\t\t\t  <section class=\"matchInformation ".concat(sortedMatch._id, "\">\n\t\t\t\t\t\t\t  <section class=\"headerInformationMatch\">\n\t\t\t\t\t\t\t\t  <h1>").concat(sortedMatch.gymnasium, " : ").concat(date, "</h1>\n\t\t\t\t\t\t\t  </section>\n\t\t\t\t\t\t\t  <section class=\"bodyInformationMatch\">\n\t\t\t\t\t\t\t\t  <article class=\"firstEquipeInformation\">\n\t\t\t\t\t\t\t\t\t  <h1>Equipe locale</h1>\n\t\t\t\t\t\t\t\t\t<img src=\"img/logo.png\" alt=\"photo\">\n\t\t\t\t\t\t\t\t\t<h1>").concat(sortedMatch.localTeam, "</h1>\n\t\t\t\t\t\t\t\t  </article>\n\t\t\t\t\t\t\t\t  <p>VS</p>\n\t\t\t\t\t\t\t\t  <article class=\"secondEquipeInformation\">\n\t\t\t\t\t\t\t\t\t  <h1>Equipe adverse</h1>\n\t\t\t\t\t\t\t\t\t  <img src=\"").concat(imgTest.src, "\" alt=\"photoEnemyTeam\">\n\t\t\t\t\t\t\t\t\t  <h1>").concat(sortedMatch.againstTeam, "</h1>\n\t\t\t\t\t\t\t\t  </article>\n\t\t\t\t\t\t\t  </section>\n\t\t\t\t\t\t  </section>\n\t\t\t\t\t");
+        }
+      }
     });
     calendar.createEvents(calendarMatch);
     // launch the caroussel animation
@@ -36170,21 +36249,10 @@ calendar.on('beforeDeleteEvent', /*#__PURE__*/function () {
   };
 }());
 
-//BannerHoverAdd de d'arreter l'animation de bannière
-var BannerHoverAdd = function BannerHoverAdd(element) {
-  element.style.animationPlayState = "paused";
-};
-
-//BannerHoverRemove de relancer l'animation de bannière
-exports.BannerHoverAdd = BannerHoverAdd;
-var BannerHoverRemove = function BannerHoverRemove(element) {
-  element.style.animationPlayState = "running";
-};
-
 // Caroussel animation to display all the matches
-exports.BannerHoverRemove = BannerHoverRemove;
 var animation = function animation() {
   var mainSection = document.querySelector('.mainSection');
+  if (!mainSection) return;
   var nbMatch = mainSection.children.length;
   var tempsTravel = 7 * nbMatch;
   var Distfin = -500 * nbMatch + document.querySelector('.bandeauDefilant').offsetWidth;
@@ -36193,6 +36261,7 @@ var animation = function animation() {
     iterations = 'infinite';
   }
   mainSection.style.animationDuration = tempsTravel;
+  // changing variables
   document.documentElement.style.setProperty('--animation-end', Distfin);
   document.documentElement.style.setProperty('--animation-iteration', iterations);
   document.documentElement.style.setProperty('--animation-temps', tempsTravel + 's');
@@ -36258,7 +36327,7 @@ var init = /*#__PURE__*/function () {
 // render calendar
 exports.init = init;
 var displayCalendar = function displayCalendar() {
-  calendar.render();
+  if (document.getElementById("calendar")) calendar.render();
 };
 
 // execute a function on windows resize
@@ -36294,6 +36363,131 @@ var changeCalendarView = function changeCalendarView(type) {
   calendar.changeView(type);
 };
 exports.changeCalendarView = changeCalendarView;
+var createMatch = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(localTeam, visitorTeam, date, location) {
+    var res, modal, modalContent;
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.prev = 0;
+          _context5.next = 3;
+          return (0, _axios.default)({
+            method: 'POST',
+            url: '/api/v1/match',
+            data: {
+              localTeam: localTeam,
+              againstTeam: visitorTeam,
+              date: date,
+              gymnasium: location
+            }
+          });
+        case 3:
+          res = _context5.sent;
+          console.log(res);
+          if (res.data.status === "success") {
+            (0, _alert.showAlert)("success", "Match ajouté avec succès");
+            modal = document.querySelector('.modal');
+            modalContent = document.querySelector('.modal-content');
+            modal.classList.add('hidden');
+            modalContent.classList.add('hidden');
+          }
+          _context5.next = 11;
+          break;
+        case 8:
+          _context5.prev = 8;
+          _context5.t0 = _context5["catch"](0);
+          (0, _alert.showAlert)("error", _context5.t0.response);
+        case 11:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5, null, [[0, 8]]);
+  }));
+  return function createMatch(_x3, _x4, _x5, _x6) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+exports.createMatch = createMatch;
+var updateMatch = /*#__PURE__*/function () {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(id, localTeam, visitorTeam, date, location) {
+    var res, modal, modalContent;
+    return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+      while (1) switch (_context6.prev = _context6.next) {
+        case 0:
+          _context6.prev = 0;
+          _context6.next = 3;
+          return (0, _axios.default)({
+            method: 'patch',
+            url: "/api/v1/match/".concat(id),
+            data: {
+              localTeam: localTeam,
+              againstTeam: visitorTeam,
+              date: date,
+              gymnasium: location
+            }
+          });
+        case 3:
+          res = _context6.sent;
+          if (res.data.status === "success") {
+            (0, _alert.showAlert)("success", "Match modifié avec succès");
+            modal = document.querySelector('.modal');
+            modalContent = document.querySelector('.modal-content');
+            modal.classList.add('hidden');
+            modalContent.classList.add('hidden');
+          }
+          _context6.next = 10;
+          break;
+        case 7:
+          _context6.prev = 7;
+          _context6.t0 = _context6["catch"](0);
+          (0, _alert.showAlert)("error", _context6.t0.response.data.message);
+        case 10:
+        case "end":
+          return _context6.stop();
+      }
+    }, _callee6, null, [[0, 7]]);
+  }));
+  return function updateMatch(_x7, _x8, _x9, _x10, _x11) {
+    return _ref6.apply(this, arguments);
+  };
+}();
+exports.updateMatch = updateMatch;
+var deleteMatch = /*#__PURE__*/function () {
+  var _ref7 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7(id, event) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
+        case 0:
+          console.log(id, event);
+          _context7.prev = 1;
+          _context7.next = 4;
+          return (0, _axios.default)({
+            method: 'delete',
+            url: "/api/v1/match/".concat(id)
+          });
+        case 4:
+          res = _context7.sent;
+          if (res.data === '') {
+            (0, _alert.showAlert)("success", "Match supprimé avec succès");
+            event.remove();
+          }
+          _context7.next = 11;
+          break;
+        case 8:
+          _context7.prev = 8;
+          _context7.t0 = _context7["catch"](1);
+          (0, _alert.showAlert)("error", _context7.t0.response.data.message);
+        case 11:
+        case "end":
+          return _context7.stop();
+      }
+    }, _callee7, null, [[1, 8]]);
+  }));
+  return function deleteMatch(_x12, _x13) {
+    return _ref7.apply(this, arguments);
+  };
+}();
+exports.deleteMatch = deleteMatch;
 },{"axios":"../../node_modules/axios/index.js","./alert":"alert.js","@toast-ui/calendar":"../../node_modules/@toast-ui/calendar/dist/toastui-calendar.mjs","@toast-ui/calendar/dist/toastui-calendar.min.css":"../../node_modules/@toast-ui/calendar/dist/toastui-calendar.min.css","tui-date-picker/dist/tui-date-picker.css":"../../node_modules/tui-date-picker/dist/tui-date-picker.css","tui-time-picker/dist/tui-time-picker.css":"../../node_modules/tui-time-picker/dist/tui-time-picker.css"}],"../../node_modules/safe-buffer/index.js":[function(require,module,exports) {
 
 /* eslint-disable node/no-deprecated-api */
@@ -85228,30 +85422,31 @@ var deleteEquipe = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
-          _context3.prev = 0;
-          _context3.next = 3;
+          console.log(id, elToRemove);
+          _context3.prev = 1;
+          _context3.next = 4;
           return (0, _axios.default)({
             method: "DELETE",
             url: "/api/v1/equipe/".concat(id)
           });
-        case 3:
+        case 4:
           res = _context3.sent;
           //if request is success, send message to user and remove the team from the DOM
           if (res.data === "") {
             elToRemove.parentElement.remove();
             (0, _alert.showAlert)("success", "Équipe supprimée avec succès");
           }
-          _context3.next = 10;
+          _context3.next = 11;
           break;
-        case 7:
-          _context3.prev = 7;
-          _context3.t0 = _context3["catch"](0);
+        case 8:
+          _context3.prev = 8;
+          _context3.t0 = _context3["catch"](1);
           (0, _alert.showAlert)("error", _context3.t0.response.data.message);
-        case 10:
+        case 11:
         case "end":
           return _context3.stop();
       }
-    }, _callee3, null, [[0, 7]]);
+    }, _callee3, null, [[1, 8]]);
   }));
   return function deleteEquipe(_x8, _x9) {
     return _ref3.apply(this, arguments);
@@ -85410,6 +85605,7 @@ var loginForm = document.querySelector('.loginForm');
 // Select elements from _navbarAdmin and _navbarUser pug pages
 var logOutBtn = document.querySelector('.deconnexion');
 var searchFormMatch = document.querySelector('#searchFormMatch');
+var matchList = document.querySelector('.matchList');
 
 // Select elements from equipe pug page
 var manageEquipe = document.querySelector('.adminEquipeUD');
@@ -85437,29 +85633,63 @@ if (searchFormMatch) {
   window.addEventListener('resize', function () {
     (0, _match.resizeCalendar)();
   });
-  document.querySelector('.navbar-calendar .prev').addEventListener('click', function () {
-    (0, _match.changeWeek)('prev');
-  });
-  document.querySelector('.navbar-calendar .next').addEventListener('click', function () {
-    (0, _match.changeWeek)('next');
-  });
-  document.querySelector('.navbar-calendar .today').addEventListener('click', function () {
-    (0, _match.changeWeek)('today');
-  });
-  document.querySelector('.navbar-calendar .day').addEventListener('click', function () {
-    (0, _match.changeCalendarView)('day');
-  });
-  document.querySelector('.navbar-calendar .week').addEventListener('click', function () {
-    (0, _match.changeCalendarView)('week');
-  });
-  document.querySelector('.navbar-calendar .month').addEventListener('click', function () {
-    (0, _match.changeCalendarView)('month');
-  });
+  if (document.querySelector('.navbar-calendar .view')) {
+    document.querySelector('.navbar-calendar .prev').addEventListener('click', function () {
+      (0, _match.changeWeek)('prev');
+    });
+    document.querySelector('.navbar-calendar .next').addEventListener('click', function () {
+      (0, _match.changeWeek)('next');
+    });
+    document.querySelector('.navbar-calendar .today').addEventListener('click', function () {
+      (0, _match.changeWeek)('today');
+    });
+    document.querySelector('.navbar-calendar .day').addEventListener('click', function () {
+      (0, _match.changeCalendarView)('day');
+    });
+    document.querySelector('.navbar-calendar .week').addEventListener('click', function () {
+      (0, _match.changeCalendarView)('week');
+    });
+    document.querySelector('.navbar-calendar .month').addEventListener('click', function () {
+      (0, _match.changeCalendarView)('month');
+    });
+  }
   var banner = document.querySelector(".mainSection");
-  banner.addEventListener("mouseover", _match.BannerHoverAdd);
-  banner.addEventListener("mouseout", _match.BannerHoverRemove);
+  if (banner) {
+    banner.addEventListener("mouseover", _match.BannerHoverAdd);
+    banner.addEventListener("mouseout", _match.BannerHoverRemove);
+  }
   window.addEventListener('load', function (event) {
     (0, _match.animation)();
+  });
+}
+if (matchList) {
+  document.querySelector('.createMatch form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var localTeam = document.querySelector('#localTeam').value;
+    var visitorTeam = document.querySelector('#visitorTeam').value;
+    var date = document.querySelector('#date').value;
+    var location = document.querySelector('#location').value;
+    (0, _match.createMatch)(localTeam, visitorTeam, date, location);
+  });
+  console.log(document.querySelectorAll('.deleteMatch'));
+  document.querySelectorAll('.deleteMatch').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      (0, _match.deleteMatch)(e.target.className.split(' ')[3], e.target.parentElement.parentElement);
+    });
+  });
+  document.querySelector('.adminMatchC').addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector('.modal').classList.remove('hidden');
+    document.querySelector('.createMatch').classList.remove('hidden');
+  });
+  document.querySelectorAll('.close').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector('.modal').classList.add('hidden');
+      document.querySelector('.createMatch').classList.add('hidden');
+      document.querySelector('.updateMatchForm').classList.add('hidden');
+    });
   });
 }
 
@@ -85534,7 +85764,6 @@ if (manageUser) {
       e.preventDefault();
       userID = e.target.className.split(' ')[3];
       (0, _user.deleteUser)(userID, e.target.parentElement.parentElement);
-
       // get the parent element of the button and remove it
     });
   }
@@ -85549,10 +85778,16 @@ if (updateUserForm) {
   var modalContent = document.querySelector('.updateUserForm');
   var modalFooter = document.querySelector('.updateUserForm .modal-footer');
   var validateForm = document.querySelector('.updateUserForm .btn-success');
+
+  // Get the button that opens the modal
   updateUserForm.forEach(function (el) {
     el.addEventListener('click', function (e) {
       e.preventDefault();
+
+      //get the id of the user
       var id = e.target.parentElement.parentElement.parentElement.className.split(' ')[3];
+
+      //if the id is not found
       if (e.target.parentElement.parentElement.className.split(' ').length === 4) {
         id = e.target.parentElement.parentElement.className.split(' ')[3];
       } else if (e.target.parentElement.className.split(' ').length === 4) {
@@ -85560,9 +85795,11 @@ if (updateUserForm) {
       } else if (e.target.className.split(' ').length === 4) {
         id = e.target.className.split(' ')[3];
       }
+
+      // Get user data with id
       function findUser(_x) {
         return _findUser.apply(this, arguments);
-      }
+      } //launch the findUser function with id as parameter id = idUser
       function _findUser() {
         _findUser = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(id) {
           var res, userData, firstNameForm, lastNameForm, emailForm;
@@ -85577,28 +85814,39 @@ if (updateUserForm) {
                 });
               case 3:
                 res = _context.sent;
+                // if the user is found return the data
                 if (res.data.status === 'success') {
-                  userData = res.data.data.user;
+                  userData = res.data.data.user; // Select the input fields
                   firstNameForm = document.querySelector('.updateUserForm #firstName');
                   lastNameForm = document.querySelector('.updateUserForm #lastName');
-                  emailForm = document.querySelector('.updateUserForm #email');
+                  emailForm = document.querySelector('.updateUserForm #email'); // and set the value of the input fields with the user data
                   if (firstName !== null) firstNameForm.value = userData.firstName;
                   if (lastName !== null) lastNameForm.value = userData.lastName;
                   if (email !== null) emailForm.value = userData.email;
+
+                  // remove hidden class for modal
                   modal.classList.remove('hidden');
                   modalContent.classList.remove('hidden');
+
+                  // when the user click outside the modal, the modal is hidden
                   modal.addEventListener('click', function (e) {
                     modal.classList.add('hidden');
                     modalContent.classList.add('hidden');
                   });
+
+                  // when the user click on the close button, the modal is hidden
                   modalFooter.addEventListener('click', function (e) {
                     modal.classList.add('hidden');
                     modalContent.classList.add('hidden');
                   });
+
+                  // when the user click on the validate button (update button)
                   validateForm.addEventListener('click', function (e) {
                     e.preventDefault();
                     var selectRoleChanged = document.querySelector('.choiceRole input[name="role"]:checked');
                     var roleChanged = "";
+
+                    // if the role is changed by the admin then the roleChanged variable is set to the new role
                     if (selectRoleChanged !== null) {
                       roleChanged = selectRoleChanged.value;
                     }
@@ -85611,11 +85859,20 @@ if (updateUserForm) {
                       'lastName': lastNameForm.value,
                       'email': emailForm.value
                     });
+
+                    // if the password is not empty then the password is set to the new password
                     var pwd = document.querySelector('.updateUserForm #password').value;
                     if (pwd === "") pwd = null;
+
+                    // launch the updateUser function
+                    // parameters: dataUser:objet, id: idUser, pwd:password, roleChanged
                     (0, _user.updateUser)(dataUser, id, pwd, roleChanged);
+
+                    // hide the modal
                     modal.classList.add('hidden');
                     modalContent.classList.add('hidden');
+
+                    // reset the input fields
                     firstNameForm.textContent = "";
                     lastNameForm.textContent = "";
                     emailForm.textContent = "";
@@ -85847,7 +86104,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65022" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55124" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

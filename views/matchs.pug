@@ -9,25 +9,6 @@ block content
 	.calendarDisplay
 		aside.options-team
 			.navbar-calendar 
-				.navigate
-					p Navigation
-					button(class="btn today")
-						i(class="bi bi-calendar3-event") Aujourd'hui
-					button(class="btn prev" )
-						i(class="bi bi-caret-left")
-					button(class="btn next")
-						i(class="bi bi-caret-right")
-				.view
-					p Affichage
-					button(class="btn day")
-						i(class="bi bi-calendar3-event") Jour
-					button(class="btn week")
-						i(class="bi bi-calendar3-week") Semaine
-					button(class="btn month")
-						i(class="bi bi-calendar3") Mois
-				
-				span.navbar--range
-
 				.filter
 					form(id="searchFormMatch" method="POST")
 						p Recherche
@@ -39,4 +20,71 @@ block content
 						each equipe in equipes
 							option(value=equipe.wording) #{equipe.wording}
 
-		div(id="calendar")
+		if user && user.role == 'Admin' || user && user.role == 'User'
+			section.matchList.admin
+		else 
+			section.matchList
+
+		if user && user.role == 'Admin'	|| user && user.role == 'User'
+			.wrapper.adminMatchC
+				.button
+					.icon
+						p +
+					span Créer un match
+
+
+	if user && user.role == 'Admin'	|| user && user.role == 'User'
+		.modal.hidden
+		.modal-content.createMatch.hidden
+			.modal-header
+				h2 Créer un match
+			.modal-body
+				form
+					.form-group
+						label(for="wording") Equipe locale
+						select(id="localTeam" for="change")
+							option(value='0') -- Select --
+							each equipe in equipes
+								option(value=equipe.wording) #{equipe.wording}
+					.form-group
+						label(for="visitorTeam") Equipe adverse
+						input(type="text" name="visitorTeam" id="visitorTeam" placeholder="Vernoux en vivarais" required)
+					.form-group
+						label(for="location") Emplacement
+						input(type="text" name="location" id="location" placeholder="Gymnase municipal de vernoux" required)
+					.form-group
+						label(for="date") Commentaire
+						input(type="datetime-local" name="date" id="date" required)
+					
+
+					.form-group
+						button(type="submit" class="btn btn-success") Créer
+			.modal-footer
+				button(type="button" class="btn btn-danger close") Fermer
+
+		.modal-content.updateMatchForm.hidden
+			.modal-header
+				h2 Modifier une équipe
+			.modal-body
+				form
+					.form-group
+						label(for="wording") Equipe locale
+						select(id="localTeam" for="change")
+							option(value='0') -- Select --
+							each equipe in equipes
+								option(value=equipe.wording) #{equipe.wording}
+					.form-group
+						label(for="visitorTeam") Equipe adverse
+						input(type="text" name="visitorTeam" id="visitorTeam" placeholder="Vernoux en vivarais" required)
+					.form-group
+						label(for="location") Emplacement
+						input(type="text" name="location" id="location" placeholder="Gymnase municipal de vernoux" required)
+					.form-group
+						label(for="date") Commentaire
+						input(type="datetime-local" name="date" id="date")
+					
+
+					.form-group
+						button(type="submit" class="btn btn-success") Modifier
+			.modal-footer
+				button(type="button" class="btn btn-danger close") Fermer
