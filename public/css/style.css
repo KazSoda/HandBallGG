@@ -892,16 +892,20 @@ form#searchFormMatch {
 	justify-content: center;
 }
 
-.matchList .matchInformation{
+.matchList .matchInformation {
 	width: 100%;
 }
 
-.matchList .matchInformation:first-child{
+.matchList .matchInformation:first-child {
 	margin-top: 0px;
 }
 
 .headerInformationMatch>h1 {
 	margin: 5px;
+}
+
+.toastui-calendar-event-time * {
+	font-size: initial;
 }
 
 
