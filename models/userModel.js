@@ -9,6 +9,12 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Vous devez spécifiez un prénom'],
         length: 64,
     },
+    lastName: {
+        type: String,
+        trim: true,
+        required: [true, 'Vous devez spécifiez un nom'],
+        length: 64,
+    },
     email: {
         type: String,
         trim: true,
