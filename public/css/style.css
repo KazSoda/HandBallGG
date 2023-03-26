@@ -27,8 +27,7 @@
 }
 
 @media (prefers-color-scheme: light) {
-	:root {
-		/* Colors */
+	/* :root {
 		--text-color-primary: black;
 		--bg-color: white;
 		--bg-color-dark: #efefef;
@@ -36,7 +35,67 @@
 		--nav-bg-color: #e0e0e0a9;
 		--shadow-color: #0000002e;
 		--translucid: #bdfccb8a;
+	} */
+
+	/* p,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	a,
+	li,
+	span,
+	div,
+	input,
+	textarea,
+	.btn {
+		color: var(--text-color-primary);
+	} */
+
+
+
+	/*--------------------------------------------------
+                            Navbar
+    --------------------------------------------------*/
+
+	/* nav>section>div:hover,
+	.nav-dropdown a:hover {
+		background-color: var(--accent-light);
+	} */
+
+
+
+
+
+	/*--------------------------------------------------
+                        PrezArticle
+    --------------------------------------------------*/
+
+	/* .team {
+		background: linear-gradient(160deg,
+				rgba(255, 255, 255, 0.5),
+				var(--accent-light));
+	} */
+
+
+
+
+
+	
+	:root {
+		/* Colors */
+		--text-color-primary: white;
+		--bg-color: #161616;
+		--bg-color-dark: #171717;
+		--bg-color-darker: #333333;
+		--nav-bg-color: #0d0d0da9;
+		--shadow-color: #7474744f;
+		--shadow-hover-color: #5857575e;
+		--translucid: #001e078a;
 	}
+
 
 	p,
 	h1,
@@ -56,17 +115,14 @@
 	}
 
 
-
 	/*--------------------------------------------------
                             Navbar
     --------------------------------------------------*/
 
 	nav>section>div:hover,
 	.nav-dropdown a:hover {
-		background-color: var(--accent-light);
+		background-color: var(--accent-darker);
 	}
-
-
 
 
 
@@ -75,10 +131,21 @@
     --------------------------------------------------*/
 
 	.team {
-		background: linear-gradient(160deg,
-				rgba(255, 255, 255, 0.5),
-				var(--accent-light));
+		/* background: linear-gradient(160deg,
+                rgba(0, 0, 0, 0.5),
+                var(--accent-darker)); */
+		background: linear-gradient(152deg, #9ebd13a8 0%, #008552b4 100%);
 	}
+
+	.team:hover {
+		/* background: linear-gradient(160deg,
+                rgba(32, 79, 18, 0.5),
+                var(--accent-darker)); */
+		background: linear-gradient(152deg, #9ebd13 0%, #008552 100%);
+		box-shadow: 5px 10px 46px var(--shadow-hover-color);
+
+	}
+
 }
 
 @media (prefers-color-scheme: dark) {

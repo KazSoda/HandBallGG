@@ -1,10 +1,8 @@
-
 class APIFeatures {
 	constructor(query, queryString) {
 		this.query = query;
 		this.queryString = queryString;
 	}
-
 
 	filter() {
 		const queryObj = { ...this.queryString }; // ... = destruturing query object
@@ -16,13 +14,10 @@ class APIFeatures {
 		// Replace gte gt lte lt with the same word but with a $ in front
 		queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
 
-
 		this.query = this.query.find(JSON.parse(queryStr));
 
 		return this;
 	}
-
-
 
 	sort() {
 		if (this.queryString.sort) {
@@ -33,7 +28,6 @@ class APIFeatures {
 
 		return this;
 	}
-
 
 	limitFields() {
 		// Limit fields
@@ -46,8 +40,6 @@ class APIFeatures {
 
 		return this;
 	}
-
-
 
 	paginate() {
 		// Pagination

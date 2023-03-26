@@ -3,21 +3,12 @@ const validate = require("validator");
 const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
-
     firstName: {
         type: String,
         trim: true,
         required: [true, 'Vous devez spécifiez un prénom'],
         length: 64,
     },
-
-    lastName: {
-        type: String,
-        trim: true,
-        required: [true, 'Vous devez spécifiez un nom'],
-        length: 64,
-    },
-
     email: {
         type: String,
         trim: true,
@@ -25,7 +16,6 @@ const userSchema = new mongoose.Schema({
         length: 64,
         validate: validate.isEmail,
     },
-
     role: {
         type: String,
         enum: {
@@ -36,13 +26,11 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Vous devez spécifiez un role'],
         length: 64,
     },
-
     password: {
         type: String,
         trim: true,
         required: [true, 'Vous devez spécifiez un mot de passe'],
     },
-
     passwordConfirm: {
         type: String,
         trim: true,
