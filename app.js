@@ -17,7 +17,16 @@ const equipeRouter = require('./routes/equipeRoutes')
 const userRouter = require('./routes/userRoutes');
 
 
-const app = express(); // Create express app
+const app = express(); // Création de l'application Express
+
+// Middleware pour forcer HTTP
+app.use((req, res, next) => {
+  if (req.secure) { // Vérifie si la requête est en HTTPS
+    return res.redirect(`http://${req.headers.host}${req.url}`); // Redirige vers HTTP
+  }
+  next();
+});
+
 
 app.set('view engine', 'pug'); // Set view engine
 app.set('views', `${__dirname}/views`); // Set views folder
