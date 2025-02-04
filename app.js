@@ -21,6 +21,11 @@ const app = express(); // Création de l'application Express
 
 app.set('trust proxy', false); // Désactive la détection des proxies
 
+app.use((req, res, next) => {
+	console.log('X-Forwarded-Proto:', req.headers['x-forwarded-proto']); // Devrait afficher 'http' ou 'https'
+	next();
+  });
+  
 // Middleware pour forcer HTTP
 app.use((req, res, next) => {
   if (req.secure) { // Vérifie si la requête est en HTTPS
