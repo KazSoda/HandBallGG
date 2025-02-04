@@ -6,9 +6,9 @@ services:
         ports:
             - "3000:3000"
         environment:
-            DATABASE_mongodb: mongodb+srv://alansapetind:DK15tilan*@tp-alan.zl0gc.mongodb.net/?retryWrites=true&w=majority&appName=TP-Alan
+            DATABASE_mongodb: 'mongodb+srv://alansapetind:DK15tilan*@tp-alan.zl0gc.mongodb.net/?retryWrites=true&w=majority&appName=TP-Alan'
             JWT_SECRET: UQAwzuiD666c7Jbph27449vFz8Mhis5
-        
+        networks:
             - handballgg-network
     mongodb:
         image: mongo:4
