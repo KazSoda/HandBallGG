@@ -19,6 +19,8 @@ const userRouter = require('./routes/userRoutes');
 
 const app = express(); // Création de l'application Express
 
+app.set('trust proxy', false); // Désactive la détection des proxies
+
 // Middleware pour forcer HTTP
 app.use((req, res, next) => {
   if (req.secure) { // Vérifie si la requête est en HTTPS
