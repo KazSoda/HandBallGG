@@ -22,7 +22,7 @@ const app = require('./app');
 
 const db = process.env.DATABASE_mongodb
 
-mongoose.set('strictQuery', true);
+mongoose.set('strictQuery', false);
 
 mongoose.connect(db, {
 	useNewUrlParser: true,
