@@ -21,25 +21,13 @@ const app = express(); // Création de l'application Express
 
 app.set('trust proxy', false); // Désactive la détection des proxies
 
-app.use((req, res, next) => {
-	console.log('X-Forwarded-Proto:', req.headers['x-forwarded-proto']); // Devrait afficher 'http' ou 'https'
-	next();
-  });
-  
-// Middleware pour forcer HTTP
-app.use((req, res, next) => {
-  if (req.secure) { // Vérifie si la requête est en HTTPS
-    return res.redirect(`http://${req.headers.host}${req.url}`); // Redirige vers HTTP
-  }
-  next();
-});
-
-
 app.set('view engine', 'pug'); // Set view engine
 app.set('views', `${__dirname}/views`); // Set views folder
 
 // Set security HTTP headers
-app.use(helmet());
+app.use(helmet({
+	hsts: false, // Désactive la redirection HTTPS forcée
+  }));
 
 // Development login
 if (process.env.NODE_ENV === 'development') {
