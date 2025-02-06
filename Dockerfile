@@ -2,7 +2,7 @@
 FROM node:18-alpine
 
 ENV NODE_ENV=development
-ENV PORT 3000
+ENV PORT 80
 
 
 ENV DATABASE_mongodb=HandGallGG

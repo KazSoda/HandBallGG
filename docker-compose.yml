@@ -4,7 +4,7 @@ services:
         build: .
         restart: always
         ports:
-            - "3000:3000"
+            - "80:80"
         environment:
             DATABASE_mongodb: 'mongodb+srv://alansapetind:DK15tilan*@tp-alan.zl0gc.mongodb.net/?retryWrites=true&w=majority&appName=TP-Alan'
             JWT_SECRET: UQAwzuiD666c7Jbph27449vFz8Mhis5
