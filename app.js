@@ -19,22 +19,13 @@ const userRouter = require('./routes/userRoutes');
 
 const app = express(); // Création de l'application Express
 
-app.use((req, res, next) => {
-	if (req.secure) { // Si la requête arrive en HTTPS
-	  return res.redirect('http://' + req.headers.host + req.url); // Redirige vers HTTP
-	}
-	next();
-  });  
-
 app.set('trust proxy', false); // Désactive la détection des proxies
 
 app.set('view engine', 'pug'); // Set view engine
 app.set('views', `${__dirname}/views`); // Set views folder
 
 // Set security HTTP headers
-app.use(helmet({
-	hsts: false, // Désactive la redirection HTTPS forcée
-  }));
+app.use(helmet());
 
 // Development login
 if (process.env.NODE_ENV === 'development') {

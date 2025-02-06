@@ -24,8 +24,12 @@ RUN npm install
 # Copy the rest of the application's code to the container
 COPY . .
 
+RUN npm run build:js
+
+# Expose the application's port
+EXPOSE 80
+
 # Specify the command to run when the container starts
 CMD [ "npm", "start" ]
 
-# Expose the application's port
-EXPOSE 3000
+
